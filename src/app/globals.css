@@ -1,26 +1,170 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navbar-h: 64px;
+  --font-plus-jakarta-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Design Tokens */
+  --color-bg-primary: #0A0A0B;
+  --color-primary-yellow: #FFB800;
+  --color-primary-yellow-hover: #FFC933;
+  --color-accent-blue: #4FC3F7;
+  --color-text-white: #FFFFFF;
+  --color-text-muted: rgba(255, 255, 255, 0.85);
+
+  /* Arch Card Palette */
+  --color-arch-sky: #7CC8E8;
+  --color-arch-yellow: #FFB800;
+  --color-arch-orange: #FF7A00;
+  --color-arch-teal: #1EA7C5;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (min-width: 1024px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --navbar-h: 72px;
   }
 }
 
+@theme inline {
+  --font-sans: var(--font-plus-jakarta-sans);
+  --color-brand-bg: var(--color-bg-primary);
+  --color-brand-yellow: var(--color-primary-yellow);
+  --color-brand-yellow-hover: var(--color-primary-yellow-hover);
+  --color-brand-blue: var(--color-accent-blue);
+  --color-brand-muted: var(--color-text-muted);
+}
+
+html {
+  background-color: #0A0A0B;
+  color: #FFFFFF;
+  color-scheme: dark;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0A0A0B;
+  color: #FFFFFF;
+  font-family: var(--font-plus-jakarta-sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Animations */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes goldShimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes drawUnderline {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes archEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes archFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-hero-fade {
+    animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-letter {
+    display: inline-block;
+    animation: letterReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-shimmer-sweep {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 35%,
+      #FFE08A 50%,
+      transparent 65%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldShimmerSweep 4s ease-in-out 1.2s infinite;
+  }
+
+  .animate-underline {
+    transform-origin: left;
+    animation: drawUnderline 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
+    transform: scaleX(0);
+  }
+
+  .animate-arch-card {
+    animation: archEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-arch-float {
+    animation: archFloat 6s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-fade,
+  .animate-letter,
+  .animate-arch-card,
+  .animate-arch-float {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .animate-underline {
+    transform: scaleX(1) !important;
+    animation: none !important;
+  }
+
+  .animate-shimmer-sweep {
+    display: none !important;
+  }
 }
