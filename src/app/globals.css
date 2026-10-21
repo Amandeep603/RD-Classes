@@ -1,28 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --navbar-h: 64px;
   --font-plus-jakarta-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Design Tokens */
-  --color-bg-primary: #0A0A0B;
+  /* Scaling unit: min(100vw / 1600, max(100svh, 560px) / 900), capped at 1.25px */
+  --u: min(min(100vw / 1600, max(100svh, 560px) / 900), 1.25px);
+
+  /* Design Tokens from Specification */
+  --color-bg-primary: #0A0A0A;
   --color-primary-yellow: #FFB800;
   --color-primary-yellow-hover: #FFC933;
-  --color-accent-blue: #4FC3F7;
+  --color-accent-cyan: #4FC3E8;
   --color-text-white: #FFFFFF;
-  --color-text-muted: rgba(255, 255, 255, 0.85);
+  --color-text-secondary: #EDEDED;
+  --color-text-smallcaps: #D6D6D6;
 
   /* Arch Card Palette */
-  --color-arch-sky: #7CC8E8;
+  --color-arch-blue: #72C7E8;
   --color-arch-yellow: #FFB800;
   --color-arch-orange: #FF7A00;
-  --color-arch-teal: #1EA7C5;
-}
-
-@media (min-width: 1024px) {
-  :root {
-    --navbar-h: 72px;
-  }
+  --color-arch-teal: #1AA6C8;
 }
 
 @theme inline {
@@ -30,18 +27,19 @@
   --color-brand-bg: var(--color-bg-primary);
   --color-brand-yellow: var(--color-primary-yellow);
   --color-brand-yellow-hover: var(--color-primary-yellow-hover);
-  --color-brand-blue: var(--color-accent-blue);
-  --color-brand-muted: var(--color-text-muted);
+  --color-brand-cyan: var(--color-accent-cyan);
+  --color-brand-secondary: var(--color-text-secondary);
+  --color-brand-smallcaps: var(--color-text-smallcaps);
 }
 
 html {
-  background-color: #0A0A0B;
+  background-color: #0A0A0A;
   color: #FFFFFF;
   color-scheme: dark;
 }
 
 body {
-  background-color: #0A0A0B;
+  background-color: #0A0A0A;
   color: #FFFFFF;
   font-family: var(--font-plus-jakarta-sans);
   overflow-x: hidden;
@@ -105,8 +103,44 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(calc(var(--u, 1px) * -6));
   }
+}
+
+@keyframes glowDriftSlow {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(25px, -18px) scale(1.05);
+  }
+  66% {
+    transform: translate(-18px, 20px) scale(0.96);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes glowDriftSlowReverse {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(-20px, 15px) scale(0.95);
+  }
+  66% {
+    transform: translate(22px, -20px) scale(1.06);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+/* Film Grain Texture Utility */
+.bg-film-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -131,7 +165,7 @@ body {
     background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: goldShimmerSweep 4s ease-in-out 1.2s infinite;
+    animation: goldShimmerSweep 5.5s ease-in-out 1.2s infinite;
   }
 
   .animate-underline {
@@ -145,7 +179,15 @@ body {
   }
 
   .animate-arch-float {
-    animation: archFloat 6s ease-in-out infinite;
+    animation: archFloat 7.5s ease-in-out infinite;
+  }
+
+  .animate-glow-drift {
+    animation: glowDriftSlow 20s ease-in-out infinite;
+  }
+
+  .animate-glow-drift-rev {
+    animation: glowDriftSlowReverse 22s ease-in-out infinite;
   }
 }
 
@@ -153,7 +195,9 @@ body {
   .animate-hero-fade,
   .animate-letter,
   .animate-arch-card,
-  .animate-arch-float {
+  .animate-arch-float,
+  .animate-glow-drift,
+  .animate-glow-drift-rev {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;

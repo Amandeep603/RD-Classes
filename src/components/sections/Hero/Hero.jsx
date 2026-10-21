@@ -1,62 +1,88 @@
-import Container from "@/components/ui/Container";
 import HeroContent from "./HeroContent";
 import HeroImageGrid from "./HeroImageGrid";
 
 /**
- * Hero Section component for RD Classes home page.
- * Strictly constrained to calc(100svh - var(--navbar-h)) to eliminate vertical scrolling.
- * Features 3 prominent ambient blurred radial glows, responsive desktop 2-column layout,
- * and a unified, vertically-centered mobile experience.
+ * Rebuilt Hero Section for RD Classes home page.
+ * - Exact visual replica of reference/hero-reference.jpeg on 1600x900 canvas
+ * - Scaled with --u: min(100vw / 1600, max(100svh, 560px) / 900), capped at 1.25
+ * - Zero vertical scroll across all desktop viewports
+ * - Anchored: left content padding-left = 6.25vw, arch cluster right padding = 3.9vw
+ * - 3 ambient blurred radial glows with slow 20s drift loop
+ * - Inline SVG feTurbulence film grain at 2.5% opacity
+ * - Mobile & tablet: vertically centered, single screen, no overflow
  */
 export default function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative w-full h-[calc(100svh-var(--navbar-h))] max-h-[calc(100svh-var(--navbar-h))] min-h-[480px] overflow-hidden flex items-center"
+      style={{
+        "--u": "min(min(100vw / 1600, max(100svh, 560px) / 900), 1.25px)",
+      }}
+      className="relative w-full h-[100svh] min-h-[560px] overflow-hidden bg-[#0A0A0A] select-none"
     >
-      {/* Ambient Radial Glow 1: Top-Left Amber/Gold (rgba(255,184,0,0.28), blur ~120px) */}
+      {/* ================= BACKGROUND GLOWS & FILM GRAIN ================= */}
+
+      {/* Ambient Radial Glow 1: Top-Left Amber (#B8730A, ~35% opacity) */}
       <div
-        className="absolute -top-20 -left-20 sm:-top-28 sm:-left-28 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,184,0,0.28)_0%,transparent_70%)] blur-[75px] sm:blur-[120px] pointer-events-none -z-10"
+        className="animate-glow-drift absolute -top-[10%] -left-[10%] w-[320px] sm:w-[480px] lg:w-[calc(var(--u)*680)] h-[320px] sm:h-[480px] lg:h-[calc(var(--u)*680)] rounded-full bg-[radial-gradient(circle,rgba(184,115,10,0.35)_0%,transparent_70%)] blur-[80px] lg:blur-[120px] pointer-events-none -z-10"
         aria-hidden="true"
       />
 
-      {/* Ambient Radial Glow 2: Left Middle Faint Teal/Blue (rgba(30,167,197,0.18), blur ~120px) */}
+      {/* Ambient Radial Glow 2: Left-Middle Dark Teal (#0E3B4A, ~40% opacity) */}
       <div
-        className="absolute top-[48%] -left-24 sm:-left-36 -translate-y-1/2 w-[240px] sm:w-[400px] h-[240px] sm:h-[400px] rounded-full bg-[radial-gradient(circle,rgba(30,167,197,0.18)_0%,transparent_70%)] blur-[70px] sm:blur-[120px] pointer-events-none -z-10"
+        className="animate-glow-drift-rev absolute top-[44%] -left-[8%] w-[260px] sm:w-[380px] lg:w-[calc(var(--u)*540)] h-[260px] sm:h-[380px] lg:h-[calc(var(--u)*540)] rounded-full bg-[radial-gradient(circle,rgba(14,59,74,0.40)_0%,transparent_70%)] blur-[75px] lg:blur-[120px] pointer-events-none -z-10"
         aria-hidden="true"
       />
 
-      {/* Ambient Radial Glow 3: Bottom-Right Amber/Gold (rgba(255,140,0,0.30), blur ~140px) */}
+      {/* Ambient Radial Glow 3: Bottom-Right Strong Amber/Orange (#D98200, ~45% opacity) */}
       <div
-        className="absolute -bottom-24 -right-24 sm:-bottom-32 sm:-right-32 w-[360px] sm:w-[600px] h-[360px] sm:h-[600px] rounded-full bg-[radial-gradient(circle,rgba(255,140,0,0.30)_0%,transparent_70%)] blur-[85px] sm:blur-[140px] pointer-events-none -z-10"
+        className="animate-glow-drift absolute -bottom-[12%] -right-[8%] w-[380px] sm:w-[560px] lg:w-[calc(var(--u)*760)] h-[380px] sm:h-[560px] lg:h-[calc(var(--u)*760)] rounded-full bg-[radial-gradient(circle,rgba(217,130,0,0.45)_0%,transparent_70%)] blur-[90px] lg:blur-[140px] pointer-events-none -z-10"
         aria-hidden="true"
       />
 
-      {/* Main Container */}
-      <Container className="h-full flex flex-col justify-center py-2 sm:py-3 lg:py-0">
-        {/* Desktop Layout (>=1024px): 2 Columns */}
-        <div className="hidden lg:grid grid-cols-12 gap-6 xl:gap-8 items-center h-full">
-          <div className="col-span-7 xl:col-span-6 z-10 flex flex-col justify-center">
-            <HeroContent />
-          </div>
-          <div className="col-span-5 xl:col-span-6 z-10 flex justify-end h-full items-center overflow-hidden">
-            <HeroImageGrid />
-          </div>
+      {/* Subtle Film Grain: inline SVG feTurbulence data-URI at 2.5% opacity */}
+      <div
+        className="bg-film-grain absolute inset-0 opacity-[0.025] pointer-events-none z-10"
+        aria-hidden="true"
+      />
+
+      {/* ================= DESKTOP & LAPTOP LAYOUT (>= 1024px) ================= */}
+      <div className="hidden lg:block w-full h-full relative">
+        {/* Left Content: anchored left at 6.25vw, top at 195u to align eyebrow at 204px */}
+        <div
+          className="absolute z-20"
+          style={{
+            left: "6.25vw",
+            top: "calc(var(--u) * 195)",
+            width: "calc(var(--u) * 650)",
+          }}
+        >
+          <HeroContent />
         </div>
 
-        {/* Mobile & Tablet Layout (<1024px): Centered single column fitting 1 screen */}
-        <div className="flex lg:hidden flex-col items-center justify-between h-full w-full py-1 sm:py-2">
-          {/* Centered Content */}
-          <div className="flex-none my-auto pt-1">
-            <HeroContent />
-          </div>
-
-          {/* Staggered Arch Grid below fold */}
-          <div className="flex-1 min-h-[160px] max-h-[34svh] w-full flex items-start justify-center overflow-hidden">
-            <HeroImageGrid />
-          </div>
+        {/* Right Arch Cluster: anchored right at 3.9vw, top at 0 */}
+        <div
+          className="absolute top-0 bottom-0 h-full z-10 flex items-start"
+          style={{
+            right: "3.9vw",
+          }}
+        >
+          <HeroImageGrid />
         </div>
-      </Container>
+      </div>
+
+      {/* ================= MOBILE & TABLET LAYOUT (< 1024px) ================= */}
+      <div className="flex lg:hidden flex-col items-center justify-between h-full w-full pt-[clamp(74px,10svh,88px)] pb-1 px-5 z-20 relative">
+        {/* Centered Content */}
+        <div className="flex-none my-auto">
+          <HeroContent />
+        </div>
+
+        {/* Scaled Arch Cluster filling width */}
+        <div className="flex-1 min-h-[220px] max-h-[36svh] w-full flex items-start justify-center overflow-hidden">
+          <HeroImageGrid />
+        </div>
+      </div>
     </section>
   );
 }

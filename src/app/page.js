@@ -6,7 +6,7 @@ import Hero from "@/components/sections/Hero/Hero";
  */
 export default function Home() {
   return (
-    <main className="flex-1 w-full flex flex-col justify-center">
+    <main className="w-full overflow-hidden">
       <Hero />
     </main>
   );

@@ -7,7 +7,7 @@ import { SITE_CONFIG } from "@/constants/site";
 import Button from "@/components/ui/Button";
 
 /**
- * Mobile navigation slide-down menu for viewports < 1100px.
+ * Mobile navigation full-screen slide-down menu for viewports < 1200px.
  * Locks body scroll when open, closes on Escape or link click, and provides touch targets >= 48px.
  *
  * @param {Object} props
@@ -39,16 +39,26 @@ export default function MobileMenu({ isOpen, onClose, currentPath }) {
 
   if (!isOpen) return null;
 
+  // Flatten navLinks for the mobile menu drawer
+  const flattenedLinks = [];
+  SITE_CONFIG.navLinks.forEach((link) => {
+    if (link.children && link.children.length > 0) {
+      link.children.forEach((child) => flattenedLinks.push(child));
+    } else {
+      flattenedLinks.push(link);
+    }
+  });
+
   return (
     <div
       id="mobile-navigation"
-      className="fixed inset-x-0 top-[var(--navbar-h)] bottom-0 z-40 bg-[#0A0A0B]/95 backdrop-blur-xl border-t border-white/10 flex flex-col justify-between p-6 overflow-y-auto min-[1100px]:hidden transition-all duration-300"
+      className="fixed inset-0 top-[68px] z-40 bg-[#0A0A0A]/98 backdrop-blur-2xl border-t border-white/10 flex flex-col justify-between p-6 overflow-y-auto min-[1200px]:hidden transition-all duration-300"
       role="dialog"
       aria-modal="true"
       aria-label="Mobile Navigation Menu"
     >
-      <nav aria-label="Mobile Nav" className="flex flex-col gap-2 pt-2">
-        {SITE_CONFIG.navLinks.map((link) => {
+      <nav aria-label="Mobile Nav" className="flex flex-col gap-1.5 pt-2">
+        {flattenedLinks.map((link) => {
           const isActive = currentPath === link.href;
           return (
             <Link
@@ -76,19 +86,21 @@ export default function MobileMenu({ isOpen, onClose, currentPath }) {
           variant="outline"
           href={SITE_CONFIG.cta.studentLogin.href}
           icon={<LogIn className="w-4 h-4" />}
-          className="w-full h-[48px] text-[15px] font-semibold rounded-[6px]"
+          className="w-full h-[48px] text-[15px] font-semibold rounded-[8px]"
           onClick={onClose}
         >
           {SITE_CONFIG.cta.studentLogin.label}
         </Button>
-        <Button
+        <a
           href={SITE_CONFIG.cta.enquire.href}
-          icon={<ArrowRight className="w-4 h-4" />}
-          className="w-full h-[48px] text-[15px] font-bold rounded-[6px]"
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={onClose}
+          className="w-full h-[48px] flex items-center justify-center gap-2 bg-[#FFB800] hover:bg-[#FFC933] text-[#0A0A0A] font-bold text-[15px] rounded-[8px] shadow-sm transition-colors"
         >
-          {SITE_CONFIG.cta.enquire.label}
-        </Button>
+          <span>{SITE_CONFIG.cta.enquire.label}</span>
+          <ArrowRight className="w-4 h-4" aria-hidden="true" />
+        </a>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 /**
  * Site-wide configuration and content constants for RD Classes.
- * All text content, navigation items, CTA definitions, and hero data are centralized here.
+ * All text content, navigation items, CTA definitions, and hero copy live here.
  */
 
 export const SITE_CONFIG = {
@@ -8,12 +8,34 @@ export const SITE_CONFIG = {
   tagline: "Accountancy Classes for Class 11 & 12, Faridabad",
   description:
     "Build confidence in Accountancy with RD Classes. Clear concepts, regular practice, and better preparation for Class 11 & 12 CBSE board exams in Faridabad.",
+
+  // Nav Items array (Center nav on desktop, full-width drawer on mobile)
   navLinks: [
     { label: "Home", href: "/" },
     { label: "Courses", href: "/courses" },
+    { label: "Lectures", href: "/lectures" },
+    { label: "Notes", href: "/notes" },
+    { label: "Results", href: "/results" },
+    { label: "Gallery", href: "/gallery" },
     { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+    {
+      label: "More",
+      href: "#",
+      children: [
+        { label: "Blog", href: "/blog" },
+        { label: "Contact", href: "/contact" },
+      ],
+    },
   ],
+
+  contact: {
+    phone: "918368545620",
+    enquiryMessage: "Hello RD Classes, I have an enquiry about Accountancy classes.",
+    get whatsappUrl() {
+      return `https://wa.me/${this.phone}?text=${encodeURIComponent(this.enquiryMessage)}`;
+    },
+  },
+
   cta: {
     studentLogin: {
       label: "Student Login",
@@ -21,7 +43,9 @@ export const SITE_CONFIG = {
     },
     enquire: {
       label: "Enquire Now",
-      href: "/contact",
+      get href() {
+        return SITE_CONFIG.contact.whatsappUrl;
+      },
     },
     exploreCourses: {
       label: "Explore Courses",
@@ -32,6 +56,7 @@ export const SITE_CONFIG = {
       href: "/contact",
     },
   },
+
   hero: {
     eyebrow: "ACCOUNTANCY CLASSES FOR 11 & 12",
     headline: {
@@ -45,56 +70,4 @@ export const SITE_CONFIG = {
     },
     metaItems: ["CLASS 11", "CLASS 12", "ACCOUNTANCY"],
   },
-  heroImages: [
-    {
-      id: "student-1",
-      src: "/images/hero/student-card-1.png",
-      alt: "Class 11 and 12 Accountancy student studying with notebook",
-      bgColor: "#7CC8E8", // sky blue
-      column: 1,
-      heightRatio: 1.0, // tall card
-      order: 1,
-      floatDelay: "0s",
-    },
-    {
-      id: "student-2",
-      src: "/images/hero/student-card-2.png",
-      alt: "Accountancy student smiling in discussion",
-      bgColor: "#FF7A00", // orange
-      column: 1,
-      heightRatio: 0.54, // bottom card
-      order: 2,
-      floatDelay: "1.2s",
-    },
-    {
-      id: "student-3",
-      src: "/images/hero/student-card-3.png",
-      alt: "Student with books preparing for CBSE Accountancy board exams",
-      bgColor: "#FFB800", // yellow
-      column: 2,
-      heightRatio: 0.77,
-      order: 3,
-      floatDelay: "2.4s",
-    },
-    {
-      id: "student-4",
-      src: "/images/hero/student-card-4.png",
-      alt: "Confident Commerce student with glasses and notebooks",
-      bgColor: "#1EA7C5", // teal
-      column: 2,
-      heightRatio: 0.81,
-      order: 4,
-      floatDelay: "3.6s",
-    },
-    {
-      id: "student-5",
-      src: "/images/hero/student-card-5.png",
-      alt: "Successful Class 12 Accountancy student preparing for CUET and boards",
-      bgColor: "#FF7A00", // orange
-      column: 3,
-      heightRatio: 1.04,
-      order: 5,
-      floatDelay: "4.8s",
-    },
-  ],
 };
