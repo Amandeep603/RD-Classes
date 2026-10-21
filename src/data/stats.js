@@ -1,0 +1,35 @@
+export const statsData = [
+  {
+    id: 'students',
+    value: 500,
+    suffix: '+',
+    label: 'Students Mentored',
+    description: 'Years of dedicated Class 11 & 12 batches in Sector 9',
+    icon: 'Users',
+  },
+  {
+    id: 'success-rate',
+    value: 95,
+    suffix: '%+',
+    label: 'Board Success Rate',
+    description: 'Consistent 90+ marks & first division board records',
+    icon: 'Award',
+  },
+  {
+    id: 'tests',
+    value: 1200,
+    formatThousands: true,
+    suffix: '+',
+    label: 'Tests Evaluated',
+    description: 'Weekly Sunday tests checked personally by Ronak Sir',
+    icon: 'ClipboardCheck',
+  },
+  {
+    id: 'lectures',
+    value: 136,
+    suffix: '',
+    label: 'Recorded Lectures',
+    description: 'Complete HD video library with chapter-wise notes',
+    icon: 'Video',
+  },
+];

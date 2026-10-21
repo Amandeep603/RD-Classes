@@ -1,74 +1,78 @@
-# PROGRAMS_SPEC.md (Canvas 1600x900 basis)
+# Section Programs Specification (Canvas 1600x764)
 
-Measured bounding boxes, typography, geometry, and color tokens extracted directly from `reference/programs-reference.png` (scaled 1024 -> 1600 canvas by factor 1.5625).
+Measured bounding boxes, typography, colors, and coordinates extracted directly from `reference/section-programs-1600.png`.
 
-## 1. Section Container & Background
-- **Section Top Rounded Corners**: `border-top-left-radius` & `border-top-right-radius`: clamp(24px, 2.5vw, 40px)
-- **Section Background**: Vertical linear gradient from `#F7FBFF` (top) to `#EAF4FC` (bottom)
-- **Decorative Ambient Circles**: 2 faint pale-blue radial circles at top-right, `rgba(120, 190, 235, 0.12)`, pointer-events-none
-- **Padding Top**: 96u (floor 64px on mobile)
-- **Padding Bottom**: 88u (floor 56px on mobile)
-- **Padding Inline**: 65u (edge-to-edge layout matching reference)
-- **Scroll Margin Top**: 64px on mobile, clamp(64px, 88u, 96px) on desktop
+## 1. Canvas & Section Container
+- **Canvas Size**: 1600 x 764 px
+- **Section Background**: `#FDFAF3` (Cream)
+- **Content Width**: 1481 px (x=62 to x=1543, centered in 1600 canvas)
+- **Top Padding**: ~46 px
+- **Bottom Padding**: ~110 px
+- **Side Padding**: 62 px (at 1600px width: `calc(var(--u) * 62)`)
+- **Transition from Hero**: Smooth transition from dark hero to cream `#FDFAF3` section via subtle curve or 24px gradient.
 
-## 2. Header Block Geometry
-- **Header Left Inset**: 27u relative to container (total left offset 92u from screen edge)
-- **Eyebrow**:
-  - Cyan / Blue Line: width 36u, height 2u, color `#2A7DB5`
-  - Text: "COURSE CATEGORIES", font-size 13u (floor 11px), tracking 0.2em, color `#5B6B7F`, uppercase font-semibold
-  - Gap line to text: 10u
-- **H2 Heading**:
-  - Line 1: "Explore Popular" in Navy `#0B1F3A`
-  - Line 2: "Programs" in Blue `#0A78AD`
-  - Font Size: 64u (floor 32px), weight 800 (extrabold), line-height 1.0, letter-spacing -0.02em
-  - Gap eyebrow -> H2: 14u (mobile 12px)
-- **Right Column Paragraph & Divider**:
-  - Vertical Divider Line: width 2u, height ~56u, color `#C5D3E3`, rounded-full
-  - Paragraph: "Choose the right learning format for your CBSE Accountancy goals in Class 11 & 12."
-  - Text: font-size 18u (floor 14px), font-light/normal, line-height 1.45, color `#5B6B7F`, max-width 340u
-  - Layout: flex row, items-center or align-self end with margin-bottom ~12u
-  - Gap divider to paragraph: 18u
-- **Gap Header -> Cards**: 56u (mobile 28px)
+## 2. Header & Typography
+- **Pill Label ("COURSE CATEGORIES")**:
+  - Position: centered, x=690..910, y=46..82 (~220px wide, ~36px tall)
+  - Background: `#FFF4D1`
+  - Border: 1px solid `#F2E3B0`
+  - Border Radius: 9999px (fully rounded pill)
+  - Font Size: 15px, font-weight 700, letter-spacing 0.12em, color `#1B1B1B`
+- **H1 Headline ("Explore Popular Programs")**:
+  - Position: centered, y~118..176, height ~58px
+  - Font Size: 58px, weight 800, line-height 1.1, color `#0B0B0B`
+  - **Highlighter Block under "Programs"**:
+    - Placed behind lower ~55% of "Programs"
+    - Width: ~296px, height: ~34px, square-edged
+    - Gradient: `linear-gradient(90deg, #FFD54A 0%, #FF9F1C 100%)`
+    - Animation: left-to-right fill on first view (respects prefers-reduced-motion)
+- **Subtitle Paragraph**:
+  - Position: centered, y~203..226, ~23px font size (floor 16px)
+  - Text: "Choose the right learning format for your CBSE Accountancy goals in Class 11 & 12."
+  - Color: `#55565B`, weight 400, line-height 1.4
 
-## 3. Cards Geometry & Anatomy (5 Cards)
-- **Card Box**:
-  - Width: 285u (at >=1280px: calc((100% - 4 * 16u) / 5))
-  - Height: 338u
-  - Border Radius: 18u
-  - Padding: 28u
-  - Row Gap: 16u
-- **Card Anatomy**:
-  - a) **Top Row**:
-    - **Number & Line**: Number "01".."05", font-size 13u, font-bold, color `#5B6B7F` (on navy `#9FB6CC`). Below number: accent line width 24u, height 1.5u.
-    - **Icon Tile**: 52u x 52u square, border-radius 14u, icon 22u. Placed ~22u below the number line.
-    - **Photo**: Width ~166u, height ~134u, border-radius 12u, `object-fit: cover`, pinned top-right.
-  - b) **Category Label**:
-    - Uppercase, font-size 12.5u (floor 11px), letter-spacing 0.14em, weight 600, color `#4A5B70` (on navy `#B9CCE0`), margin-top 26u.
-  - c) **Title**:
-    - Font-size 25u (floor 18px), weight 700 (bold), color `#0B1F3A` (on navy `#FFFFFF`), margin-top 6u.
-  - d) **Description**:
-    - Font-size 15.5u (floor 13px), line-height 1.45, color `#5B6B7F` (on navy `#C9D8E8`), max 2 lines, margin-top 8u.
-  - e) **Footer Row**:
-    - "Explore Course", font-size 15u, weight 700, color `#0B1F3A` (on navy `#FFFFFF`).
-    - Circular Arrow Button: 44u circle, centered ArrowRight (18u), theme colors.
-- **Card Themes**:
-  1. **Sky** (Class 12 Board): card `#D7ECFB`, icon tile `#0B1F3A` (white icon), arrow `#0A6E9E` (white arrow).
-  2. **Navy** (Class 11 Foundation): card `#0B3558`, text white, icon tile `#CFE8F7` (navy icon), arrow `#CFE8F7` (navy arrow).
-  3. **White** (Crash Course): card `#FFFFFF` (1px border `#E5EEF5`, soft shadow), icon tile `#FFF1B8` (dark icon), arrow `#FFF1B8` (dark arrow).
-  4. **Sun** (Online Video Portal): card `#FFE9A8`, icon tile `#F57C1F` (white icon), arrow `#F57C1F` (white arrow).
-  5. **Peach** (Mock Test Series): card `#FFE2C8`, icon tile `#0A6E9E` (white icon), arrow `#0A6E9E` (white arrow).
+## 3. Cards Geometry & Tokens (5 Cards)
+- **Layout**: 5 equal columns in row, width ~276px each, height ~342px, gap ~25px
+- **Border Radius**: 20px
+- **Border**: 1px solid
+- **Padding**: 30px
+- **Inside Card Elements**:
+  - **Icon Circle**: 64px diameter at top-left, centered lucide-react icon with stroke 2px (white)
+  - **Number ("01".."05")**: 20px, font-weight 700, at top-right
+  - **Accent Line**: 20px wide x 2px tall, below icon circle (margin-top ~16px)
+  - **Eyebrow**: Uppercase 14px, tracking 0.15em, weight 700, margin-top ~14px
+  - **Title**: 27px, weight 700, tracking tight, margin-top ~6px
+  - **Description**: 18px, line-height 1.5, color `#6B6B6B` (on dark card `#C9D8E2`), margin-top ~8px
+  - **Footer Row**:
+    - "Explore Course", 17px, weight 600
+    - Circular Arrow Button: 46px diameter, centered ArrowRight icon
+- **Card Color Themes**:
+  1. **01 Full Year Batch** (Class 12 Board):
+     - bg `#DDF0FA`, border `#BFE3F5`, iconBg `#1E9BD7`, num `#1E9BD7`, arrowBg `#BFE3F5` (dark arrow `#0B2F45`, hover bg `#1E9BD7` white arrow)
+  2. **02 Foundation Batch** (Class 11 Foundation):
+     - bg `#FFFFFF`, border `#EEEAE0`, iconBg `#1AA6C8`, num `#1AA6C8`, arrowBg `#D6EEF7` (dark arrow `#0B2F45`, hover bg `#1AA6C8` white arrow)
+  3. **03 Fast Track** (Crash Course):
+     - bg deep navy `#0B2F45` (elevated, stronger shadow), border `rgba(255,255,255,0.12)`, iconBg `#1F4A63`, num `#2BA7E0`, eyebrow `#FFFFFF`, title `#FFFFFF`, desc `#C9D8E2`, arrowBg `#1E9BD7` (white arrow)
+  4. **04 Self-Paced Access** (Online Video Portal):
+     - bg gradient `#FFF3CC` to `#FFF9E6`, border `#F6E3A6`, iconBg `#FFB800`, num `#F2A900`, arrowBg `#FFB800` (dark arrow)
+  5. **05 Board Pattern** (Mock Test Series):
+     - bg gradient `#FFE3CF` to `#FFF1E7`, border `#F8D3BC`, iconBg `#FF7A00`, num `#FF7A00`, arrowBg `#FF7A00` (white arrow)
 
-## 4. Bottom Controls Row
-- **Margin Top**: 40u
-- **Prev / Next Buttons**:
-  - Prev Button: 48u circle, bg `#FFFFFF`, border 1px `#D5E1EC`, icon `#0B1F3A`
-  - Next Button: 48u circle, bg `#0A6E9E`, icon `#FFFFFF`
-  - Gap: 12u
-- **Progress Track**:
-  - Height 1px, background `#CBD8E6`
-  - Thumb: height 2px, background `#0A6E9E`, dynamic width & translate
-- **View All Courses Button**:
-  - Height 52u, border-radius 26u (pill)
-  - Background `#0B1F3A`, text `#FFFFFF`, font-size 16u, font-weight 600
-  - Padding Inline 28u
-  - Arrow icon with hover translate-x-1
+## 4. Terms Row
+- **Divider Line Above**: y~646, 1px solid `#E8E2D3`, full 1481px content width
+- **Terms**: 7 uppercase terms separated by 1px vertical dividers `#E8E2D3`:
+  1. PARTNERSHIP ACCOUNTS
+  2. GOODWILL VALUATION
+  3. JOURNAL & LEDGER
+  4. CASH FLOW STATEMENTS
+  5. COMPANY ACCOUNTS & SHARES
+  6. ACCOUNTING RATIOS
+  7. TRIAL BALANCE
+- Typography: 14px, letter-spacing 0.08em, color `#6B6B6B`, font-semibold
+- Clickable link: `/courses?topic=<slug>`
+
+## 5. Responsive Behavior
+- **>= 1100px**: 5 columns, `--u: min(100vw / 1600, 100svh / 900)` for paddings and typography, cards grid 5 equal columns gap 25u.
+- **1024 - 1099px**: 5 columns, smaller paddings, no overflow.
+- **768 - 1023px**: 3 + 2 grid (last row centered), gap 20px.
+- **< 768px**: Cards swipe carousel with scroll-snap (card width 78vw, max 320px, 16px gap, first card aligned with 16px padding, 5 indicator dots below); terms row becomes slow auto-scrolling marquee (pauses on touch).

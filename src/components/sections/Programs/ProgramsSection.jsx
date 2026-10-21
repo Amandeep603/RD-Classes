@@ -1,52 +1,40 @@
 import ProgramsHeader from "./ProgramsHeader";
-import ProgramsCarousel from "./ProgramsCarousel";
-import ProgramsRevealWrapper from "./ProgramsRevealWrapper";
+import ProgramsCardsGrid from "./ProgramsCardsGrid";
+import TermsRow from "./TermsRow";
 
-/**
- * Explore Popular Programs section component (Server Component).
- * - Sits directly below the hero section.
- * - Light panel rising over dark hero with rounded-t corners (24px to 40px).
- * - Background: soft gradient #F7FBFF -> #EAF4FC with 2 faint pale-blue ambient circles.
- * - Fluid scaling on desktop via --su: min(100vw / 1600, 1.1px).
- * - Plain Tailwind/clamp on mobile/tablet (<1024px); never uses --su below 1024px.
- */
 export default function ProgramsSection() {
   return (
     <section
-      id="programs"
-      aria-labelledby="programs-heading"
+      id="programs-section"
+      aria-label="Course Categories and Popular Programs"
       style={{
-        "--su": "min(100vw / 1600, 1.1px)",
+        backgroundColor: "#FDFAF3",
+        "--u": "min(min(100vw / 1600, 100svh / 900), 1.1px)",
       }}
-      className="relative w-full overflow-hidden bg-[#0A0A0A] select-none scroll-mt-[64px] lg:scroll-mt-[clamp(64px,calc(var(--su)*88),96px)]"
+      className="relative z-20 w-full overflow-hidden text-[#0B0B0B] scroll-mt-20 pt-[46px] lg:pt-[calc(var(--u)*46)] pb-[60px] lg:pb-[calc(var(--u)*84)] border-t border-black/5"
     >
-      {/* Light Rounded Panel Container */}
+      {/* Smooth 24px transition gradient from dark hero at the very top edge */}
       <div
-        className="relative w-full rounded-t-[clamp(24px,2.5vw,40px)] bg-gradient-to-b from-[#F7FBFF] to-[#EAF4FC] pt-[64px] pb-[56px] px-5 lg:pt-[calc(var(--su)*96)] lg:pb-[calc(var(--su)*88)] lg:px-[calc(var(--su)*65)] shadow-[0_-12px_40px_rgba(0,0,0,0.25)]"
+        className="absolute top-0 left-0 right-0 h-[24px] bg-gradient-to-b from-[#0A0A0A]/20 to-transparent pointer-events-none -z-0"
+        aria-hidden="true"
+      />
+
+      {/* Main Container - max-width 1600px centered with 62u side padding on desktop */}
+      <div
+        className="relative z-10 w-full max-w-[1600px] mx-auto flex flex-col items-center"
+        style={{
+          paddingLeft: "max(16px, calc(var(--u) * 62))",
+          paddingRight: "max(16px, calc(var(--u) * 62))",
+        }}
       >
-        {/* ================= DECORATIVE AMBIENT CIRCLES ================= */}
-        {/* Top-Right Faint Pale Blue Circle 1 */}
-        <div
-          className="absolute -top-[12%] -right-[6%] w-[380px] lg:w-[calc(var(--su)*520)] h-[380px] lg:h-[calc(var(--su)*520)] rounded-full bg-[radial-gradient(circle,rgba(120,190,235,0.18)_0%,transparent_70%)] pointer-events-none -z-0"
-          aria-hidden="true"
-        />
+        {/* Header Block: Pill + H1 with Animated Highlighter + Subtitle */}
+        <ProgramsHeader />
 
-        {/* Top-Right Faint Pale Blue Circle 2 (Inner highlight) */}
-        <div
-          className="absolute top-[4%] -right-[3%] w-[260px] lg:w-[calc(var(--su)*360)] h-[260px] lg:h-[calc(var(--su)*360)] rounded-full bg-[radial-gradient(circle,rgba(120,190,235,0.12)_0%,transparent_75%)] pointer-events-none -z-0"
-          aria-hidden="true"
-        />
+        {/* 5 Cards Row (5 columns desktop, 3+2 tablet, swipe carousel mobile) */}
+        <ProgramsCardsGrid />
 
-        {/* ================= CONTENT CONTAINER WITH REVEAL WRAPPER ================= */}
-        <div className="relative z-10 w-full max-w-[1600px] mx-auto flex flex-col">
-          <ProgramsRevealWrapper className="w-full flex flex-col gap-7 lg:gap-[calc(var(--su)*56)]">
-            {/* Header Block */}
-            <ProgramsHeader />
-
-            {/* Carousel with Cards & Bottom Controls */}
-            <ProgramsCarousel />
-          </ProgramsRevealWrapper>
-        </div>
+        {/* Accounting Terms Row with Divider */}
+        <TermsRow />
       </div>
     </section>
   );
