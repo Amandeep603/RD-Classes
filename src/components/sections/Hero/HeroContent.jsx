@@ -218,7 +218,7 @@ export default function HeroContent() {
           {/* Primary Explore Courses */}
           <a
             href={cta.exploreCourses.href}
-            className="flex-1 max-[339px]:w-full h-[52px] px-4 rounded-[10px] bg-[#FFB800] hover:bg-[#FFC933] active:bg-[#E5A600] text-[#0A0A0A] font-semibold text-[16px] inline-flex items-center justify-center shadow-sm transition-colors whitespace-nowrap cursor-pointer"
+            className="flex-1 max-[339px]:w-full h-[52px] px-4 rounded-[10px] bg-[#FFB800] hover:bg-[#FFC933] active:bg-[#E5A600] text-[#0A0A0A] font-semibold text-[16px] flex items-center justify-center text-center shadow-sm transition-colors whitespace-nowrap cursor-pointer"
           >
             <span>{cta.exploreCourses.label}</span>
             <ArrowRight className="ml-2 w-4 h-4 shrink-0" aria-hidden="true" />
@@ -227,7 +227,7 @@ export default function HeroContent() {
           {/* Secondary Get in Touch */}
           <a
             href={cta.getInTouch.href}
-            className="flex-1 max-[339px]:w-full h-[52px] px-4 rounded-[10px] bg-transparent hover:bg-white/[0.08] border border-white/50 text-white font-semibold text-[16px] inline-flex items-center justify-center transition-colors whitespace-nowrap cursor-pointer"
+            className="flex-1 max-[339px]:w-full h-[52px] px-4 rounded-[10px] bg-transparent hover:bg-white/[0.08] border border-white/50 text-white font-semibold text-[16px] flex items-center justify-center text-center transition-colors whitespace-nowrap cursor-pointer"
           >
             <span>{cta.getInTouch.label}</span>
           </a>

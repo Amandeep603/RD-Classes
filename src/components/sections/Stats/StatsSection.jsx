@@ -1,4 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
+import InViewSection from "@/components/ui/InViewSection";
 import StatItem from "./StatItem";
 import { STATS } from "@/constants/stats";
 
@@ -14,19 +15,19 @@ import { STATS } from "@/constants/stats";
  */
 export default function StatsSection() {
   return (
-    <section
+    <InViewSection
       id="results"
       aria-label="Achievements and statistics"
       className="relative w-full overflow-hidden text-white scroll-mt-20 [isolation:isolate] lg:box-border"
       style={{
         paddingTop: "clamp(48px, 5vw, calc(var(--su, 1px) * 68))",
         paddingBottom: "clamp(44px, 4.2vw, calc(var(--su, 1px) * 53))",
-        background: "linear-gradient(90deg, #0E0907 0%, #1A0F06 20%, #381E07 35%, #5C2E06 50%, #7E3505 65%, #923203 80%, #7C1800 100%)",
+        background: "linear-gradient(90deg, #171310 0%, #1F160C 14%, #381E09 26%, #5C2E06 40%, #7E3505 55%, #9B3804 70%, #8E2B02 84%, #7D1804 100%)",
       }}
     >
       {/* ================= CRISP CORNER CIRCLES (From docs/STATS_SPEC.md, NO blur) ================= */}
 
-      {/* 1. Top-Left Dark Arc: cx: -100u, cy: -150u, r: 230u (dia: 460u) */}
+      {/* 1. Top-Left Dark Arc */}
       <div
         className="absolute rounded-full pointer-events-none lg:animate-stat-circle-drift"
         style={{
@@ -34,7 +35,7 @@ export default function StatsSection() {
           height: "calc(var(--su, 1px) * 460)",
           left: "calc(var(--su, 1px) * -330)",
           top: "calc(var(--su, 1px) * -380)",
-          background: "rgba(0, 0, 0, 0.40)",
+          background: "rgba(0, 0, 0, 0.05)",
         }}
         aria-hidden="true"
       />
@@ -47,68 +48,67 @@ export default function StatsSection() {
           height: "calc(var(--su, 1px) * 580)",
           left: "calc(var(--su, 1px) * -275)",
           bottom: "calc(var(--su, 1px) * -390)",
-          background: "rgba(65, 40, 12, 0.65)",
+          background: "rgba(60, 36, 12, 0.70)",
           animationDelay: "-6s",
         }}
         aria-hidden="true"
       />
 
-      {/* 3. Bottom-Left Inner Bright Amber Circle: cx: -84u, cy: 572u, r: 317u (dia: 634u) */}
+      {/* 3. Bottom-Left Inner Deep Brown-Amber Circle: cx: -110u, cy: 500u, r: 240u */}
       <div
         className="absolute rounded-full pointer-events-none lg:animate-stat-circle-drift"
         style={{
-          width: "calc(var(--su, 1px) * 634)",
-          height: "calc(var(--su, 1px) * 634)",
-          left: "calc(var(--su, 1px) * -401)",
-          bottom: "calc(var(--su, 1px) * -516)",
-          background: "radial-gradient(circle at 15% 85%, #B87815 0%, #A86E12 55%, #8A580A 100%)",
+          width: "calc(var(--su, 1px) * 490)",
+          height: "calc(var(--su, 1px) * 490)",
+          left: "calc(var(--su, 1px) * -300)",
+          bottom: "calc(var(--su, 1px) * -385)",
+          background: "radial-gradient(circle at 45% 45%, #AB7014 0%, #9B6210 40%, #764508 70%, #462805 88%, transparent 100%)",
           animationDelay: "-12s",
         }}
         aria-hidden="true"
       />
 
-      {/* 4. Upper Right Orange Circle: cx: 1660u, cy: -95u, r: 285u (dia: 570u) */}
+      {/* 4. Upper Right Dark Orange Circle: tuned */}
       <div
         className="absolute rounded-full pointer-events-none lg:animate-stat-circle-drift"
         style={{
-          width: "calc(var(--su, 1px) * 570)",
-          height: "calc(var(--su, 1px) * 570)",
-          right: "calc(var(--su, 1px) * -345)",
-          top: "calc(var(--su, 1px) * -380)",
-          background: "radial-gradient(circle at 85% 15%, #F7570D 0%, #D83B01 45%, #A82800 80%, #7C1800 100%)",
+          width: "calc(var(--su, 1px) * 520)",
+          height: "calc(var(--su, 1px) * 520)",
+          right: "calc(var(--su, 1px) * -260)",
+          top: "calc(var(--su, 1px) * -340)",
+          background: "radial-gradient(circle at 50% 50%, #F84C00 0%, #EA3E00 28%, #C23000 56%, #942200 82%, transparent 98%)",
           animationDelay: "-18s",
         }}
         aria-hidden="true"
       />
 
-      {/* 5. Lower Right Bright Orange Circle: cx: 1650u, cy: 500u, r: 270u (dia: 540u) */}
+      {/* 5. Lower Right Bright Orange Circle */}
       <div
         className="absolute rounded-full pointer-events-none lg:animate-stat-circle-drift"
         style={{
-          width: "calc(var(--su, 1px) * 540)",
-          height: "calc(var(--su, 1px) * 540)",
-          right: "calc(var(--su, 1px) * -320)",
-          bottom: "calc(var(--su, 1px) * -397)",
-          background: "radial-gradient(circle at 85% 85%, #DF4D00 0%, #D64201 60%, #C43801 100%)",
+          width: "calc(var(--su, 1px) * 480)",
+          height: "calc(var(--su, 1px) * 480)",
+          right: "calc(var(--su, 1px) * -240)",
+          bottom: "calc(var(--su, 1px) * -328)",
+          background: "radial-gradient(circle at 50% 50%, #E64C00 0%, #D84200 48%, #BE3600 75%, #881E00 96%, transparent 100%)",
           animationDelay: "-8s",
         }}
         aria-hidden="true"
       />
-
       {/* ================= CONTENT CONTAINER ================= */}
       <div
-        className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto"
+        className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto px-3 lg:px-0"
         style={{
-          paddingLeft: "clamp(16px, 3.5vw, calc(var(--su, 1px) * 75))",
-          paddingRight: "clamp(16px, 3.5vw, calc(var(--su, 1px) * 75))",
+          paddingLeft: "clamp(12px, 3.5vw, calc(var(--su, 1px) * 75))",
+          paddingRight: "clamp(12px, 3.5vw, calc(var(--su, 1px) * 75))",
         }}
       >
         <Reveal className="w-full">
-          {/* Desktop Layout (>=1024px): Exact Grid Template (366fr 365fr 367fr 427fr) with 1px Dividers */}
+          {/* Desktop Layout (>=1024px): Exact Grid Template (366fr 365fr 367fr 352fr) with 1px Dividers at x=441u, 806u, 1173u */}
           <div
             className="hidden lg:grid items-center w-full relative"
             style={{
-              gridTemplateColumns: "366fr 365fr 367fr 427fr",
+              gridTemplateColumns: "366fr 365fr 367fr 352fr",
             }}
           >
             {STATS.map((stat, idx) => (
@@ -147,7 +147,7 @@ export default function StatsSection() {
             {STATS.map((stat, idx) => (
               <div
                 key={stat.id}
-                className="flex flex-col items-center justify-start py-6 px-3 min-w-0 h-full"
+                className="flex flex-col items-center justify-start py-6 px-2 min-w-0 h-full"
               >
                 <StatItem stat={stat} index={idx} />
               </div>
@@ -155,6 +155,6 @@ export default function StatsSection() {
           </div>
         </Reveal>
       </div>
-    </section>
+    </InViewSection>
   );
 }

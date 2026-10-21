@@ -43,7 +43,6 @@ const motionInitScript = `
 `;
 
 import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
-import SectionObserver from "@/components/ui/SectionObserver";
 
 export default function RootLayout({ children }) {
   return (
@@ -57,7 +56,6 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-screen flex flex-col bg-[#0A0A0B] text-white selection:bg-[#FFB800] selection:text-[#0A0A0B] overflow-x-clip">
         <ScrollProgressBar />
-        <SectionObserver />
         <Navbar />
         {children}
       </body>

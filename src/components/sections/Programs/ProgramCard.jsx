@@ -19,6 +19,7 @@ export default function ProgramCard({ program, index = 0 }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e) => {
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -32,7 +33,10 @@ export default function ProgramCard({ program, index = 0 }) {
     });
   };
 
-  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseEnter = () => {
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return;
+    setIsHovered(true);
+  };
   const handleMouseLeave = () => {
     setIsHovered(false);
     setTilt({ rx: 0, ry: 0, glareX: 50, glareY: 50 });

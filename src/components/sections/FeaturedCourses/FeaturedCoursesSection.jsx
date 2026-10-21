@@ -1,6 +1,7 @@
 import SectionBadge from "@/components/ui/SectionBadge";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import InViewSection from "@/components/ui/InViewSection";
 import CourseFilters, { CourseFilterProvider } from "./CourseFilters";
 import CourseGrid from "./CourseGrid";
 import { COURSE_FILTERS } from "@/constants/courseFilters";
@@ -34,12 +35,11 @@ export default function FeaturedCoursesSection() {
   };
 
   return (
-    <section
+    <InViewSection
       id="courses"
       aria-labelledby="featured-courses-heading"
-      className="relative w-full overflow-hidden scroll-mt-20 text-[#0F172A]"
+      className="relative w-full overflow-hidden scroll-mt-20 text-[#0F172A] pt-[40px] lg:pt-[clamp(56px,6vw,calc(var(--su,1px)*72))]"
       style={{
-        paddingTop: "clamp(56px, 6vw, calc(var(--su, 1px) * 72))",
         paddingBottom: "clamp(56px, 7vw, calc(var(--su, 1px) * 88))",
       }}
     >
@@ -103,6 +103,6 @@ export default function FeaturedCoursesSection() {
           </div>
         </CourseFilterProvider>
       </div>
-    </section>
+    </InViewSection>
   );
 }

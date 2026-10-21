@@ -72,9 +72,27 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-colors duration-200 flex items-center px-5 lg:px-[6.25vw] h-[64px] lg:h-[clamp(64px,calc(var(--u)*88),96px)] ${
           isScrolled
-            ? "bg-[#0A0A0A]/92 lg:bg-[#0A0A0A]/95 lg:backdrop-blur-md border-b border-white/[0.08] lg:shadow-lg lg:shadow-black/50"
-            : "bg-transparent border-b border-transparent"
+            ? "bg-[#0A0A0A] border-b border-white/[0.08]"
+            : "bg-transparent border-none"
         }`}
+        style={
+          isScrolled
+            ? {
+                backgroundColor: "#0A0A0A",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+                boxShadow: "none",
+                backdropFilter: "none",
+                WebkitBackdropFilter: "none",
+              }
+            : {
+                backgroundColor: "transparent",
+                border: "none",
+                boxShadow: "none",
+                backdropFilter: "none",
+                WebkitBackdropFilter: "none",
+                backgroundImage: "none",
+              }
+        }
       >
         <div className="w-full flex items-center justify-between">
           {/* Left: Original Logo Tile */}

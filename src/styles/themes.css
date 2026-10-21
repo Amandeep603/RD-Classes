@@ -236,10 +236,16 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .course-card:hover .course-card-view-btn {
+  .course-card:hover .course-card-view-btn,
+  .course-card-view-btn:hover {
     background: var(--btn-hover-bg) !important;
     color: var(--btn-hover-text) !important;
   }
+}
+
+.course-card-view-btn:active {
+  background: var(--btn-hover-bg) !important;
+  color: var(--btn-hover-text) !important;
 }
 
 .course-card-whatsapp-btn {

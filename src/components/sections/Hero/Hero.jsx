@@ -1,30 +1,34 @@
 import HeroContent from "./HeroContent";
 import HeroImageGrid from "./HeroImageGrid";
-import { NOISE_DATA_URI } from "@/constants/noise";
+import InViewSection from "@/components/ui/InViewSection";
 
 /**
- * Hero Section for RD Classes home page (Hero v3.2).
+ * Hero Section for RD Classes home page (Hero v3.3).
  * - Exact calibrated background radial gradients painted directly on section background over #0A0A0A.
+ * - Noise overlay completely removed across all breakpoints.
+ * - All background layers: background-repeat: no-repeat, sized to cover hero.
  * - [isolation: isolate], content relative z-10, no negative z-index, no filter:blur.
  * - Desktop: 1600x900 basis, strictly fits one screen, capped at 1.1px.
- * - Mobile (< 1024px): Scrollable, height auto, pb-6 (<=24px), all 5 cards fully visible with no dead gap.
- * - Static 128px noise tile (hidden on mobile <=767px).
- * - Glow drift: desktop only (hidden lg:block), no glow animation on mobile.
- * - overflow-x-clip prevents scroll container traps.
+ * - Mobile (< 1024px): Scrollable, height auto, pb-7 (28px), all 5 cards fully visible with no dead gap.
+ * - Glow drift: desktop only (hidden lg:block).
  */
 export default function Hero() {
   return (
-    <section
+    <InViewSection
       id="hero"
       aria-labelledby="hero-heading"
       style={{
         "--u": "min(min(100vw / 1600, max(100svh, 560px) / 900), 1.1px)",
-        background: `
-          radial-gradient(circle 28vw at 0% 0%, rgba(184, 115, 10, 0.35) 0%, transparent 70%),
-          radial-gradient(circle 22vw at 0% 50%, rgba(14, 59, 74, 0.40) 0%, transparent 70%),
-          radial-gradient(circle 40vw at 100% 100%, rgba(217, 130, 0, 0.45) 0%, transparent 70%),
-          radial-gradient(circle 20vw at 100% 0%, rgba(138, 90, 10, 0.18) 0%, transparent 70%),
-          #0A0A0A
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundColor: "#0A0A0A",
+        backgroundImage: `
+          radial-gradient(circle 35vw at 0% 0%, rgba(175, 112, 14, 0.35) 0%, transparent 68%),
+          radial-gradient(circle 25vw at 0% 28%, rgba(30, 80, 85, 0.44) 0%, transparent 68%),
+          radial-gradient(circle 27vw at 0% 55%, rgba(16, 66, 78, 0.48) 0%, transparent 70%),
+          radial-gradient(circle 48vw at 90% 100%, rgba(215, 125, 0, 0.50) 0%, transparent 72%),
+          radial-gradient(circle 38vw at 58% 105%, rgba(190, 110, 10, 0.42) 0%, transparent 68%),
+          radial-gradient(circle 24vw at 100% 12%, rgba(175, 110, 10, 0.22) 0%, transparent 70%)
         `,
       }}
       className="relative w-full min-h-[100svh] h-auto lg:h-[100svh] lg:min-h-[560px] overflow-x-clip select-none [isolation:isolate]"
@@ -33,24 +37,17 @@ export default function Hero() {
       <div
         className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
+        style={{ backgroundRepeat: "no-repeat" }}
       >
         <div
           className="animate-glow-drift absolute -top-[5%] -left-[5%] w-[42vw] h-[42vw] rounded-full bg-[radial-gradient(circle,rgba(184,115,10,0.18)_0%,transparent_70%)] pointer-events-none"
+          style={{ backgroundRepeat: "no-repeat" }}
         />
         <div
-          className="animate-glow-drift-rev absolute -bottom-[10%] -right-[5%] w-[48vw] h-[48vw] rounded-full bg-[radial-gradient(circle,rgba(217,130,0,0.20)_0%,transparent_70%)] pointer-events-none"
+          className="animate-glow-drift-rev absolute -bottom-[10%] -right-[5%] w-[48vw] h-[48vw] rounded-full bg-[radial-gradient(circle,rgba(217,130,0,0.22)_0%,transparent_70%)] pointer-events-none"
+          style={{ backgroundRepeat: "no-repeat" }}
         />
       </div>
-
-      {/* ================= STATIC NOISE TILE (Tiny 128px PNG, opacity 0.03, hidden <=767px) ================= */}
-      <div
-        className="hidden md:block absolute inset-0 opacity-[0.03] pointer-events-none z-10 bg-repeat"
-        style={{
-          backgroundImage: `url("${NOISE_DATA_URI}")`,
-          backgroundSize: "128px 128px",
-        }}
-        aria-hidden="true"
-      />
 
       {/* ================= DESKTOP & LAPTOP LAYOUT (>= 1024px) ================= */}
       <div className="hidden lg:block w-full h-full relative z-20">
@@ -66,7 +63,7 @@ export default function Hero() {
           <HeroContent />
         </div>
 
-        {/* Right Arch Cluster: anchored right at 3.9vw, top moved down ~2% of hero height */}
+        {/* Right Arch Cluster: anchored right at 3.9vw */}
         <div
           className="absolute bottom-0 z-10 flex items-start"
           style={{
@@ -80,8 +77,8 @@ export default function Hero() {
       </div>
 
       {/* ================= MOBILE & TABLET LAYOUT (< 1024px) ================= */}
-      {/* Scrollable, height auto, pb-6 (max 24px), content starts below 64px header (pt 88px) */}
-      <div className="flex lg:hidden flex-col items-center justify-start min-h-[100svh] h-auto w-full pt-[88px] pb-[24px] px-5 z-20 relative">
+      {/* Scrollable, height auto, pb-[28px], content starts below 64px header (pt 88px) */}
+      <div className="flex lg:hidden flex-col items-center justify-start min-h-[100svh] h-auto w-full pt-[88px] pb-[28px] px-4 z-20 relative">
         {/* Centered Content */}
         <HeroContent />
 
@@ -90,6 +87,6 @@ export default function Hero() {
           <HeroImageGrid isDesktop={false} className="w-full" />
         </div>
       </div>
-    </section>
+    </InViewSection>
   );
 }

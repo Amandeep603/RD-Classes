@@ -1,5 +1,6 @@
 import { PROGRAMS } from "@/constants/programs";
 import Reveal from "@/components/ui/Reveal";
+import InViewSection from "@/components/ui/InViewSection";
 import ProgramsHeader from "./ProgramsHeader";
 import ProgramCard from "./ProgramCard";
 import TopicsTicker from "./TopicsTicker";
@@ -12,13 +13,12 @@ import TopicsTicker from "./TopicsTicker";
  */
 export default function ProgramsSection() {
   return (
-    <section
+    <InViewSection
       id="programs"
       aria-labelledby="programs-heading"
-      className="relative w-full overflow-hidden scroll-mt-[72px] lg:scroll-mt-[96px]"
+      className="relative w-full overflow-hidden scroll-mt-[72px] lg:scroll-mt-[96px] pb-[40px] lg:pb-[clamp(48px,4.5vw,calc(var(--su,1px)*56))]"
       style={{
         paddingTop: "clamp(56px, 6vw, calc(var(--su, 1px) * 80))",
-        paddingBottom: "clamp(48px, 4.5vw, calc(var(--su, 1px) * 56))",
       }}
     >
       <div
@@ -68,7 +68,21 @@ export default function ProgramsSection() {
           </div>
 
           {/* 3. Mobile Swipe Scroller (< 768px): CSS Scroll-Snap */}
-          <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-[14px] px-5 -mx-5 pb-3 scrollbar-none [scroll-padding-left:20px]">
+          <div
+            className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-[14px] scrollbar-none"
+            style={{
+              paddingTop: "20px",
+              marginTop: "-20px",
+              paddingBottom: "44px",
+              marginBottom: "-44px",
+              paddingLeft: "20px",
+              paddingRight: "20px",
+              marginLeft: "-20px",
+              marginRight: "-20px",
+              scrollPaddingLeft: "20px",
+              scrollPaddingRight: "20px",
+            }}
+          >
             {PROGRAMS.map((program, index) => (
               <div
                 key={program.id}
@@ -85,6 +99,6 @@ export default function ProgramsSection() {
           <TopicsTicker />
         </Reveal>
       </div>
-    </section>
+    </InViewSection>
   );
 }

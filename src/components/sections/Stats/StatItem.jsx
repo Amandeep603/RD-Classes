@@ -54,9 +54,9 @@ export default function StatItem({ stat, index = 0 }) {
         <CountUp value={stat.value} suffix={stat.suffix} />
       </div>
 
-      {/* Label: 22u / 700 / white (gap 8u) */}
+      {/* Label: 22u / 700 / white (gap 8u) - min-height 2.5em with centered text on mobile */}
       <div
-        className="font-bold text-white leading-tight min-h-[2.5em] lg:min-h-0 flex items-center justify-center"
+        className="font-bold text-white leading-tight min-h-[2.5em] lg:min-h-0 flex items-center justify-center text-center"
         style={{
           marginTop: "clamp(6px, 1vw, calc(var(--su, 1px) * 8))",
           fontSize: "clamp(15px, 3.8vw, calc(var(--su, 1px) * 22))",
@@ -65,14 +65,11 @@ export default function StatItem({ stat, index = 0 }) {
         {stat.label}
       </div>
 
-      {/* Description: 17.5u / line-height 1.6 (28u pitch) / rgba(255,255,255,0.78) (gap 8u) */}
+      {/* Description: desktop max-width 275u, text-wrap: wrap; mobile width 100%, 13px/1.5, text-wrap: pretty */}
       <p
-        className="font-normal text-white/78 text-center text-balance"
+        className="font-normal text-white/78 text-center w-full text-[13px] leading-[1.5] [text-wrap:pretty] lg:[text-wrap:wrap] lg:text-[calc(var(--su,1px)*17.5)] lg:leading-[1.6] max-w-none lg:max-w-[calc(var(--su,1px)*275)]"
         style={{
           marginTop: "clamp(6px, 1vw, calc(var(--su, 1px) * 8))",
-          fontSize: "clamp(13px, 2.5vw, calc(var(--su, 1px) * 17.5))",
-          lineHeight: 1.6,
-          maxWidth: "min(26ch, calc(var(--su, 1px) * 280))",
         }}
       >
         {stat.description}
