@@ -2,14 +2,10 @@ import HeroContent from "./HeroContent";
 import HeroImageGrid from "./HeroImageGrid";
 
 /**
- * Rebuilt Hero Section for RD Classes home page.
- * - Exact visual replica of reference/hero-reference.jpeg on 1600x900 canvas
- * - Scaled with --u: min(100vw / 1600, max(100svh, 560px) / 900), capped at 1.1px
- * - Zero vertical scroll across all desktop viewports
- * - Anchored: left content padding-left = 6.25vw, arch cluster right padding = 3.9vw
- * - 3 ambient blurred radial glows with slow 20s drift loop
- * - Inline SVG feTurbulence film grain at 2.5% opacity
- * - Mobile & tablet: vertically centered, single screen, no overflow
+ * Hero Section for RD Classes home page (Hero v2.2 Final Polish).
+ * - Desktop (>= 1024px): 1600x900 basis, strictly fits one screen with zero vertical scroll, capped at 1.1px.
+ * - Mobile (< 1024px): Scrollable, min-height 100svh, height auto, bottom padding 40px, all 5 cards fully visible.
+ * - Ambient radial glows with slow drift.
  */
 export default function Hero() {
   return (
@@ -18,7 +14,7 @@ export default function Hero() {
       style={{
         "--u": "min(min(100vw / 1600, max(100svh, 560px) / 900), 1.1px)",
       }}
-      className="relative w-full h-[100svh] min-h-[560px] overflow-hidden bg-[#0A0A0A] select-none"
+      className="relative w-full min-h-[100svh] h-auto lg:h-[100svh] lg:min-h-[560px] overflow-x-hidden lg:overflow-hidden bg-[#0A0A0A] select-none"
     >
       {/* ================= BACKGROUND GLOWS & FILM GRAIN ================= */}
 
@@ -48,12 +44,12 @@ export default function Hero() {
 
       {/* ================= DESKTOP & LAPTOP LAYOUT (>= 1024px) ================= */}
       <div className="hidden lg:block w-full h-full relative">
-        {/* Left Content: anchored left at 6.25vw, top at 195u to align eyebrow at 204px */}
+        {/* Left Content: anchored left at 6.25vw, top at 180u to center vertically */}
         <div
           className="absolute z-20"
           style={{
             left: "6.25vw",
-            top: "calc(var(--u) * 195)",
+            top: "calc(var(--u) * 180)",
             width: "calc(var(--u) * 650)",
           }}
         >
@@ -74,12 +70,13 @@ export default function Hero() {
       </div>
 
       {/* ================= MOBILE & TABLET LAYOUT (< 1024px) ================= */}
-      <div className="flex lg:hidden flex-col items-center justify-start h-full min-h-[100svh] w-full pt-[80px] px-5 z-20 relative overflow-hidden">
-        {/* Centered Content: starts below header (pt 64px + 16px = 80px) */}
+      {/* Scrollable, height auto, pb-40px, content starts 28px below 64px header (pt 92px) */}
+      <div className="flex lg:hidden flex-col items-center justify-start min-h-[100svh] h-auto w-full pt-[92px] pb-[40px] px-5 z-20 relative">
+        {/* Centered Content */}
         <HeroContent />
 
-        {/* Scaled Arch Cluster filling screen width: min(100% - 40px, 440px), sm:max-w-[520px], centered, mt 24px */}
-        <div className="w-[min(100%-40px,440px)] sm:max-w-[520px] mx-auto mt-[24px] shrink-0">
+        {/* Scaled Arch Cluster showing all 5 arches completely: gap 36px below buttons */}
+        <div className="w-[min(100%-40px,440px)] mx-auto mt-[36px] shrink-0">
           <HeroImageGrid isDesktop={false} className="w-full" />
         </div>
       </div>

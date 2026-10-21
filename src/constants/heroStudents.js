@@ -1,7 +1,6 @@
 /**
  * Student showcase data for the Hero Arch Photo Cards.
  * Supports hot-swapping photos without changing component code.
- * mode: "cutout" | "photo"
  */
 export const HERO_STUDENTS = [
   {
@@ -10,7 +9,7 @@ export const HERO_STUDENTS = [
     column: 1,
     src: "/images/hero/student-1.webp",
     alt: "Accountancy student studying with notebook",
-    bg: "#76CAE6",
+    bg: "#7ACBE4",
     anchor: "bottom",
     order: 1,
   },
@@ -20,7 +19,7 @@ export const HERO_STUDENTS = [
     column: 1,
     src: "/images/hero/student-2.webp",
     alt: "Accountancy student smiling in discussion",
-    bg: "#FA7703",
+    bg: "#F57506",
     anchor: "top",
     order: 2,
   },
@@ -30,7 +29,7 @@ export const HERO_STUDENTS = [
     column: 2,
     src: "/images/hero/student-3.webp",
     alt: "Student with books preparing for CBSE Accountancy board exams",
-    bg: "#FCBB06",
+    bg: "#F8BA0D",
     anchor: "bottom",
     order: 3,
   },
@@ -40,7 +39,7 @@ export const HERO_STUDENTS = [
     column: 2,
     src: "/images/hero/student-4.webp",
     alt: "Confident Commerce student with glasses and notebooks",
-    bg: "#0FA1BB",
+    bg: "#0B9FBA",
     anchor: "top",
     order: 4,
   },
@@ -50,7 +49,7 @@ export const HERO_STUDENTS = [
     column: 3,
     src: "/images/hero/student-5.webp",
     alt: "Successful Class 12 Accountancy student preparing for CUET and boards",
-    bg: "#FD7504",
+    bg: "#F7780F",
     anchor: "bottom",
     order: 5,
   },

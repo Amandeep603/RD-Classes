@@ -102,7 +102,7 @@ export default function Navbar() {
                       onClick={() => setDropdownOpen((prev) => !prev)}
                       className="flex items-center gap-1 font-medium text-white/90 hover:text-[#FFB800] transition-colors py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB800] rounded-sm cursor-pointer"
                       style={{
-                        fontSize: "max(13px, calc(var(--u) * 15))",
+                        fontSize: "max(13px, calc(var(--u) * 16))",
                       }}
                       aria-expanded={dropdownOpen}
                       aria-haspopup="true"
@@ -145,7 +145,7 @@ export default function Navbar() {
                       : "text-white/90 hover:text-[#FFB800]"
                   }`}
                   style={{
-                    fontSize: "max(13px, calc(var(--u) * 15))",
+                    fontSize: "max(13px, calc(var(--u) * 16))",
                   }}
                 >
                   <span>{link.label}</span>
@@ -171,7 +171,7 @@ export default function Navbar() {
               href={SITE_CONFIG.cta.studentLogin.href}
               className="font-medium text-white/90 hover:text-[#FFB800] transition-colors whitespace-nowrap py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB800] rounded-sm"
               style={{
-                fontSize: "max(13px, calc(var(--u) * 15))",
+                fontSize: "max(13px, calc(var(--u) * 16))",
               }}
             >
               {SITE_CONFIG.cta.studentLogin.label}
@@ -183,11 +183,11 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center bg-[#FFB800] hover:bg-[#FFC933] active:bg-[#E5A600] text-[#0A0A0A] font-bold shadow-sm transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB800] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] whitespace-nowrap"
               style={{
-                height: "clamp(40px, calc(var(--u) * 46), 50px)",
+                height: "clamp(42px, calc(var(--u) * 48), 54px)",
                 paddingLeft: "calc(var(--u) * 26)",
                 paddingRight: "calc(var(--u) * 26)",
                 borderRadius: "calc(var(--u) * 8)",
-                fontSize: "max(13px, calc(var(--u) * 15))",
+                fontSize: "max(14px, calc(var(--u) * 16))",
               }}
             >
               <span>{SITE_CONFIG.cta.enquire.label}</span>

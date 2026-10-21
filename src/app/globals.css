@@ -16,10 +16,10 @@
   --color-text-smallcaps: #D6D6D6;
 
   /* Arch Card Palette */
-  --color-arch-blue: #72C7E8;
-  --color-arch-yellow: #FFB800;
-  --color-arch-orange: #FF7A00;
-  --color-arch-teal: #1AA6C8;
+  --color-arch-blue: #7ACBE4;
+  --color-arch-yellow: #F8BA0D;
+  --color-arch-orange: #F57506;
+  --color-arch-teal: #0B9FBA;
 }
 
 @theme inline {
@@ -61,7 +61,7 @@ body {
 @keyframes letterReveal {
   0% {
     opacity: 0;
-    transform: translateY(40%);
+    transform: translateY(45%);
   }
   100% {
     opacity: 1;
@@ -80,19 +80,19 @@ body {
   }
 }
 
-@keyframes drawUnderline {
-  from {
-    transform: scaleX(0);
+@keyframes wordGlowPulse {
+  0%, 100% {
+    text-shadow: 0 0 28px rgba(255, 184, 0, 0.15);
   }
-  to {
-    transform: scaleX(1);
+  50% {
+    text-shadow: 0 0 28px rgba(255, 184, 0, 0.45);
   }
 }
 
 @keyframes archEntrance {
   0% {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(28px);
   }
   100% {
     opacity: 1;
@@ -100,7 +100,16 @@ body {
   }
 }
 
-@keyframes archFloat {
+@keyframes archFloatDesktop {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes archFloatMobile {
   0%, 100% {
     transform: translateY(0);
   }
@@ -139,19 +148,29 @@ body {
   }
 }
 
+@keyframes reducedMotionFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Film Grain Texture Utility */
 .bg-film-grain {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
-/* Accountancy. Shimmer Mask (Overlay ::after without background-clip:text) */
+/* Accountancy. Word Styling & Shimmer Overlay */
 .accountancy-word {
   position: relative;
   display: inline-block;
-  line-height: 1.1;
-  padding-bottom: 0.12em;
+  line-height: 1.0;
+  padding-bottom: 0.08em;
   overflow: visible;
+  animation: wordGlowPulse 3.5s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -161,7 +180,7 @@ body {
 
   .animate-letter {
     display: inline-block;
-    animation: letterReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: letterReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .accountancy-word::after {
@@ -174,27 +193,25 @@ body {
     font-weight: inherit;
     letter-spacing: inherit;
     line-height: inherit;
-    -webkit-mask-image: linear-gradient(100deg, transparent 40%, #000 50%, transparent 60%);
-    mask-image: linear-gradient(100deg, transparent 40%, #000 50%, transparent 60%);
+    -webkit-mask-image: linear-gradient(110deg, transparent 25%, #000 48%, #000 52%, transparent 75%);
+    mask-image: linear-gradient(110deg, transparent 25%, #000 48%, #000 52%, transparent 75%);
     -webkit-mask-size: 250% 100%;
     mask-size: 250% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    animation: shimmerMask 5.5s ease-in-out 1.2s infinite;
-  }
-
-  .animate-underline {
-    transform-origin: left;
-    animation: drawUnderline 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
-    transform: scaleX(0);
+    animation: shimmerMask 4s ease-in-out infinite;
   }
 
   .animate-arch-card {
     animation: archEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  .animate-arch-float {
-    animation: archFloat 7.5s ease-in-out infinite;
+  .animate-arch-float-desktop {
+    animation: archFloatDesktop 7.5s ease-in-out infinite;
+  }
+
+  .animate-arch-float-mobile {
+    animation: archFloatMobile 7.5s ease-in-out infinite;
   }
 
   .animate-glow-drift {
@@ -209,17 +226,20 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .animate-hero-fade,
   .animate-letter,
-  .animate-arch-card,
-  .animate-arch-float,
-  .animate-glow-drift,
-  .animate-glow-drift-rev {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
+  .animate-arch-card {
+    animation: reducedMotionFade 0.3s ease-out both !important;
   }
 
-  .animate-underline {
-    transform: scaleX(1) !important;
+  .accountancy-word {
+    animation: none !important;
+    text-shadow: none !important;
+  }
+
+  .accountancy-word::after,
+  .animate-arch-float-desktop,
+  .animate-arch-float-mobile,
+  .animate-glow-drift,
+  .animate-glow-drift-rev {
     animation: none !important;
   }
 }
