@@ -3,7 +3,9 @@ import SectionHeading from "@/components/ui/SectionHeading";
 
 /**
  * Header block for Section A: Explore Popular Programs.
+ * Centered on all viewports.
  * Spacing: badge -> H2: 24u. H2 -> paragraph: 20u. Paragraph -> cards: 40u.
+ * Mobile: paragraph max-width min(100%, 34rem), font clamp(15px, 4vw, 17px), 2-3 lines.
  */
 export default function ProgramsHeader() {
   return (
@@ -21,12 +23,12 @@ export default function ProgramsHeader() {
         />
       </div>
 
-      {/* Section Paragraph: 20.5u / 1.5 / 400 / #5A6472 (Anchor width 862u) */}
+      {/* Section Paragraph: Desktop 20.5u / 1.5 / 400 (Anchor width 862u) */}
       <p
-        className="mt-[14px] lg:mt-[calc(var(--su,1px)*20)] text-[#5A6472] font-normal leading-[1.5] w-full text-center"
+        className="mt-[14px] lg:mt-[calc(var(--su,1px)*20)] text-[#5A6472] font-normal leading-[1.5] w-full text-center text-balance"
         style={{
-          fontSize: "clamp(15px, 2.2vw, calc(var(--su, 1px) * 20.5))",
-          maxWidth: "calc(var(--su, 1px) * 862)",
+          fontSize: "clamp(15px, 4vw, calc(var(--su, 1px) * 20.5))",
+          maxWidth: "min(100%, max(34rem, calc(var(--su, 1px) * 862)))",
         }}
       >
         Choose the right learning format for your CBSE Accountancy goals in Class 11 &amp; 12.

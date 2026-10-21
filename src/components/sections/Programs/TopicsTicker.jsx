@@ -23,7 +23,7 @@ export default function TopicsTicker() {
           <div key={topic.id} className="contents">
             <Link
               href={`/courses?topic=${topic.slug}`}
-              className="font-medium uppercase text-[#6B7280] hover:text-[#0F172A] transition-colors whitespace-nowrap tracking-[0.06em]"
+              className="relative font-medium uppercase text-[#6B7280] hover:text-[#0F172A] transition-colors whitespace-nowrap tracking-[0.06em] after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[1px] after:bg-[#0F172A] after:scale-x-0 after:origin-left after:transition-transform after:duration-200 hover:after:scale-x-100"
               style={{
                 fontSize: "calc(var(--su, 1px) * 12)",
               }}

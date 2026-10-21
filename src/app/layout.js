@@ -42,17 +42,22 @@ const motionInitScript = `
   })();
 `;
 
+import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
+import SectionObserver from "@/components/ui/SectionObserver";
+
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${plusJakartaSans.variable} h-full antialiased dark`}
+      className={`${plusJakartaSans.variable} antialiased dark overflow-x-clip`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: motionInitScript }} />
       </head>
-      <body className="min-h-full flex flex-col bg-[#0A0A0B] text-white selection:bg-[#FFB800] selection:text-[#0A0A0B]">
+      <body className="min-h-screen flex flex-col bg-[#0A0A0B] text-white selection:bg-[#FFB800] selection:text-[#0A0A0B] overflow-x-clip">
+        <ScrollProgressBar />
+        <SectionObserver />
         <Navbar />
         {children}
       </body>

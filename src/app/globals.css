@@ -41,6 +41,7 @@ html {
   color: #FFFFFF;
   color-scheme: dark;
   scroll-behavior: smooth;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-synthesis: none;
@@ -50,7 +51,7 @@ body {
   background-color: #0A0A0A;
   color: #FFFFFF;
   font-family: var(--font-plus-jakarta-sans);
-  overflow-x: hidden;
+  overflow-x: clip;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
@@ -307,12 +308,28 @@ html[data-motion="full"] .animate-arch-card {
   animation: archEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-html[data-motion="full"] .animate-arch-float-desktop {
-  animation: archFloatDesktop 7.5s ease-in-out infinite;
+@media (min-width: 768px) {
+  html[data-motion="full"] .animate-arch-float-desktop,
+  html[data-motion="full"] .md\:animate-arch-float-mobile {
+    animation: archFloatDesktop 7.5s ease-in-out infinite;
+  }
 }
 
-html[data-motion="full"] .animate-arch-float-mobile {
-  animation: archFloatMobile 7.5s ease-in-out infinite;
+@keyframes statCircleDrift {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(6px, -6px);
+  }
+}
+
+html[data-motion="full"] .lg\:animate-stat-circle-drift {
+  animation: statCircleDrift 24s ease-in-out infinite;
+}
+
+button:active:not(:disabled), a:active {
+  transform: scale(0.97);
 }
 
 html[data-motion="full"] .animate-glow-drift {
@@ -409,3 +426,13 @@ html[data-motion="reduce"] [data-reveal][data-visible="true"] {
   transform: none !important;
   transition: opacity 200ms ease-out !important;
 }
+
+/* =========================================================
+   OFF-SCREEN SECTION PAUSE (data-inview="false")
+   ========================================================= */
+[data-inview="false"] *,
+[data-inview="false"] *::before,
+[data-inview="false"] *::after {
+  animation-play-state: paused !important;
+}
+

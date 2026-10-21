@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Clock, Globe, MessageCircle } from "lucide-react";
 import { DynamicIcon } from "@/lib/icons";
@@ -8,6 +11,9 @@ import FacultyChip from "./FacultyChip";
  * Course Card for Section B: Featured Batches.
  * Exact visual replica of courses-full.png & courses-cards.png.
  * 475u canvas width, CSS container for cqw scaling.
+ * 4deg tilt on pointer move.
+ * View Course: outline rest state on mobile; hover fill only on desktop fine pointer.
+ * WhatsApp: gentle 5s pulse ring.
  */
 export default function CourseCard({ course, index = 0 }) {
   // Badge tone pill styles
@@ -17,14 +23,38 @@ export default function CourseCard({ course, index = 0 }) {
     orange: "bg-[#F97316] text-white",
   }[course.badgeTone] || "bg-[#0B3556] text-white";
 
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const px = x / rect.width - 0.5;
+    const py = y / rect.height - 0.5;
+    setTilt({ rx: -py * 8, ry: px * 8 }); // max 4 deg
+  };
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ rx: 0, ry: 0 });
+  };
+
   return (
     <article
       data-theme={course.theme}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       style={{
         "--i": index,
         containerType: "inline-size",
+        transform: isHovered
+          ? `perspective(1000px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) translateY(-8px)`
+          : undefined,
       }}
-      className="course-card group relative flex flex-col justify-between bg-white rounded-[18px] lg:rounded-[calc(var(--su,1px)*18)] border border-[rgba(15,23,42,0.07)] overflow-hidden shadow-[0_1px_2px_rgba(15,23,42,0.04),0_18px_40px_-22px_rgba(15,23,42,0.18)] hover:shadow-[0_24px_48px_-16px_rgba(15,23,42,0.22)] hover:-translate-y-[8px] transition-all duration-300 ease-out h-full select-none"
+      className="course-card group relative flex flex-col justify-between bg-white rounded-[18px] lg:rounded-[calc(var(--su,1px)*18)] border border-[rgba(15,23,42,0.07)] overflow-hidden shadow-[0_1px_2px_rgba(15,23,42,0.04),0_18px_40px_-22px_rgba(15,23,42,0.18)] hover:shadow-[0_24px_48px_-16px_rgba(15,23,42,0.22)] transition-all duration-300 ease-out h-full select-none"
     >
       {/* ================= CARD BANNER (170u high) ================= */}
       <div
@@ -139,7 +169,7 @@ export default function CourseCard({ course, index = 0 }) {
             {course.title}
           </h3>
 
-          {/* Description: 15.5u / 1.62 / #5B6677, 2-line clamp (margin-top 8u, Anchor line 1: 396u) */}
+          {/* Description: 17u / 1.62 / #5B6677, 2-line clamp (margin-top 8u, Anchor line 1: 396u) */}
           <p
             className="font-normal text-[#5B6677] line-clamp-2"
             style={{

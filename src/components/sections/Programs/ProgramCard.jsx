@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { DynamicIcon } from "@/lib/icons";
@@ -7,19 +10,60 @@ import { DynamicIcon } from "@/lib/icons";
  * Exact replica of programs.png (275u x 342u canvas, 20u radius).
  * CSS container for proportional cqw typography.
  * Direct CSS theme classes guarantee non-transparent colors and borders.
+ * Title: white-space: nowrap, NO ellipsis, clamp(17px, 7.8cqw, 26px) so all titles fit with spare.
+ * 3D tilt on pointer move (max 6deg) + glare gradient.
  */
 export default function ProgramCard({ program, index = 0 }) {
   const isNavy = program.theme === "navy";
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0, glareX: 50, glareY: 50 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const px = x / rect.width - 0.5; // -0.5 to 0.5
+    const py = y / rect.height - 0.5;
+    setTilt({
+      rx: -py * 12, // max 6 deg
+      ry: px * 12,
+      glareX: (x / rect.width) * 100,
+      glareY: (y / rect.height) * 100,
+    });
+  };
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ rx: 0, ry: 0, glareX: 50, glareY: 50 });
+  };
 
   return (
     <article
       data-theme={program.theme}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       style={{
         "--i": index,
         containerType: "inline-size",
+        transform: isHovered
+          ? `perspective(1000px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) translateY(-8px)`
+          : undefined,
       }}
-      className="program-card relative flex flex-col justify-between select-none rounded-[20px] lg:rounded-[calc(var(--su,1px)*20)] overflow-hidden w-full transition-all duration-300 ease-out hover:-translate-y-[8px] focus-within:ring-2 focus-within:ring-[#FFC21A] focus-within:ring-offset-2 group"
+      className="program-card relative flex flex-col justify-between select-none rounded-[20px] lg:rounded-[calc(var(--su,1px)*20)] overflow-hidden w-full transition-all duration-300 ease-out hover:shadow-xl focus-within:ring-2 focus-within:ring-[#FFC21A] focus-within:ring-offset-2 group"
     >
+      {/* 3D Tilt Glare Overlay */}
+      {isHovered && (
+        <div
+          className="absolute inset-0 pointer-events-none z-10 transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.18) 0%, transparent 60%)`,
+          }}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Navy Card Slow Light Sheen Sweep */}
       {isNavy && (
         <div
@@ -30,13 +74,13 @@ export default function ProgramCard({ program, index = 0 }) {
         </div>
       )}
 
-      {/* Inner Content with Exact Padding: top 24u, sides 29u, bottom 21u */}
+      {/* Inner Content with Exact Padding: top 24u, left 28u, right 20u, bottom 21u */}
       <div
         className="relative z-10 flex flex-col justify-between h-full"
         style={{
           paddingTop: "clamp(18px, 8.7cqw, calc(var(--su, 1px) * 24))",
-          paddingLeft: "clamp(20px, 10.5cqw, calc(var(--su, 1px) * 29))",
-          paddingRight: "clamp(20px, 10.5cqw, calc(var(--su, 1px) * 29))",
+          paddingLeft: "clamp(18px, 10.1cqw, calc(var(--su, 1px) * 28))",
+          paddingRight: "clamp(14px, 7.2cqw, calc(var(--su, 1px) * 20))",
           paddingBottom: "clamp(16px, 7.6cqw, calc(var(--su, 1px) * 21))",
         }}
       >
@@ -98,12 +142,12 @@ export default function ProgramCard({ program, index = 0 }) {
             {program.label}
           </div>
 
-          {/* Title: 24.2u / 800 / letter-spacing -0.02em / white-space nowrap (margin-top 14u, Anchor 219u) */}
+          {/* Title: 24.2u / 800 / letter-spacing -0.02em / white-space nowrap, NO ellipsis */}
           <h3
-            className="program-card-title font-extrabold tracking-[-0.02em] whitespace-nowrap overflow-hidden text-ellipsis"
+            className="program-card-title font-extrabold tracking-[-0.02em] whitespace-nowrap overflow-visible"
             style={{
               marginTop: "clamp(8px, 5.1cqw, calc(var(--su, 1px) * 14))",
-              fontSize: "clamp(17px, 8.8cqw, calc(var(--su, 1px) * 24.2))",
+              fontSize: "clamp(17px, 7.8cqw, 26px)",
             }}
             title={program.title}
           >

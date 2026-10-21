@@ -1,49 +1,59 @@
 import HeroContent from "./HeroContent";
 import HeroImageGrid from "./HeroImageGrid";
+import { NOISE_DATA_URI } from "@/constants/noise";
 
 /**
- * Hero Section for RD Classes home page (Hero v2.2 Final Polish).
- * - Desktop (>= 1024px): 1600x900 basis, strictly fits one screen with zero vertical scroll, capped at 1.1px.
- * - Mobile (< 1024px): Scrollable, min-height 100svh, height auto, bottom padding 40px, all 5 cards fully visible.
- * - Ambient radial glows with slow drift.
+ * Hero Section for RD Classes home page (Hero v3.2).
+ * - Exact calibrated background radial gradients painted directly on section background over #0A0A0A.
+ * - [isolation: isolate], content relative z-10, no negative z-index, no filter:blur.
+ * - Desktop: 1600x900 basis, strictly fits one screen, capped at 1.1px.
+ * - Mobile (< 1024px): Scrollable, height auto, pb-6 (<=24px), all 5 cards fully visible with no dead gap.
+ * - Static 128px noise tile (hidden on mobile <=767px).
+ * - Glow drift: desktop only (hidden lg:block), no glow animation on mobile.
+ * - overflow-x-clip prevents scroll container traps.
  */
 export default function Hero() {
   return (
     <section
+      id="hero"
       aria-labelledby="hero-heading"
       style={{
         "--u": "min(min(100vw / 1600, max(100svh, 560px) / 900), 1.1px)",
+        background: `
+          radial-gradient(circle 28vw at 0% 0%, rgba(184, 115, 10, 0.35) 0%, transparent 70%),
+          radial-gradient(circle 22vw at 0% 50%, rgba(14, 59, 74, 0.40) 0%, transparent 70%),
+          radial-gradient(circle 40vw at 100% 100%, rgba(217, 130, 0, 0.45) 0%, transparent 70%),
+          radial-gradient(circle 20vw at 100% 0%, rgba(138, 90, 10, 0.18) 0%, transparent 70%),
+          #0A0A0A
+        `,
       }}
-      className="relative w-full min-h-[100svh] h-auto lg:h-[100svh] lg:min-h-[560px] overflow-x-hidden lg:overflow-hidden bg-[#0A0A0A] select-none"
+      className="relative w-full min-h-[100svh] h-auto lg:h-[100svh] lg:min-h-[560px] overflow-x-clip select-none [isolation:isolate]"
     >
-      {/* ================= BACKGROUND GLOWS & FILM GRAIN ================= */}
-
-      {/* Ambient Radial Glow 1: Top-Left Amber (#B8730A, ~35% opacity) */}
+      {/* ================= DESKTOP LIGHTWEIGHT GLOW DRIFT OVERLAY (Transform-only, Desktop only) ================= */}
       <div
-        className="animate-glow-drift absolute -top-[10%] -left-[10%] w-[320px] sm:w-[480px] lg:w-[calc(var(--u)*680)] h-[320px] sm:h-[480px] lg:h-[calc(var(--u)*680)] rounded-full bg-[radial-gradient(circle,rgba(184,115,10,0.35)_0%,transparent_70%)] blur-[80px] lg:blur-[120px] pointer-events-none -z-10"
+        className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
-      />
+      >
+        <div
+          className="animate-glow-drift absolute -top-[5%] -left-[5%] w-[42vw] h-[42vw] rounded-full bg-[radial-gradient(circle,rgba(184,115,10,0.18)_0%,transparent_70%)] pointer-events-none"
+        />
+        <div
+          className="animate-glow-drift-rev absolute -bottom-[10%] -right-[5%] w-[48vw] h-[48vw] rounded-full bg-[radial-gradient(circle,rgba(217,130,0,0.20)_0%,transparent_70%)] pointer-events-none"
+        />
+      </div>
 
-      {/* Ambient Radial Glow 2: Left-Middle Dark Teal (#0E3B4A, ~40% opacity) */}
+      {/* ================= STATIC NOISE TILE (Tiny 128px PNG, opacity 0.03, hidden <=767px) ================= */}
       <div
-        className="animate-glow-drift-rev absolute top-[44%] -left-[8%] w-[260px] sm:w-[380px] lg:w-[calc(var(--u)*540)] h-[260px] sm:h-[380px] lg:h-[calc(var(--u)*540)] rounded-full bg-[radial-gradient(circle,rgba(14,59,74,0.40)_0%,transparent_70%)] blur-[75px] lg:blur-[120px] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-
-      {/* Ambient Radial Glow 3: Bottom-Right Strong Amber/Orange (#D98200, ~45% opacity) */}
-      <div
-        className="animate-glow-drift absolute -bottom-[12%] -right-[8%] w-[380px] sm:w-[560px] lg:w-[calc(var(--u)*760)] h-[380px] sm:h-[560px] lg:h-[calc(var(--u)*760)] rounded-full bg-[radial-gradient(circle,rgba(217,130,0,0.45)_0%,transparent_70%)] blur-[90px] lg:blur-[140px] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-
-      {/* Subtle Film Grain: inline SVG feTurbulence data-URI at 2.5% opacity */}
-      <div
-        className="bg-film-grain absolute inset-0 opacity-[0.025] pointer-events-none z-10"
+        className="hidden md:block absolute inset-0 opacity-[0.03] pointer-events-none z-10 bg-repeat"
+        style={{
+          backgroundImage: `url("${NOISE_DATA_URI}")`,
+          backgroundSize: "128px 128px",
+        }}
         aria-hidden="true"
       />
 
       {/* ================= DESKTOP & LAPTOP LAYOUT (>= 1024px) ================= */}
-      <div className="hidden lg:block w-full h-full relative">
+      <div className="hidden lg:block w-full h-full relative z-20">
         {/* Left Content: anchored left at 6.25vw, top at 180u to center vertically */}
         <div
           className="absolute z-20"
@@ -70,13 +80,13 @@ export default function Hero() {
       </div>
 
       {/* ================= MOBILE & TABLET LAYOUT (< 1024px) ================= */}
-      {/* Scrollable, height auto, pb-40px, content starts 28px below 64px header (pt 92px) */}
-      <div className="flex lg:hidden flex-col items-center justify-start min-h-[100svh] h-auto w-full pt-[92px] pb-[40px] px-5 z-20 relative">
+      {/* Scrollable, height auto, pb-6 (max 24px), content starts below 64px header (pt 88px) */}
+      <div className="flex lg:hidden flex-col items-center justify-start min-h-[100svh] h-auto w-full pt-[88px] pb-[24px] px-5 z-20 relative">
         {/* Centered Content */}
         <HeroContent />
 
-        {/* Scaled Arch Cluster showing all 5 arches completely: gap 36px below buttons */}
-        <div className="w-[min(100%-40px,440px)] mx-auto mt-[36px] shrink-0">
+        {/* Scaled Arch Cluster showing all 5 arches completely: gap 28px below buttons */}
+        <div className="w-[min(100%-32px,440px)] mx-auto mt-[28px] shrink-0">
           <HeroImageGrid isDesktop={false} className="w-full" />
         </div>
       </div>

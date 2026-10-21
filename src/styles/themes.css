@@ -232,18 +232,41 @@
   border: 1.5px solid var(--btn-border) !important;
   background: #FFFFFF !important;
   color: var(--btn-text) !important;
+  transition: all 0.2s ease-out;
 }
 
-.course-card:hover .course-card-view-btn {
-  background: var(--btn-hover-bg) !important;
-  color: var(--btn-hover-text) !important;
+@media (hover: hover) and (pointer: fine) {
+  .course-card:hover .course-card-view-btn {
+    background: var(--btn-hover-bg) !important;
+    color: var(--btn-hover-text) !important;
+  }
 }
 
 .course-card-whatsapp-btn {
   background: var(--whatsapp-bg) !important;
   color: #FFFFFF !important;
+  animation: whatsappRingPulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-.course-card-whatsapp-btn:hover {
-  background: var(--whatsapp-hover-bg) !important;
+@keyframes whatsappRingPulse {
+  0%, 80%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 194, 26, 0);
+  }
+  88% {
+    box-shadow: 0 0 0 7px rgba(255, 194, 26, 0.35);
+  }
+  94% {
+    box-shadow: 0 0 0 12px rgba(255, 194, 26, 0);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .course-card-whatsapp-btn:hover {
+    background: var(--whatsapp-hover-bg) !important;
+  }
+}
+
+/* Reduced motion stops pulse */
+html[data-motion="reduce"] .course-card-whatsapp-btn {
+  animation: none !important;
 }

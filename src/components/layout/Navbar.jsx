@@ -25,8 +25,20 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
+    let wasScrolled = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrolled = window.scrollY > 80;
+          if (scrolled !== wasScrolled) {
+            wasScrolled = scrolled;
+            setIsScrolled(scrolled);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -51,16 +63,16 @@ export default function Navbar() {
         setMobileMenuOpen(false);
       }
     };
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
     return () => window.removeEventListener("resize", handleResize);
   }, [mobileMenuOpen]);
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 flex items-center px-5 lg:px-[6.25vw] h-[64px] lg:h-[clamp(64px,calc(var(--u)*88),96px)] ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-colors duration-200 flex items-center px-5 lg:px-[6.25vw] h-[64px] lg:h-[clamp(64px,calc(var(--u)*88),96px)] ${
           isScrolled
-            ? "bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/[0.08] shadow-lg shadow-black/50"
+            ? "bg-[#0A0A0A]/92 lg:bg-[#0A0A0A]/95 lg:backdrop-blur-md border-b border-white/[0.08] lg:shadow-lg lg:shadow-black/50"
             : "bg-transparent border-b border-transparent"
         }`}
       >
