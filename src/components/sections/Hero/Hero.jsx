@@ -4,7 +4,7 @@ import HeroImageGrid from "./HeroImageGrid";
 /**
  * Rebuilt Hero Section for RD Classes home page.
  * - Exact visual replica of reference/hero-reference.jpeg on 1600x900 canvas
- * - Scaled with --u: min(100vw / 1600, max(100svh, 560px) / 900), capped at 1.25
+ * - Scaled with --u: min(100vw / 1600, max(100svh, 560px) / 900), capped at 1.1px
  * - Zero vertical scroll across all desktop viewports
  * - Anchored: left content padding-left = 6.25vw, arch cluster right padding = 3.9vw
  * - 3 ambient blurred radial glows with slow 20s drift loop
@@ -16,7 +16,7 @@ export default function Hero() {
     <section
       aria-labelledby="hero-heading"
       style={{
-        "--u": "min(min(100vw / 1600, max(100svh, 560px) / 900), 1.25px)",
+        "--u": "min(min(100vw / 1600, max(100svh, 560px) / 900), 1.1px)",
       }}
       className="relative w-full h-[100svh] min-h-[560px] overflow-hidden bg-[#0A0A0A] select-none"
     >
@@ -60,27 +60,27 @@ export default function Hero() {
           <HeroContent />
         </div>
 
-        {/* Right Arch Cluster: anchored right at 3.9vw, top at 0 */}
+        {/* Right Arch Cluster: anchored right at 3.9vw, top moved down ~2% of hero height */}
         <div
-          className="absolute top-0 bottom-0 h-full z-10 flex items-start"
+          className="absolute bottom-0 z-10 flex items-start"
           style={{
             right: "3.9vw",
+            top: "calc(clamp(64px, calc(var(--u) * 88), 96px) + 2svh)",
+            height: "calc(100svh - clamp(64px, calc(var(--u) * 88), 96px) - 2svh)",
           }}
         >
-          <HeroImageGrid />
+          <HeroImageGrid isDesktop={true} style={{ height: "100%", width: "auto" }} />
         </div>
       </div>
 
       {/* ================= MOBILE & TABLET LAYOUT (< 1024px) ================= */}
-      <div className="flex lg:hidden flex-col items-center justify-between h-full w-full pt-[clamp(74px,10svh,88px)] pb-1 px-5 z-20 relative">
-        {/* Centered Content */}
-        <div className="flex-none my-auto">
-          <HeroContent />
-        </div>
+      <div className="flex lg:hidden flex-col items-center justify-start h-full min-h-[100svh] w-full pt-[80px] px-5 z-20 relative overflow-hidden">
+        {/* Centered Content: starts below header (pt 64px + 16px = 80px) */}
+        <HeroContent />
 
-        {/* Scaled Arch Cluster filling width */}
-        <div className="flex-1 min-h-[220px] max-h-[36svh] w-full flex items-start justify-center overflow-hidden">
-          <HeroImageGrid />
+        {/* Scaled Arch Cluster filling screen width: min(100% - 40px, 440px), sm:max-w-[520px], centered, mt 24px */}
+        <div className="w-[min(100%-40px,440px)] sm:max-w-[520px] mx-auto mt-[24px] shrink-0">
+          <HeroImageGrid isDesktop={false} className="w-full" />
         </div>
       </div>
     </section>

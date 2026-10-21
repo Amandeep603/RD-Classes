@@ -58,32 +58,25 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 flex items-center px-[6.25vw] ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 flex items-center px-5 lg:px-[6.25vw] h-[64px] lg:h-[clamp(64px,calc(var(--u)*88),96px)] ${
           isScrolled
             ? "bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/[0.08] shadow-lg shadow-black/50"
             : "bg-transparent border-b border-transparent"
         }`}
-        style={{
-          height: "clamp(68px, calc(var(--u) * 112), 112px)",
-        }}
       >
         <div className="w-full flex items-center justify-between">
           {/* Left: Original Logo Tile */}
           <Link
             href="/"
-            className="inline-flex items-center justify-center bg-white px-3 py-1.5 shadow-md hover:opacity-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB800] shrink-0"
-            style={{
-              height: "clamp(52px, calc(var(--u) * 60), 68px)",
-              borderRadius: "calc(var(--u) * 14)",
-            }}
+            className="inline-flex items-center justify-center bg-white px-[6px] py-[3px] rounded-[12px] shadow-md hover:opacity-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB800] shrink-0 h-[44px] lg:h-[clamp(44px,calc(var(--u)*62),62px)]"
             aria-label="RD Classes Home"
           >
             <div className="relative h-full flex items-center">
               <Image
                 src="/images/logo-rd.png"
                 alt="RD Classes - Classes for Accountancy"
-                width={100}
-                height={52}
+                width={130}
+                height={79}
                 priority
                 style={{ width: "auto", height: "100%" }}
                 className="object-contain select-none"
@@ -109,7 +102,7 @@ export default function Navbar() {
                       onClick={() => setDropdownOpen((prev) => !prev)}
                       className="flex items-center gap-1 font-medium text-white/90 hover:text-[#FFB800] transition-colors py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB800] rounded-sm cursor-pointer"
                       style={{
-                        fontSize: "max(13px, calc(var(--u) * 16))",
+                        fontSize: "max(13px, calc(var(--u) * 15))",
                       }}
                       aria-expanded={dropdownOpen}
                       aria-haspopup="true"
@@ -152,7 +145,7 @@ export default function Navbar() {
                       : "text-white/90 hover:text-[#FFB800]"
                   }`}
                   style={{
-                    fontSize: "max(13px, calc(var(--u) * 16))",
+                    fontSize: "max(13px, calc(var(--u) * 15))",
                   }}
                 >
                   <span>{link.label}</span>
@@ -190,9 +183,9 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center bg-[#FFB800] hover:bg-[#FFC933] active:bg-[#E5A600] text-[#0A0A0A] font-bold shadow-sm transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB800] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] whitespace-nowrap"
               style={{
-                height: "clamp(44px, calc(var(--u) * 52), 54px)",
-                paddingLeft: "calc(var(--u) * 28)",
-                paddingRight: "calc(var(--u) * 28)",
+                height: "clamp(40px, calc(var(--u) * 46), 50px)",
+                paddingLeft: "calc(var(--u) * 26)",
+                paddingRight: "calc(var(--u) * 26)",
                 borderRadius: "calc(var(--u) * 8)",
                 fontSize: "max(13px, calc(var(--u) * 15))",
               }}

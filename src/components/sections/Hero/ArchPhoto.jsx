@@ -26,6 +26,7 @@ export default function ArchPhoto({
   style = {},
 }) {
   const [hasError, setHasError] = useState(false);
+  const isTopAnchor = student.anchor === "top";
 
   return (
     <>
@@ -53,25 +54,20 @@ export default function ArchPhoto({
         } overflow-hidden shadow-2xl transition-transform duration-300 hover:scale-[1.03] ${className}`}
       >
         {!hasError && student.src ? (
-          <div className="relative w-[104%] h-[104%] -left-[2%] -top-[2%]">
+          <div
+            className={`absolute left-0 right-0 w-full transform scale-[1.04] ${
+              isTopAnchor ? "top-0 origin-top" : "bottom-0 origin-bottom"
+            }`}
+          >
             <Image
               src={student.src}
               alt={student.alt}
-              fill
+              width={400}
+              height={1000}
               priority
               onError={() => setHasError(true)}
-              sizes="(max-width: 640px) 28vw, (max-width: 1024px) 160px, (max-width: 1440px) 180px, 220px"
-              style={{
-                objectPosition:
-                  student.mode === "cutout"
-                    ? "center bottom"
-                    : `${student.focusX || "50%"} ${student.focusY || "50%"}`,
-              }}
-              className={`${
-                student.mode === "cutout"
-                  ? "object-contain object-bottom"
-                  : "object-cover"
-              } pointer-events-none select-none`}
+              sizes="(max-width: 640px) 30vw, (max-width: 1024px) 160px, 220px"
+              className="w-full h-auto block select-none pointer-events-none"
             />
           </div>
         ) : (
