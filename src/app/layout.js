@@ -1,4 +1,4 @@
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "@/styles/themes.css";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
@@ -8,6 +8,13 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
   display: "swap",
 });
 
@@ -49,7 +56,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${plusJakartaSans.variable} antialiased dark overflow-x-clip`}
+      className={`${plusJakartaSans.variable} ${caveat.variable} antialiased dark overflow-x-clip`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: motionInitScript }} />

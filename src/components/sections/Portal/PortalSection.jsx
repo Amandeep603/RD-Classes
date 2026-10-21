@@ -35,20 +35,15 @@ export default function PortalSection() {
         <Reveal index={0}>
           {/* Main White Card Container */}
           <div
-            className="relative w-full bg-white overflow-hidden border border-[rgba(15,23,42,0.04)]"
+            className="relative w-full bg-white overflow-hidden border border-[rgba(15,23,42,0.04)] rounded-[24px] min-[1100px]:rounded-[calc(var(--su,1px)*36)] py-[24px] px-[18px] min-[1100px]:pt-[calc(var(--su,1px)*48)] min-[1100px]:pb-[calc(var(--su,1px)*50)] min-[1100px]:pl-[calc(var(--su,1px)*70)] min-[1100px]:pr-[calc(var(--su,1px)*48)]"
             style={{
-              borderRadius: "clamp(24px, 2.5vw, calc(var(--su, 1px) * 36))",
               boxShadow: "0 30px 60px -30px rgba(120, 90, 20, 0.18)",
-              paddingTop: "clamp(28px, 3.5vw, calc(var(--su, 1px) * 48))",
-              paddingBottom: "clamp(28px, 3.5vw, calc(var(--su, 1px) * 50))",
-              paddingLeft: "clamp(20px, 4.5vw, calc(var(--su, 1px) * 70))",
-              paddingRight: "clamp(20px, 3.5vw, calc(var(--su, 1px) * 48))",
             }}
           >
             {/* 2-Column Desktop Grid (>=1100px) / Stacked (<1100px) */}
             <div className="portal-grid items-center gap-[clamp(32px,4vw,calc(var(--su,1px)*60))]">
               {/* Left Column */}
-              <div className="flex flex-col items-center min-[1100px]:items-start text-center min-[1100px]:text-left">
+              <div className="flex flex-col items-center min-[1100px]:items-start text-center min-[1100px]:text-left w-full">
                 {/* Badge F */}
                 <SectionBadge
                   variant="icon"
@@ -71,10 +66,9 @@ export default function PortalSection() {
 
                 {/* Subtitle / Paragraph */}
                 <p
-                  className="font-normal text-[#596273] leading-[1.47] mt-[clamp(14px,1.8vw,calc(var(--su,1px)*24))]"
+                  className="font-normal text-[#596273] leading-[1.47] mt-[clamp(14px,1.8vw,calc(var(--su,1px)*24))] w-full max-w-full min-[1100px]:max-w-[calc(var(--su,1px)*600)] text-center min-[1100px]:text-left text-[clamp(15px,4vw,17px)] min-[1100px]:text-[calc(var(--su,1px)*19)]"
                   style={{
-                    fontSize: "clamp(15px, 1.8vw, calc(var(--su, 1px) * 19))",
-                    maxWidth: "calc(var(--su, 1px) * 600)",
+                    textWrap: "pretty",
                   }}
                 >
                   {paragraph}
@@ -85,7 +79,7 @@ export default function PortalSection() {
               </div>
 
               {/* Right Column: Device Showcase */}
-              <div className="w-full max-w-[640px] min-[1100px]:max-w-none mx-auto">
+              <div className="w-full max-w-[640px] min-[1100px]:max-w-none mx-auto min-[1100px]:self-center">
                 <DeviceShowcase />
               </div>
             </div>

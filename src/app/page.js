@@ -18,8 +18,9 @@ export default function Home() {
 
       {/* Continuous Cream Panel rising over dark hero */}
       <div
-        className="relative z-20 w-full bg-[#FDFAF3] rounded-t-[clamp(24px,2.5vw,40px)] shadow-[0_-12px_36px_rgba(0,0,0,0.18)]"
+        className="relative z-20 w-full rounded-t-[clamp(24px,2.5vw,40px)] shadow-[0_-12px_36px_rgba(0,0,0,0.18)]"
         style={{
+          backgroundColor: "var(--bg-cream-panel, #F7F0E0)",
           "--su": "min(100vw / 1600, 1px)",
         }}
       >

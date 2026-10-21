@@ -5,8 +5,8 @@
 
 /* Theme: Sky */
 [data-theme="sky"] {
-  --card-bg: linear-gradient(160deg, #E2F3FD, #D5ECFA);
-  --card-border: #BFE1F4;
+  --card-bg: var(--surface-programs-sky-bg);
+  --card-border: var(--surface-programs-sky-border);
   --card-shadow: 0 12px 30px -14px rgba(30, 155, 209, 0.30);
   --icon-bg: #1B9AD2;
   --icon-color: #FFFFFF;
@@ -21,10 +21,10 @@
   --arrow-hover-color: #FFFFFF;
 
   /* Course Card Banners */
-  --banner-bg: linear-gradient(135deg, #D6EEFC, #C9E7FA);
+  --banner-bg: var(--surface-featured-sky-banner);
   --banner-circle: rgba(255, 255, 255, 0.40);
-  --class-pill-bg: #BDE3F7;
-  --icon-tile-bg: #BFE3F8;
+  --class-pill-bg: var(--surface-featured-sky-pill);
+  --icon-tile-bg: var(--surface-featured-sky-tile);
   --btn-border: #1E9BD1;
   --btn-text: #0F172A;
   --btn-hover-bg: #1E9BD1;
@@ -96,8 +96,8 @@
 
 /* Theme: Sun */
 [data-theme="sun"] {
-  --card-bg: linear-gradient(160deg, #FFF1BF, #FFF8E0);
-  --card-border: #F8E3A0;
+  --card-bg: var(--surface-programs-sun-bg);
+  --card-border: var(--surface-programs-sun-border);
   --card-shadow: 0 12px 30px -14px rgba(253, 190, 24, 0.25);
   --icon-bg: #FDBE18;
   --icon-color: #FFFFFF;
@@ -112,10 +112,10 @@
   --arrow-hover-color: #0B1B2E;
 
   /* Course Card Banners */
-  --banner-bg: linear-gradient(135deg, #FFF3C9, #FFEBA8);
+  --banner-bg: var(--surface-featured-sun-banner);
   --banner-circle: rgba(255, 255, 255, 0.45);
-  --class-pill-bg: #FFE69A;
-  --icon-tile-bg: #FFE9A8;
+  --class-pill-bg: var(--surface-featured-sun-pill);
+  --icon-tile-bg: var(--surface-featured-sun-tile);
   --btn-border: #FFC21A;
   --btn-text: #0F172A;
   --btn-hover-bg: #FFC21A;
@@ -126,8 +126,8 @@
 
 /* Theme: Peach */
 [data-theme="peach"] {
-  --card-bg: linear-gradient(160deg, #FFE3CF, #FFF1E6);
-  --card-border: #F8D3B8;
+  --card-bg: var(--surface-programs-peach-bg);
+  --card-border: var(--surface-programs-peach-border);
   --card-shadow: 0 12px 30px -14px rgba(245, 130, 31, 0.25);
   --icon-bg: #F5821F;
   --icon-color: #FFFFFF;
@@ -142,10 +142,10 @@
   --arrow-hover-color: #FFFFFF;
 
   /* Course Card Banners */
-  --banner-bg: linear-gradient(135deg, #FFDCCB, #FFD0BA);
+  --banner-bg: var(--surface-featured-peach-banner);
   --banner-circle: rgba(255, 255, 255, 0.40);
-  --class-pill-bg: #FFD2BD;
-  --icon-tile-bg: #FFD9C6;
+  --class-pill-bg: var(--surface-featured-peach-pill);
+  --icon-tile-bg: var(--surface-featured-peach-tile);
   --btn-border: #F97316;
   --btn-text: #0F172A;
   --btn-hover-bg: #F97316;
@@ -284,117 +284,117 @@ html[data-motion="reduce"] .course-card-whatsapp-btn {
 
 /* Tone: Yellow */
 [data-tone="yellow"] {
-  --tone-card-bg: linear-gradient(160deg, #FFF6DB 0%, #FFFBEE 60%, #FFF7DD 100%);
-  --tone-card-border: #FBE7B0;
-  --tone-tile-bg: #FFE9A6;
+  --tone-card-bg: var(--surface-d-yellow-bg);
+  --tone-card-border: var(--surface-d-yellow-border);
+  --tone-tile-bg: var(--surface-d-yellow-tile);
   --tone-tile-color: #1F2937;
   --tone-number: rgba(252, 211, 77, 0.55);
   --tone-accent: linear-gradient(90deg, #FFC21A, #FFD86B);
   --tone-check-bg: #F9B21E;
-  --tone-arrow-bg: #FFE49C;
+  --tone-arrow-bg: var(--surface-d-yellow-arrow);
   --tone-arrow-color: #1F2937;
   --tone-arrow-hover-bg: #FFC21A;
-  --tone-wave: rgba(255, 214, 102, 0.30);
+  --tone-wave: var(--surface-d-yellow-wave);
 
   /* Syllabus Book Theme */
-  --book-card-bg: linear-gradient(165deg, #FFF1C8 0%, #FFF8E2 45%, #FFFCF3 100%);
-  --book-card-border: #FBE9B5;
+  --book-card-bg: var(--surface-e-yellow-bg);
+  --book-card-border: var(--surface-e-yellow-border);
   --book-pill-bg: #FFC21A;
   --book-pill-text: #1A1A1A;
   --book-topic-icon: #F59E0B;
-  --book-blob-bg: rgba(255, 230, 160, 0.45);
+  --book-blob-bg: var(--surface-e-yellow-blob);
   --book-btn-arrow-bg: #FFC21A;
   --book-btn-arrow-color: #0B1F3F;
 
   /* Floating Chip Theme */
-  --chip-circle-bg: #FFE8A3;
+  --chip-circle-bg: var(--surface-f-chip-yellow);
   --chip-icon-color: #D97706;
 }
 
 /* Tone: Blue */
 [data-tone="blue"] {
-  --tone-card-bg: linear-gradient(160deg, #EEF6FF 0%, #F7FBFF 100%);
-  --tone-card-border: #D3E8FB;
-  --tone-tile-bg: #BFE0FB;
+  --tone-card-bg: var(--surface-d-blue-bg);
+  --tone-card-border: var(--surface-d-blue-border);
+  --tone-tile-bg: var(--surface-d-blue-tile);
   --tone-tile-color: #1F2937;
   --tone-number: rgba(96, 165, 250, 0.55);
   --tone-accent: linear-gradient(90deg, #2B7FFF, #8CC8FF);
   --tone-check-bg: #1D7BF0;
-  --tone-arrow-bg: #BFE0FA;
+  --tone-arrow-bg: var(--surface-d-blue-arrow);
   --tone-arrow-color: #1F2937;
   --tone-arrow-hover-bg: #2B7FFF;
-  --tone-wave: rgba(125, 190, 250, 0.35);
+  --tone-wave: var(--surface-d-blue-wave);
 
   /* Syllabus Book Theme */
-  --book-card-bg: linear-gradient(165deg, #D9EAFF 0%, #EAF4FF 45%, #F6FAFF 100%);
-  --book-card-border: #CFE3F8;
+  --book-card-bg: var(--surface-e-blue-bg);
+  --book-card-border: var(--surface-e-blue-border);
   --book-pill-bg: #1E6FE8;
   --book-pill-text: #FFFFFF;
   --book-topic-icon: #2563EB;
-  --book-blob-bg: rgba(185, 220, 255, 0.45);
+  --book-blob-bg: var(--surface-e-blue-blob);
   --book-btn-arrow-bg: #2F8BFF;
   --book-btn-arrow-color: #FFFFFF;
 
   /* Floating Chip Theme */
-  --chip-circle-bg: #DCEBFB;
+  --chip-circle-bg: var(--surface-f-chip-blue);
   --chip-icon-color: #2563EB;
 }
 
 /* Tone: Orange */
 [data-tone="orange"] {
-  --tone-card-bg: linear-gradient(160deg, #FFF1E5 0%, #FFF8F2 100%);
-  --tone-card-border: #FADCC3;
-  --tone-tile-bg: #FFCFA5;
+  --tone-card-bg: var(--surface-d-orange-bg);
+  --tone-card-border: var(--surface-d-orange-border);
+  --tone-tile-bg: var(--surface-d-orange-tile);
   --tone-tile-color: #1F2937;
   --tone-number: rgba(251, 146, 60, 0.50);
   --tone-accent: linear-gradient(90deg, #F97316, #FDBA74);
   --tone-check-bg: #F97316;
-  --tone-arrow-bg: #FFD3AE;
+  --tone-arrow-bg: var(--surface-d-orange-arrow);
   --tone-arrow-color: #1F2937;
   --tone-arrow-hover-bg: #F97316;
-  --tone-wave: rgba(251, 160, 90, 0.35);
+  --tone-wave: var(--surface-d-orange-wave);
 
   /* Syllabus Book Theme */
-  --book-card-bg: linear-gradient(165deg, #FFE4CF 0%, #FFF0E3 45%, #FFF9F4 100%);
-  --book-card-border: #F8DCC6;
+  --book-card-bg: var(--surface-e-orange-bg);
+  --book-card-border: var(--surface-e-orange-border);
   --book-pill-bg: #F97316;
   --book-pill-text: #FFFFFF;
   --book-topic-icon: #F97316;
-  --book-blob-bg: rgba(255, 210, 180, 0.45);
+  --book-blob-bg: var(--surface-e-orange-blob);
   --book-btn-arrow-bg: #F97316;
   --book-btn-arrow-color: #0B1F3F;
 
   /* Floating Chip Theme */
-  --chip-circle-bg: #FFDCC2;
+  --chip-circle-bg: var(--surface-f-chip-orange);
   --chip-icon-color: #EA580C;
 }
 
 /* Tone: Navy */
 [data-tone="navy"] {
-  --tone-card-bg: linear-gradient(165deg, #D6EAFF 0%, #EAF4FF 45%, #F6FAFF 100%);
-  --tone-card-border: #CFE3F8;
-  --tone-tile-bg: #BFE0FB;
+  --tone-card-bg: var(--surface-d-blue-bg);
+  --tone-card-border: var(--surface-d-blue-border);
+  --tone-tile-bg: var(--surface-d-blue-tile);
   --tone-tile-color: #1F2937;
   --tone-number: rgba(96, 165, 250, 0.55);
   --tone-accent: linear-gradient(90deg, #2B7FFF, #8CC8FF);
   --tone-check-bg: #1D7BF0;
-  --tone-arrow-bg: #BFE0FA;
+  --tone-arrow-bg: var(--surface-d-blue-arrow);
   --tone-arrow-color: #1F2937;
   --tone-arrow-hover-bg: #2B7FFF;
-  --tone-wave: rgba(125, 190, 250, 0.35);
+  --tone-wave: var(--surface-d-blue-wave);
 
   /* Syllabus Book Theme */
-  --book-card-bg: linear-gradient(165deg, #D6EAFF 0%, #EAF4FF 45%, #F6FAFF 100%);
-  --book-card-border: #CFE3F8;
-  --book-pill-bg: #0B2A5B;
+  --book-card-bg: var(--surface-e-navy-bg);
+  --book-card-border: var(--surface-e-navy-border);
+  --book-pill-bg: #0B2A63;
   --book-pill-text: #FFFFFF;
   --book-topic-icon: #2563EB;
-  --book-blob-bg: rgba(180, 215, 255, 0.45);
+  --book-blob-bg: var(--surface-e-navy-blob);
   --book-btn-arrow-bg: #2F8BFF;
   --book-btn-arrow-color: #FFFFFF;
 
   /* Floating Chip Theme */
-  --chip-circle-bg: #DCEBFB;
+  --chip-circle-bg: var(--surface-f-chip-blue);
   --chip-icon-color: #2563EB;
 }
 
@@ -556,4 +556,139 @@ section:not([data-inview="true"]) .animate-video-progress {
     grid-template-columns: calc(var(--su, 1px) * 650) 1fr;
   }
 }
+
+/* =========================================================
+   HOW IT WORKS CTA ARROW PULSE (Fix Pass v3.4)
+   ========================================================= */
+
+@keyframes arrowCirclePulse {
+  0%, 75%, 100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  82% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  94% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+html[data-motion="full"] .arrow-circle-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: #FFC21A;
+  pointer-events: none;
+  z-index: -1;
+  animation: arrowCirclePulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+html[data-motion="reduce"] .arrow-circle-pulse::after {
+  animation: none !important;
+  display: none !important;
+}
+
+section:not([data-inview="true"]) .arrow-circle-pulse::after {
+  animation-play-state: paused !important;
+}
+
+/* Step Card min-height on tablet/desktop */
+@media (min-width: 640px) {
+  .step-card {
+    min-height: max(340px, calc(var(--su, 1px) * 395));
+  }
+}
+
+/* =========================================================
+   SYLLABUS SINGLE UL LIST RESPONSIVE STYLES (Fix Pass v3.4)
+   ========================================================= */
+
+.syllabus-card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile (<768px): Horizontal snap scroller */
+@media (max-width: 767px) {
+  .syllabus-card-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 14px;
+    padding-inline: 20px;
+    scroll-padding-inline: 20px;
+    padding-top: 20px;
+    padding-bottom: 44px;
+    margin-top: -20px;
+    margin-bottom: -44px;
+    align-items: stretch;
+    -webkit-overflow-scrolling: touch;
+  }
+  .syllabus-card-item {
+    flex: 0 0 min(86vw, 340px);
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Tablet (768px - 1339px): 2-Column Grid */
+@media (min-width: 768px) and (max-width: 1339px) {
+  .syllabus-card-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 1.8vw, calc(var(--su, 1px) * 19));
+    overflow-x: visible;
+  }
+  .syllabus-card-item {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+/* Desktop (>= 1340px): 4-Column Grid */
+@media (min-width: 1340px) {
+  .syllabus-card-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(16px, 1.8vw, calc(var(--su, 1px) * 19));
+    overflow-x: visible;
+  }
+  .syllabus-card-item {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* =========================================================
+   PORTAL FLOATING CHIP RESPONSIVE POSITIONS
+   ========================================================= */
+
+:root {
+  --chip-1-top: 1.5%;
+  --chip-1-left: 14%;
+  --chip-2-top: 1.5%;
+  --chip-2-left: 64%;
+  --chip-3-top: 88.5%;
+  --chip-3-left: 12%;
+}
+
+@media (min-width: 1100px) {
+  :root {
+    --chip-1-top: 5.4%;
+    --chip-1-left: 21.4%;
+    --chip-2-top: 5.6%;
+    --chip-2-left: 72%;
+    --chip-3-top: 85.9%;
+    --chip-3-left: 16.3%;
+  }
+}
+
+
 

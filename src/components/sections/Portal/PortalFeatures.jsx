@@ -14,14 +14,12 @@ export default function PortalFeatures({ features, buttons }) {
         {features.map((feat) => (
           <div
             key={feat.id}
-            className="flex items-start gap-[clamp(12px,1.5vw,calc(var(--su,1px)*16))]"
+            className="flex items-start gap-3.5 text-left w-full"
           >
-            {/* Feature Icon Tile */}
+            {/* Feature Icon Tile (44px on mobile, 52u on desktop) */}
             <div
-              className="flex items-center justify-center shrink-0"
+              className="flex items-center justify-center shrink-0 w-[44px] h-[44px] min-[1100px]:w-[calc(var(--su,1px)*52)] min-[1100px]:h-[calc(var(--su,1px)*52)]"
               style={{
-                width: "clamp(42px, 4.5vw, calc(var(--su, 1px) * 52))",
-                height: "clamp(42px, 4.5vw, calc(var(--su, 1px) * 52))",
                 borderRadius: "max(12px, calc(var(--su, 1px) * 14))",
                 backgroundColor: feat.tileBg,
                 color: feat.iconColor,
@@ -29,30 +27,21 @@ export default function PortalFeatures({ features, buttons }) {
             >
               <DynamicIcon
                 name={feat.icon}
-                style={{
-                  width: "clamp(20px, 2.2vw, calc(var(--su, 1px) * 24))",
-                  height: "clamp(20px, 2.2vw, calc(var(--su, 1px) * 24))",
-                }}
+                className="w-5 h-5 min-[1100px]:w-[calc(var(--su,1px)*24)] min-[1100px]:h-[calc(var(--su,1px)*24)]"
                 strokeWidth={2}
                 aria-hidden="true"
               />
             </div>
 
-            {/* Title & Description */}
-            <div className="flex flex-col justify-center">
+            {/* Title & Description (strictly left-aligned) */}
+            <div className="flex flex-col justify-center text-left">
               <h3
-                className="font-bold text-[#0F172A] leading-tight"
-                style={{
-                  fontSize: "clamp(15px, 1.8vw, calc(var(--su, 1px) * 17.5))",
-                }}
+                className="font-bold text-[#0F172A] leading-tight text-left text-[clamp(15px,4.2vw,16.5px)] min-[1100px]:text-[calc(var(--su,1px)*17.5)]"
               >
                 {feat.title}
               </h3>
               <p
-                className="text-[#5B6676] font-normal leading-normal mt-0.5"
-                style={{
-                  fontSize: "clamp(13px, 1.4vw, calc(var(--su, 1px) * 14.5))",
-                }}
+                className="text-[#5B6676] font-normal leading-normal mt-0.5 text-left text-[clamp(13px,3.6vw,14px)] min-[1100px]:text-[calc(var(--su,1px)*14.5)]"
               >
                 {feat.description}
               </p>

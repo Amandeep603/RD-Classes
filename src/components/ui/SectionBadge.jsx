@@ -2,10 +2,10 @@ import { DynamicIcon } from "@/lib/icons";
 
 /**
  * Shared Section Badge component.
- * Variants:
- *  - "gradient": linear-gradient(90deg, #FFF3D6, #FFE6D6) with no border (Section D)
- *  - "soft": fill #FFF4D4 with 1px #F5E2A5 border (Section E)
- *  - "icon": fill #FFF2D0 with a Zap icon (18u) (Section F)
+ * Fix Pass v3.4 tokens:
+ * - How It Works badge (variant="gradient"): linear-gradient(90deg, #FFE29A, #FFD0A0)
+ * - All others: solid #FFE08F
+ * - All with 1px border #F0BC4E, text #1A1205, shadow 0 6px 14px -8px rgba(180, 120, 10, 0.55)
  */
 export default function SectionBadge({
   children,
@@ -17,33 +17,22 @@ export default function SectionBadge({
 }) {
   const content = children || text;
 
-  let bgStyle = {
-    backgroundColor: "#FFF4D4",
-    border: "1px solid #F5E2A5",
-  };
-
-  if (variant === "gradient") {
-    bgStyle = {
-      background: "linear-gradient(90deg, #FFF3D6 0%, #FFE6D6 100%)",
-      border: "none",
-    };
-  } else if (variant === "icon") {
-    bgStyle = {
-      backgroundColor: "#FFF2D0",
-      border: "none",
-    };
-  }
+  const isGradient = variant === "gradient";
+  const bg = isGradient ? "var(--badge-bg-gradient)" : "var(--badge-bg-solid)";
 
   return (
     <div
-      className={`inline-flex items-center justify-center rounded-full select-none font-extrabold uppercase text-[#1A1A1A] whitespace-nowrap ${className}`}
+      className={`inline-flex items-center justify-center rounded-full select-none font-extrabold uppercase whitespace-nowrap ${className}`}
       style={{
         height: "max(32px, calc(var(--su, 1px) * 36))",
         paddingLeft: icon ? "max(14px, calc(var(--su, 1px) * 16))" : "max(18px, calc(var(--su, 1px) * 22))",
         paddingRight: "max(18px, calc(var(--su, 1px) * 22))",
         fontSize: variant === "icon" ? "max(12px, calc(var(--su, 1px) * 12.4))" : "max(12px, calc(var(--su, 1px) * 13))",
         letterSpacing: variant === "icon" ? "0.04em" : "0.12em",
-        ...bgStyle,
+        background: bg,
+        border: "1px solid var(--badge-border, #F0BC4E)",
+        color: "var(--badge-text, #1A1205)",
+        boxShadow: "var(--badge-shadow, 0 6px 14px -8px rgba(180, 120, 10, 0.55))",
         ...style,
       }}
     >
@@ -62,4 +51,3 @@ export default function SectionBadge({
     </div>
   );
 }
-

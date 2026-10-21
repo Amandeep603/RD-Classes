@@ -25,10 +25,9 @@ export default function ProgramsHeader() {
 
       {/* Section Paragraph: Desktop 20.5u / 1.5 / 400 (Anchor width 862u) */}
       <p
-        className="mt-[14px] lg:mt-[calc(var(--su,1px)*20)] text-[#5A6472] font-normal leading-[1.5] w-full text-center text-balance"
+        className="mt-[14px] lg:mt-[calc(var(--su,1px)*20)] text-[#5A6472] font-normal leading-[1.5] w-full text-center max-w-full lg:max-w-[calc(var(--su,1px)*862)] text-[clamp(15px,4vw,17px)] lg:text-[calc(var(--su,1px)*20.5)]"
         style={{
-          fontSize: "clamp(15px, 4vw, calc(var(--su, 1px) * 20.5))",
-          maxWidth: "min(100%, max(34rem, calc(var(--su, 1px) * 862)))",
+          textWrap: "pretty",
         }}
       >
         Choose the right learning format for your CBSE Accountancy goals in Class 11 &amp; 12.

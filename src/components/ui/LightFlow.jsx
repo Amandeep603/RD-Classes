@@ -8,7 +8,7 @@ export default function LightFlow({ children, className = "" }) {
     <div
       className={`relative w-full overflow-hidden text-[#0F172A] ${className}`}
       style={{
-        background: "linear-gradient(180deg, #FFFFFF 0%, #FEFCF7 40%, #FBF9F2 100%)",
+        background: "var(--bg-lightflow, linear-gradient(180deg, #FBF6EA 0%, #F7F0E0 45%, #F3EAD6 100%))",
         "--su": "min(100vw / 1600, 1px)",
       }}
     >

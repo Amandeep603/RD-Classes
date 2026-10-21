@@ -12,7 +12,7 @@ export const PORTAL_DATA = {
     {
       id: "feat-1",
       icon: "CirclePlay",
-      tileBg: "#FFE9A8",
+      tileBg: "var(--surface-f-tile-1, #FFE38F)",
       iconColor: "#1F2D44",
       title: "136 HD Recorded Video Lectures",
       description:
@@ -21,7 +21,7 @@ export const PORTAL_DATA = {
     {
       id: "feat-2",
       icon: "FileText",
-      tileBg: "#DCEBFB",
+      tileBg: "var(--surface-f-tile-2, #BFDBF9)",
       iconColor: "#2B63B0",
       title: "Chapter-wise PDF Notes & Formula Sheets",
       description:
@@ -30,7 +30,7 @@ export const PORTAL_DATA = {
     {
       id: "feat-3",
       icon: "Monitor",
-      tileBg: "#FFD1B5",
+      tileBg: "var(--surface-f-tile-3, #FFC19C)",
       iconColor: "#1F2D44",
       title: "Cross-Device Progress Tracking",
       description:
@@ -39,7 +39,7 @@ export const PORTAL_DATA = {
     {
       id: "feat-4",
       icon: "Headset",
-      tileBg: "#D5E8FB",
+      tileBg: "var(--surface-f-tile-4, #B8D9FA)",
       iconColor: "#2B63B0",
       title: "Direct Doubt Support for Enrolled Students",
       description:
@@ -72,7 +72,7 @@ export const PORTAL_DATA = {
     },
     {
       id: "chip-devices",
-      labelLines: ["Access on", "All Devices"],
+      label: "Access on All Devices",
       icon: "Monitor",
       tone: "yellow",
     },

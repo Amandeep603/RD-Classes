@@ -54,10 +54,9 @@ export default function HowItWorksSection() {
             className="w-full flex justify-center mt-[clamp(12px,1.5vw,calc(var(--su,1px)*18))]"
           >
             <p
-              className="font-normal text-[#5A6472] leading-[1.5] text-center whitespace-normal md:whitespace-nowrap"
+              className="font-normal text-[#5A6472] leading-[1.5] text-center w-full max-w-full lg:max-w-[calc(var(--su,1px)*844)] text-[clamp(15px,4vw,17px)] lg:text-[calc(var(--su,1px)*20)]"
               style={{
-                fontSize: "clamp(15px, 2.2vw, calc(var(--su, 1px) * 20))",
-                maxWidth: "calc(var(--su, 1px) * 844)",
+                textWrap: "pretty",
               }}
             >
               {subtitle}

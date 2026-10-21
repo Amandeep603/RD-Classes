@@ -5,20 +5,20 @@ import TopicList from "./TopicList";
 
 /**
  * BookCard component for Section E: "What You Will Master".
- * Features:
- * - Top-left book badge ("BOOK 1")
- * - Lectures count ("48 Lectures")
- * - 2-line title ("Accounting for \n Partnership Firms") with high z-index
- * - Marks row with gold Award ribbon icon
- * - "CORE TOPICS COVERED:" header + TopicList
- * - Decorative tone-colored blob + 3D Book Illustration at top-right
- * - Pinned "Complete Board Mastery" button at bottom
+ * Fix Pass v3.4 specifications:
+ * - data-book-card attribute present
+ * - 30% padding-right on first two text rows so text never runs under book illustration
+ * - Title on two explicit lines (whitespace-nowrap per line, clamp(19px, 6.4cqw, 25px))
+ * - "CORE TOPICS COVERED:" on one line
+ * - Marks text wraps naturally
+ * - Footer button label on one line (clamp(14px, 5cqw, 17px)), arrow circle never clipped
  */
 export default function BookCard({ book, index }) {
   return (
     <article
       data-tone={book.tone}
-      className="group relative flex flex-col justify-between overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_36px_60px_-24px_rgba(15,23,42,0.35)]"
+      data-book-card="true"
+      className="group relative flex flex-col justify-between overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_36px_60px_-24px_rgba(15,23,42,0.35)] h-full"
       style={{
         containerType: "inline-size",
         background: "var(--book-card-bg)",
@@ -32,7 +32,7 @@ export default function BookCard({ book, index }) {
         minHeight: "max(560px, calc(var(--su, 1px) * 610))",
       }}
     >
-      {/* Decorative Blob in top-right */}
+      {/* Decorative Tone Blob in top-right */}
       <div
         className="pointer-events-none absolute -top-8 -right-8 rounded-full z-0 transition-transform duration-500 ease-out group-hover:scale-105"
         style={{
@@ -48,42 +48,45 @@ export default function BookCard({ book, index }) {
 
       {/* Top Content Area */}
       <div className="relative z-10 flex flex-col">
-        {/* Book Badge */}
-        <div
-          className="inline-flex items-center justify-center font-extrabold uppercase select-none shadow-sm"
-          style={{
-            width: "clamp(76px, 25.5cqw, calc(var(--su, 1px) * 94))",
-            height: "clamp(32px, 10.6cqw, calc(var(--su, 1px) * 39))",
-            borderRadius: "max(16px, calc(var(--su, 1px) * 20))",
-            backgroundColor: "var(--book-pill-bg)",
-            color: "var(--book-pill-text)",
-            fontSize: "clamp(13px, 4.3cqw, calc(var(--su, 1px) * 16))",
-          }}
-        >
-          {book.bookLabel}
+        {/* First two text rows have 30% padding-right so text never underlaps the book */}
+        <div style={{ paddingRight: "30%" }}>
+          {/* Book Badge */}
+          <div
+            className="inline-flex items-center justify-center font-extrabold uppercase select-none shadow-sm"
+            style={{
+              width: "clamp(76px, 25.5cqw, calc(var(--su, 1px) * 94))",
+              height: "clamp(32px, 10.6cqw, calc(var(--su, 1px) * 39))",
+              borderRadius: "max(16px, calc(var(--su, 1px) * 20))",
+              backgroundColor: "var(--book-pill-bg)",
+              color: "var(--book-pill-text)",
+              fontSize: "clamp(13px, 4.3cqw, calc(var(--su, 1px) * 16))",
+            }}
+          >
+            {book.bookLabel}
+          </div>
+
+          {/* Lectures Count */}
+          <p
+            className="font-medium text-[#2A2F3A]"
+            style={{
+              fontSize: "clamp(14px, 4.8cqw, calc(var(--su, 1px) * 17.5))",
+              marginTop: "max(8px, calc(var(--su, 1px) * 12))",
+            }}
+          >
+            {book.lectures}
+          </p>
         </div>
 
-        {/* Lectures Count */}
-        <p
-          className="font-medium text-[#2A2F3A]"
-          style={{
-            fontSize: "clamp(14px, 4.8cqw, calc(var(--su, 1px) * 17.5))",
-            marginTop: "max(8px, calc(var(--su, 1px) * 12))",
-          }}
-        >
-          {book.lectures}
-        </p>
-
-        {/* 2-Line Title */}
+        {/* 2-Line Title (explicit lines, whitespace-nowrap per line) */}
         <h3
           className="font-extrabold text-[#0B1B2E] tracking-tight leading-[1.28]"
           style={{
-            fontSize: "clamp(20px, 8.2cqw, calc(var(--su, 1px) * 30.5))",
+            fontSize: "clamp(19px, 6.4cqw, 25px)",
             marginTop: "max(8px, calc(var(--su, 1px) * 12))",
           }}
         >
-          <span className="block">{book.title[0]}</span>
-          <span className="block">{book.title[1]}</span>
+          <span className="block whitespace-nowrap">{book.title[0]}</span>
+          <span className="block whitespace-nowrap">{book.title[1]}</span>
         </h3>
 
         {/* Marks Ribbon Row */}
@@ -112,9 +115,9 @@ export default function BookCard({ book, index }) {
           </span>
         </div>
 
-        {/* Core Topics Eyebrow */}
+        {/* Core Topics Eyebrow (on one line) */}
         <p
-          className="font-extrabold uppercase tracking-[0.12em] text-[#4A5568]"
+          className="font-extrabold uppercase tracking-[0.12em] text-[#4A5568] whitespace-nowrap"
           style={{
             fontSize: "clamp(11.5px, 3.7cqw, calc(var(--su, 1px) * 13.5))",
             marginTop: "max(16px, calc(var(--su, 1px) * 24))",
@@ -143,7 +146,7 @@ export default function BookCard({ book, index }) {
             height: "max(52px, calc(var(--su, 1px) * 65))",
             borderRadius: "max(26px, calc(var(--su, 1px) * 33))",
             backgroundColor: "#0B1F3F",
-            paddingLeft: "clamp(18px, 9cqw, calc(var(--su, 1px) * 33))",
+            paddingLeft: "clamp(18px, 8cqw, calc(var(--su, 1px) * 33))",
             paddingRight: "max(8px, calc(var(--su, 1px) * 9))",
           }}
         >
@@ -156,7 +159,7 @@ export default function BookCard({ book, index }) {
           <span
             className="font-bold whitespace-nowrap"
             style={{
-              fontSize: "clamp(14.5px, 5cqw, calc(var(--su, 1px) * 18.5))",
+              fontSize: "clamp(14px, 5cqw, 17px)",
             }}
           >
             {book.buttonLabel}

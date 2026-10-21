@@ -1,0 +1,121 @@
+/**
+ * surfaces.css
+ * Centralised design tokens for light surfaces, card tints, page backgrounds, and badges.
+ * Generated according to Fix Pass v3.4 HSL deepening formula:
+ * - Hues strictly preserved (Delta H = 0)
+ * - S' = min(100, S + 4)
+ * - L' = L - 6 for L >= 90; L - 5 for 80 <= L < 90
+ */
+
+:root {
+  /* =========================================================
+     PAGE BACKGROUNDS
+     ========================================================= */
+  --bg-cream-panel: #F7F0E0;
+  --bg-lightflow: linear-gradient(180deg, #FBF6EA 0%, #F7F0E0 45%, #F3EAD6 100%);
+  --surface-pure-white: #FFFFFF;
+  --surface-topic-row: rgba(255, 255, 255, 0.78);
+
+  /* =========================================================
+     SECTION BADGES (Deeper containers, high contrast text)
+     ========================================================= */
+  --badge-bg-gradient: linear-gradient(90deg, #FFE29A, #FFD0A0);
+  --badge-bg-solid: #FFE08F;
+  --badge-border: #F0BC4E;
+  --badge-text: #1A1205;
+  --badge-shadow: 0 6px 14px -8px rgba(180, 120, 10, 0.55);
+
+  /* =========================================================
+     SECTION A: PROGRAMS TINTED SURFACES
+     ========================================================= */
+  --surface-programs-sky-bg: linear-gradient(160deg, #C7E7FE, #D3EEFF);
+  --surface-programs-sky-border: #AFDAFD;
+
+  --surface-programs-sun-bg: linear-gradient(160deg, #FFEBA6, #FFF1C1);
+  --surface-programs-sun-border: #F9DD86;
+
+  --surface-programs-peach-bg: linear-gradient(160deg, #FFD1B0, #FFE0C7);
+  --surface-programs-peach-border: #F8C49F;
+
+  /* =========================================================
+     SECTION B: FEATURED COURSES TINTED SURFACES
+     ========================================================= */
+  --surface-featured-sky-banner: linear-gradient(135deg, #B8E4FD, #AEE0FA);
+  --surface-featured-sky-pill: #A2D9F6;
+  --surface-featured-sky-tile: #A6DBF7;
+
+  --surface-featured-sun-banner: linear-gradient(135deg, #FFEDB0, #FFE58F);
+  --surface-featured-sun-pill: #FFE081;
+  --surface-featured-sun-tile: #FFE38F;
+
+  --surface-featured-peach-banner: linear-gradient(135deg, #FFCBB2, #FFBFA1);
+  --surface-featured-peach-pill: #FFC1A4;
+  --surface-featured-peach-tile: #FFC8AC;
+
+  /* =========================================================
+     SECTION D: HOW IT WORKS TINTED SURFACES
+     ========================================================= */
+  --surface-d-yellow-bg: linear-gradient(160deg, #FFEEBC 0%, #FFF4CF 60%, #FFF0BE 100%);
+  --surface-d-yellow-border: #FCE196;
+  --surface-d-yellow-tile: #FFE38D;
+  --surface-d-yellow-arrow: #FFDD83;
+  --surface-d-yellow-wave: rgba(255, 205, 80, 0.35);
+
+  --surface-d-blue-bg: linear-gradient(160deg, #CFE6FF 0%, #D8ECFF 100%);
+  --surface-d-blue-border: #B5D9FA;
+  --surface-d-blue-tile: #A5D5FB;
+  --surface-d-blue-arrow: #A5D5FA;
+  --surface-d-blue-wave: rgba(110, 180, 250, 0.38);
+
+  --surface-d-orange-bg: linear-gradient(160deg, #FFE1C6 0%, #FFE8D3 100%);
+  --surface-d-orange-border: #FACEAA;
+  --surface-d-orange-tile: #FFC18B;
+  --surface-d-orange-arrow: #FFC595;
+  --surface-d-orange-wave: rgba(250, 150, 80, 0.38);
+
+  /* =========================================================
+     SECTION E: SYLLABUS TINTED SURFACES & VIVID BOOK COVERS
+     ========================================================= */
+  --surface-e-yellow-bg: linear-gradient(165deg, #FFEBAE 0%, #FFF1C3 45%, #FFF4D4 100%);
+  --surface-e-yellow-border: #FCE39B;
+  --surface-e-yellow-blob: rgba(255, 215, 120, 0.35);
+
+  --surface-e-navy-bg: linear-gradient(165deg, #B7DAFF 0%, #CBE4FF 45%, #D7E9FF 100%);
+  --surface-e-navy-border: #B7D6F6;
+  --surface-e-navy-blob: rgba(160, 205, 255, 0.35);
+
+  --surface-e-orange-bg: linear-gradient(165deg, #FFD3B0 0%, #FFE0C4 45%, #FFE8D5 100%);
+  --surface-e-orange-border: #F7CEAD;
+  --surface-e-orange-blob: rgba(255, 190, 145, 0.35);
+
+  --surface-e-blue-bg: linear-gradient(165deg, #BAD9FF 0%, #CBE4FF 45%, #D7E9FF 100%);
+  --surface-e-blue-border: #B7D6F6;
+  --surface-e-blue-blob: rgba(160, 205, 255, 0.35);
+
+  /* Vivid Book Covers (Part 1e) */
+  --book-cover-yellow-start: #FFD84D;
+  --book-cover-yellow-end: #F5B50F;
+
+  --book-cover-navy-start: #1B3F8F;
+  --book-cover-navy-end: #0B2A63;
+
+  --book-cover-orange-start: #FF9F5A;
+  --book-cover-orange-end: #F27A24;
+
+  --book-cover-blue-start: #3B93FF;
+  --book-cover-blue-end: #1E6FE8;
+
+  /* =========================================================
+     SECTION F: PORTAL TINTED SURFACES
+     ========================================================= */
+  --surface-f-tile-1: #FFE38F;
+  --surface-f-tile-2: #BFDBF9;
+  --surface-f-tile-3: #FFC19C;
+  --surface-f-tile-4: #B8D9FA;
+  --surface-f-blob-start: #FFEBB3;
+  --surface-f-blob-end: #FFDF97;
+
+  --surface-f-chip-blue: #BFDBF9;
+  --surface-f-chip-orange: #FFCDA8;
+  --surface-f-chip-yellow: #FFE289;
+}

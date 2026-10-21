@@ -1,30 +1,29 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import LaptopMockup from "./LaptopMockup";
-import PhoneMockup from "./PhoneMockup";
+import DevicesIllustration from "./DevicesIllustration";
 import FloatingChip from "./FloatingChip";
 import { PORTAL_DATA } from "@/constants/portal";
 
 /**
  * DeviceShowcase component for Section F: "Student Learning Portal".
- * Responsive container (container-type: inline-size, aspect-ratio 810/555).
- * Contains:
- * - Organic pale-yellow background blob SVG
- * - Laptop mockup with HD video player and blackboard notes
- * - Phone mockup overlapping the right edge
- * - 3 Floating badge chips with subtle desktop float animation
- * - Pointer-parallax on desktop (pointer:fine, max 4deg tilt / 8u shift, rAF throttled)
+ * Rebuilt according to Fix Pass v3.4 specification:
+ * - Desktop: aspect-ratio 810/555, max-width calc(var(--su) * 810), viewBox "0 0 810 555"
+ * - Mobile/tablet (<1100px): aspect-ratio 740/615, max-width 640px, viewBox "40 -60 740 615"
+ * - Pointer-parallax on desktop (pointer:fine only, rAF-throttled, translates up to 8u, tilts up to 3deg)
+ * - 3 Floating badge chips positioned via % of container
  */
 export default function DeviceShowcase() {
   const containerRef = useRef(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [transform, setTransform] = useState({ x: 0, y: 0, tiltX: 0, tiltY: 0 });
   const { chips } = PORTAL_DATA;
 
   useEffect(() => {
+    // Only run pointer parallax on desktop with fine pointer and full motion
     const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+    const isDesktop = window.matchMedia("(min-width: 1100px)").matches;
     const forceMotion = document.documentElement.dataset.motion !== "reduce";
-    if (!isFinePointer || !forceMotion) return;
+    if (!isFinePointer || !isDesktop || !forceMotion) return;
 
     let rafId = null;
 
@@ -39,13 +38,18 @@ export default function DeviceShowcase() {
         const clientX = e.clientX - rect.left;
         const clientY = e.clientY - rect.top;
 
-        // Calculate relative coordinates from -1 to 1
+        // Relative coordinates from -1 to 1
         const relX = (clientX / rect.width - 0.5) * 2;
         const relY = (clientY / rect.height - 0.5) * 2;
 
-        setTilt({
-          x: Math.max(-1, Math.min(1, relX)) * 3.5, // max 3.5deg
-          y: Math.max(-1, Math.min(1, relY)) * -3.5,
+        const clampedX = Math.max(-1, Math.min(1, relX));
+        const clampedY = Math.max(-1, Math.min(1, relY));
+
+        setTransform({
+          x: clampedX * 8, // up to 8u translation
+          y: clampedY * 8,
+          tiltX: clampedY * -3, // up to 3deg tilt
+          tiltY: clampedX * 3,
         });
 
         rafId = null;
@@ -53,7 +57,7 @@ export default function DeviceShowcase() {
     };
 
     const handleMouseLeave = () => {
-      setTilt({ x: 0, y: 0 });
+      setTransform({ x: 0, y: 0, tiltX: 0, tiltY: 0 });
     };
 
     const container = containerRef.current;
@@ -74,104 +78,67 @@ export default function DeviceShowcase() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full select-none"
+      className="relative w-full mx-auto select-none max-w-[640px] aspect-[740/615] min-[1100px]:max-w-[calc(var(--su,1px)*810)] min-[1100px]:aspect-[810/555]"
       style={{
         containerType: "inline-size",
-        aspectRatio: "810 / 555",
       }}
     >
       <span className="sr-only">
         Interactive preview of RD Classes online student portal running HD lecture video player on laptop and mobile phone
       </span>
 
-      {/* Decorative Organic Pale-Yellow Blob SVG behind devices */}
-      <svg
-        className="pointer-events-none absolute inset-0 w-full h-full z-0 opacity-95"
-        viewBox="0 0 810 555"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="portalBlobGrad" x1="200" y1="60" x2="680" y2="480" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#FFF3D2" />
-            <stop offset="100%" stopColor="#FFE7B0" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M 280 80 C 440 30, 620 60, 710 160 C 800 260, 780 400, 680 480 C 580 560, 360 540, 240 480 C 120 420, 120 280, 180 180 C 220 110, 240 90, 280 80 Z"
-          fill="url(#portalBlobGrad)"
-        />
-      </svg>
-
-      {/* Parallax Group (Laptop + Phone) */}
+      {/* SVG Devices Illustration with Parallax Group */}
       <div
-        className="relative w-full h-full z-10 transition-transform duration-300 ease-out"
+        className="w-full h-full transition-transform duration-300 ease-out"
         style={{
-          transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
+          transform: `perspective(1000px) translate3d(${transform.x}px, ${transform.y}px, 0) rotateX(${transform.tiltX}deg) rotateY(${transform.tiltY}deg)`,
           transformStyle: "preserve-3d",
         }}
       >
-        {/* Laptop Mockup Box */}
-        <div
-          className="absolute"
-          style={{
-            top: "14%",
-            left: "6%",
-            width: "77%",
-            height: "79%",
-          }}
-        >
-          <LaptopMockup />
+        {/* Desktop ViewBox (>=1100px) */}
+        <div className="hidden min-[1100px]:block w-full h-full">
+          <DevicesIllustration viewBox="0 0 810 555" />
         </div>
 
-        {/* Phone Mockup Box (overlapping bottom-right) */}
-        <div
-          className="absolute z-20"
-          style={{
-            top: "43%",
-            right: "1.5%",
-            width: "23%",
-            height: "53%",
-          }}
-        >
-          <PhoneMockup />
+        {/* Mobile/Tablet ViewBox (<1100px) */}
+        <div className="block min-[1100px]:hidden w-full h-full">
+          <DevicesIllustration viewBox="40 -60 740 615" />
         </div>
       </div>
 
-      {/* Floating Chips */}
-      {/* Chip 1: PDF Notes (Top-Left area) */}
+      {/* 3 Floating Badge Chips */}
+      {/* Chip 1: PDF Notes */}
       {chips[0] && (
         <FloatingChip
           chip={chips[0]}
           className="animate-chip-float-1"
           style={{
-            top: "4%",
-            left: "17%",
+            top: "var(--chip-1-top, 5.4%)",
+            left: "var(--chip-1-left, 21.4%)",
           }}
         />
       )}
 
-      {/* Chip 2: Watch at 1x – 2x (Top-Right area) */}
+      {/* Chip 2: Watch at 1x – 2x */}
       {chips[1] && (
         <FloatingChip
           chip={chips[1]}
           className="animate-chip-float-2"
           style={{
-            top: "4%",
-            right: "4%",
+            top: "var(--chip-2-top, 5.6%)",
+            left: "var(--chip-2-left, 72%)",
           }}
         />
       )}
 
-      {/* Chip 3: Access on All Devices (Bottom-Left area) */}
+      {/* Chip 3: Access on All Devices */}
       {chips[2] && (
         <FloatingChip
           chip={chips[2]}
           className="animate-chip-float-3"
           style={{
-            bottom: "2%",
-            left: "12%",
+            top: "var(--chip-3-top, 85.9%)",
+            left: "var(--chip-3-left, 16.3%)",
           }}
         />
       )}

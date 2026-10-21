@@ -48,7 +48,7 @@ export default function TopicList({ topics, tone }) {
             </div>
 
             <span
-              className="font-medium text-[#1F2937] leading-tight select-none overflow-hidden text-ellipsis whitespace-nowrap min-[768px]:whitespace-normal min-[1340px]:whitespace-nowrap"
+              className="font-medium text-[#1F2937] leading-[1.25] select-none text-left"
               style={{
                 fontSize: "clamp(13px, 4.4cqw, calc(var(--su, 1px) * 16.2))",
               }}

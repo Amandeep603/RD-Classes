@@ -11,43 +11,43 @@
  * - Micro-animation: softFloat + tilt on hover
  */
 export default function BookIllustration({ tone, index }) {
-  // Config per book index/tone
+  // Config per book index/tone (Fix Pass v3.4 vivid book covers)
   const bookConfigs = {
     yellow: {
-      gradientStart: "#FFE270",
+      gradientStart: "#FFD84D",
       gradientEnd: "#F5B50F",
-      spineColor: "#DDA00A",
-      spineGradient: "linear-gradient(180deg, #F8BD1E, #DDA00A)",
+      spineColor: "#D69708",
+      spineGradient: "linear-gradient(180deg, #F8BD1E, #D69708)",
       pagesEdge: "#FFF9E6",
       pagesShadow: "#E8D8A8",
       tilt: "-11deg",
       scale: 1,
     },
     navy: {
-      gradientStart: "#214EA3",
-      gradientEnd: "#0C2E6D",
-      spineColor: "#081E48",
-      spineGradient: "linear-gradient(180deg, #1C4591, #081E48)",
+      gradientStart: "#1B3F8F",
+      gradientEnd: "#0B2A63",
+      spineColor: "#071E47",
+      spineGradient: "linear-gradient(180deg, #163678, #071E47)",
       pagesEdge: "#EDF4FC",
       pagesShadow: "#BCCEE2",
       tilt: "-13deg",
       scale: 1.06, // book 2 is slightly larger in the reference
     },
     orange: {
-      gradientStart: "#FFC69D",
-      gradientEnd: "#F99654",
-      spineColor: "#E07530",
-      spineGradient: "linear-gradient(180deg, #F99654, #E07530)",
+      gradientStart: "#FF9F5A",
+      gradientEnd: "#F27A24",
+      spineColor: "#D66212",
+      spineGradient: "linear-gradient(180deg, #F97316, #D66212)",
       pagesEdge: "#FFF6ED",
       pagesShadow: "#EED1BC",
       tilt: "-11deg",
       scale: 1,
     },
     blue: {
-      gradientStart: "#4CA2FF",
-      gradientEnd: "#1A6EE3",
-      spineColor: "#1054B5",
-      spineGradient: "linear-gradient(180deg, #378EF9, #1054B5)",
+      gradientStart: "#3B93FF",
+      gradientEnd: "#1E6FE8",
+      spineColor: "#1457BD",
+      spineGradient: "linear-gradient(180deg, #2E85FB, #1457BD)",
       pagesEdge: "#EFF6FF",
       pagesShadow: "#BDD5F0",
       tilt: "-12deg",
@@ -141,7 +141,7 @@ export default function BookIllustration({ tone, index }) {
         {/* Cover Surface Graphics */}
         {tone === "yellow" && (
           /* Book 1: Two embossed horizontal bars */
-          <g opacity="0.6">
+          <g>
             <rect
               x="58"
               y="68"
@@ -149,7 +149,7 @@ export default function BookIllustration({ tone, index }) {
               height="6"
               rx="3"
               fill="#FFFFFF"
-              fillOpacity="0.45"
+              fillOpacity="0.85"
             />
             <rect
               x="58"
@@ -157,8 +157,8 @@ export default function BookIllustration({ tone, index }) {
               width="50"
               height="5"
               rx="2.5"
-              fill="#D99808"
-              fillOpacity="0.75"
+              fill="#B87700"
+              fillOpacity="0.95"
             />
             <rect
               x="58"
@@ -167,7 +167,7 @@ export default function BookIllustration({ tone, index }) {
               height="6"
               rx="3"
               fill="#FFFFFF"
-              fillOpacity="0.45"
+              fillOpacity="0.85"
             />
             <rect
               x="58"
@@ -175,8 +175,8 @@ export default function BookIllustration({ tone, index }) {
               width="36"
               height="5"
               rx="2.5"
-              fill="#D99808"
-              fillOpacity="0.75"
+              fill="#B87700"
+              fillOpacity="0.95"
             />
           </g>
         )}

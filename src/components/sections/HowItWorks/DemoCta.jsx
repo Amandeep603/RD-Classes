@@ -3,13 +3,12 @@ import { CalendarDays, ArrowRight } from "lucide-react";
 
 /**
  * DemoCta component for Section D: "How It Works".
- * Dark pill button linking to WhatsApp for booking a free demo.
- * Desktop: 482u x 65u, radius 33u, padding 0 14u 0 36u.
- * Mobile: min(100%, 420px) width, 58px height, 16px text.
- * Micro-animations:
- * - Hover lift + shine sweep
- * - Arrow slide
- * - Soft pulse ring every 5s (single mobile infinite animation, paused off-screen)
+ * Fix Pass v3.4 specifications:
+ * - Width: min(100%, 420px)
+ * - Padding: 12px 12px 12px 20px
+ * - Content row flex: calendar icon 22px, label flex: 1 / min-width: 0 / text-align: left / clamp(14px, 4vw, 16px) / line-height: 1.2
+ * - Arrow circle: 44px, flex: none, fully visible (overflow visible)
+ * - Thick pill halo removed completely. Pulse ring is on arrow circle ::after only (scale 1 -> 1.6, opacity .45 -> 0, 2.4s, every 5s)
  */
 export default function DemoCta({ cta }) {
   return (
@@ -19,58 +18,38 @@ export default function DemoCta({ cta }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Book Your Free Demo on WhatsApp"
-        className="group relative inline-flex items-center justify-between overflow-hidden rounded-full transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_26px_48px_-16px_rgba(15,26,44,0.7)] active:scale-[0.98] select-none text-white animate-cta-pulse"
+        className="group relative inline-flex items-center gap-3.5 rounded-full transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_26px_48px_-16px_rgba(15,26,44,0.7)] active:scale-[0.98] select-none text-white overflow-visible"
         style={{
-          width: "min(100%, max(320px, calc(var(--su, 1px) * 482)))",
-          height: "max(58px, calc(var(--su, 1px) * 65))",
-          borderRadius: "max(29px, calc(var(--su, 1px) * 33))",
+          width: "min(100%, 420px)",
+          borderRadius: "9999px",
           background: "linear-gradient(180deg, #121E33 0%, #0B1424 100%)",
           boxShadow: "0 20px 40px -18px rgba(15, 26, 44, 0.55)",
-          paddingLeft: "max(24px, calc(var(--su, 1px) * 36))",
-          paddingRight: "max(10px, calc(var(--su, 1px) * 14))",
+          padding: "12px 12px 12px 20px",
         }}
       >
-        {/* Shine sweep effect on hover */}
-        <span
-          className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full"
+        {/* Left side: Calendar icon */}
+        <CalendarDays
+          className="shrink-0 text-[#FFC21A] w-[22px] h-[22px]"
           aria-hidden="true"
         />
 
-        {/* Left side: Calendar icon + text */}
-        <div className="flex items-center gap-[clamp(12px,2vw,calc(var(--su,1px)*18))]">
-          <CalendarDays
-            className="shrink-0 text-[#FFC21A]"
-            style={{
-              width: "max(22px, calc(var(--su, 1px) * 28))",
-              height: "max(22px, calc(var(--su, 1px) * 28))",
-            }}
-            aria-hidden="true"
-          />
-          <span
-            className="font-bold tracking-tight text-white whitespace-nowrap"
-            style={{
-              fontSize: "clamp(15px, 2.2vw, calc(var(--su, 1px) * 19))",
-            }}
-          >
-            {cta.label}
-          </span>
-        </div>
-
-        {/* Right side: Yellow circle with dark arrow */}
-        <div
-          className="flex items-center justify-center rounded-full bg-[#FFC21A] text-[#0B1424] shrink-0 transition-transform duration-300 ease-out group-hover:scale-105"
+        {/* Center: Label text */}
+        <span
+          className="font-bold tracking-tight text-white flex-1 min-w-0 text-left leading-[1.2]"
           style={{
-            width: "max(44px, calc(var(--su, 1px) * 50))",
-            height: "max(44px, calc(var(--su, 1px) * 50))",
+            fontSize: "clamp(14px, 4vw, 16px)",
           }}
+        >
+          {cta.label}
+        </span>
+
+        {/* Right side: Yellow arrow circle with isolated pulse ring */}
+        <div
+          className="relative flex items-center justify-center rounded-full bg-[#FFC21A] text-[#0B1424] shrink-0 flex-none transition-transform duration-300 ease-out group-hover:scale-105 w-[44px] h-[44px] arrow-circle-pulse"
           aria-hidden="true"
         >
           <ArrowRight
-            className="transition-transform duration-300 group-hover:translate-x-[3px]"
-            style={{
-              width: "max(18px, calc(var(--su, 1px) * 22))",
-              height: "max(18px, calc(var(--su, 1px) * 22))",
-            }}
+            className="transition-transform duration-300 group-hover:translate-x-[3px] w-[20px] h-[20px]"
             strokeWidth={2.4}
           />
         </div>
@@ -78,4 +57,3 @@ export default function DemoCta({ cta }) {
     </div>
   );
 }
-
