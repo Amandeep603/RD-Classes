@@ -1,53 +1,101 @@
-import Container from "@/components/layout/Container";
 import Reveal from "@/components/ui/Reveal";
 import StatItem from "./StatItem";
 import { STATS } from "@/constants/stats";
 
 /**
  * Section C: Stats Band
- * Full-bleed dark amber gradient band with ambient glowing drift shapes,
- * 4 equal columns on desktop with dividers, 2x2 on mobile/tablet,
- * and animated count-up numbers.
+ * id="results"
+ * Exact visual replica of stats.png:
+ * - Height: ~373-380u at 1600px canvas (padding top 68u, bottom 56u).
+ * - Container padding-inline 60u.
+ * - 4 equal columns with 1px vertical dividers 210u tall, vertically centered.
+ * - Explicit radial + linear background gradient and 4 decorative ambient circles.
  */
 export default function StatsSection() {
   return (
     <section
       id="results"
       aria-label="Achievements and statistics"
-      className="relative w-full overflow-hidden text-white pt-[56px] sm:pt-[72px] lg:pt-[calc(var(--su)*84)] pb-[56px] sm:pb-[72px] lg:pb-[calc(var(--su)*84)] px-[20px] sm:px-[32px] lg:px-[calc(var(--su)*80)] scroll-mt-20"
+      className="relative w-full overflow-hidden text-white scroll-mt-20"
       style={{
-        "--su": "min(100vw / 1600, 1.1px)",
+        paddingTop: "clamp(52px, 5.5vw, calc(var(--su, 1px) * 68))",
+        paddingBottom: "clamp(44px, 4.5vw, calc(var(--su, 1px) * 56))",
+        background: `
+          radial-gradient(900px 500px at 100% 100%, rgba(232,71,11,.95), rgba(232,71,11,0) 60%),
+          radial-gradient(700px 420px at 62% 45%, rgba(140,74,8,.9), rgba(140,74,8,0) 70%),
+          radial-gradient(500px 360px at 0% 100%, rgba(150,95,12,.75), rgba(150,95,12,0) 65%),
+          linear-gradient(90deg, #0A0705 0%, #1A0F06 28%, #4A2706 52%, #6E3908 70%, #8F4309 85%, #B8460A 100%)
+        `,
       }}
     >
-      {/* Base Background Gradient */}
+      {/* Decorative Circle A: top-left 520u dia at left -240u / top -300u rgba(0,0,0,.45) */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none"
+        className="absolute rounded-full pointer-events-none animate-glow-drift"
         style={{
-          background:
-            "radial-gradient(circle at 100% 100%, #E8470B 0%, rgba(232, 71, 11, 0.45) 30%, transparent 60%), radial-gradient(circle at 55% 50%, #8A4A08 0%, #6B3A06 40%, transparent 75%), linear-gradient(90deg, #0B0806 0%, #170E06 30%, #452104 65%, #662E04 100%)",
+          width: "calc(var(--su, 1px) * 520)",
+          height: "calc(var(--su, 1px) * 520)",
+          left: "calc(var(--su, 1px) * -240)",
+          top: "calc(var(--su, 1px) * -300)",
+          background: "rgba(0, 0, 0, 0.45)",
+          filter: "blur(20px)",
         }}
         aria-hidden="true"
       />
 
-      {/* Decorative Drifting Glow Shapes */}
+      {/* Decorative Circle B: bottom-left 420u at left -200u / bottom -230u rgba(150,95,12,.85) */}
       <div
-        className="absolute -top-32 -left-32 w-[340px] h-[340px] lg:w-[calc(var(--su)*420)] lg:h-[calc(var(--su)*420)] rounded-full bg-black/60 blur-2xl pointer-events-none animate-glow-drift"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -bottom-24 left-[8%] w-[300px] h-[300px] lg:w-[calc(var(--su)*380)] lg:h-[calc(var(--su)*380)] rounded-full bg-[#6B3A06]/40 blur-3xl pointer-events-none animate-glow-drift"
-        style={{ animationDelay: "-7s" }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute top-1/2 -translate-y-1/2 -right-20 w-[380px] h-[380px] lg:w-[calc(var(--su)*500)] lg:h-[calc(var(--su)*500)] rounded-full bg-[#E8470B]/25 blur-3xl pointer-events-none animate-glow-drift"
-        style={{ animationDelay: "-14s" }}
+        className="absolute rounded-full pointer-events-none animate-glow-drift"
+        style={{
+          width: "calc(var(--su, 1px) * 420)",
+          height: "calc(var(--su, 1px) * 420)",
+          left: "calc(var(--su, 1px) * -200)",
+          bottom: "calc(var(--su, 1px) * -230)",
+          background: "rgba(150, 95, 12, 0.85)",
+          filter: "blur(40px)",
+          animationDelay: "-5s",
+        }}
         aria-hidden="true"
       />
 
-      <Container className="relative z-10 w-full">
+      {/* Decorative Circle C: right 700u at right -260u / top 40u rgba(255,120,30,.22) */}
+      <div
+        className="absolute rounded-full pointer-events-none animate-glow-drift"
+        style={{
+          width: "calc(var(--su, 1px) * 700)",
+          height: "calc(var(--su, 1px) * 700)",
+          right: "calc(var(--su, 1px) * -260)",
+          top: "calc(var(--su, 1px) * 40)",
+          background: "rgba(255, 120, 30, 0.22)",
+          filter: "blur(50px)",
+          animationDelay: "-10s",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Decorative Circle D: bottom-right 520u at right -120u / bottom -330u rgba(255,90,20,.35) */}
+      <div
+        className="absolute rounded-full pointer-events-none animate-glow-drift"
+        style={{
+          width: "calc(var(--su, 1px) * 520)",
+          height: "calc(var(--su, 1px) * 520)",
+          right: "calc(var(--su, 1px) * -120)",
+          bottom: "calc(var(--su, 1px) * -330)",
+          background: "rgba(255, 90, 20, 0.35)",
+          filter: "blur(35px)",
+          animationDelay: "-15s",
+        }}
+        aria-hidden="true"
+      />
+
+      <div
+        className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto"
+        style={{
+          paddingLeft: "clamp(20px, 4vw, calc(var(--su, 1px) * 60))",
+          paddingRight: "clamp(20px, 4vw, calc(var(--su, 1px) * 60))",
+        }}
+      >
         <Reveal className="w-full">
-          {/* Desktop Layout (>=1024px): 4 Equal Columns with 1px Vertical Dividers */}
+          {/* Desktop Layout (>=1024px): 4 Equal Columns with 1px Vertical Dividers (210u tall, centered) */}
           <div className="hidden lg:flex items-center justify-between w-full relative">
             {STATS.map((stat, idx) => (
               <div
@@ -58,7 +106,7 @@ export default function StatsSection() {
                 {idx < STATS.length - 1 && (
                   <div
                     className="absolute right-0 top-1/2 -translate-y-1/2 w-[1px] bg-[rgba(255,170,60,0.25)] animate-divider-draw"
-                    style={{ height: "calc(var(--su) * 210)" }}
+                    style={{ height: "calc(var(--su, 1px) * 210)" }}
                     aria-hidden="true"
                   />
                 )}
@@ -66,8 +114,8 @@ export default function StatsSection() {
             ))}
           </div>
 
-          {/* Mobile & Tablet Layout (<1024px): 2x2 Grid with Center Dividers */}
-          <div className="grid grid-cols-2 lg:hidden w-full relative py-4">
+          {/* Mobile & Tablet Layout (<1024px): 2x2 Grid with Center Hairline Dividers */}
+          <div className="grid grid-cols-2 lg:hidden w-full relative py-2">
             {/* Horizontal Center Divider */}
             <div
               className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-[1px] bg-[rgba(255,170,60,0.2)]"
@@ -82,14 +130,14 @@ export default function StatsSection() {
             {STATS.map((stat, idx) => (
               <div
                 key={stat.id}
-                className="flex items-center justify-center py-6 px-2 min-w-0"
+                className="flex items-center justify-center py-4 px-2 min-w-0"
               >
                 <StatItem stat={stat} index={idx} />
               </div>
             ))}
           </div>
         </Reveal>
-      </Container>
+      </div>
     </section>
   );
 }

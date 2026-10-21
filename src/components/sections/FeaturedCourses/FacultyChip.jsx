@@ -3,16 +3,24 @@ import { useState } from "react";
 
 /**
  * Faculty Chip component for CourseCard.
- * Displays faculty avatar with a 2u yellow-orange gradient ring, name, and role.
+ * Displays faculty avatar with a 2u ring linear-gradient(135deg,#FFC21A,#F97316),
+ * name 15.5u / 700 #0F172A (Anchor 97u), role 12.5u / #6B7280 (Anchor 169u).
  */
 export default function FacultyChip({ faculty }) {
   const [hasImgError, setHasImgError] = useState(false);
 
   return (
-    <div className="flex items-center gap-3 select-none">
-      {/* Avatar with 2u yellow-orange gradient ring */}
-      <div className="relative rounded-full p-[2px] bg-gradient-to-tr from-[#FFB800] to-[#F97316] shrink-0">
-        <div className="relative w-[38px] h-[38px] lg:w-[calc(var(--su)*46)] lg:h-[calc(var(--su)*46)] rounded-full overflow-hidden bg-[#FFF3C7] flex items-center justify-center">
+    <div className="flex items-center select-none" style={{ gap: "clamp(10px, 2.5cqw, calc(var(--su, 1px) * 12))" }}>
+      {/* 46u Avatar with 2u gradient ring */}
+      <div
+        className="relative rounded-full p-[2px] shrink-0"
+        style={{
+          background: "linear-gradient(135deg, #FFC21A, #F97316)",
+          width: "clamp(38px, 9.6cqw, calc(var(--su, 1px) * 46))",
+          height: "clamp(38px, 9.6cqw, calc(var(--su, 1px) * 46))",
+        }}
+      >
+        <div className="relative w-full h-full rounded-full overflow-hidden bg-[#FFF3C7] flex items-center justify-center">
           {!hasImgError && faculty?.avatar ? (
             <Image
               src={faculty.avatar}
@@ -23,7 +31,10 @@ export default function FacultyChip({ faculty }) {
               onError={() => setHasImgError(true)}
             />
           ) : (
-            <span className="font-extrabold text-[14px] lg:text-[calc(var(--su)*16)] text-[#B45309]">
+            <span
+              className="font-extrabold text-[#B45309]"
+              style={{ fontSize: "clamp(12px, 3.2cqw, calc(var(--su, 1px) * 15))" }}
+            >
               RD
             </span>
           )}
@@ -32,10 +43,19 @@ export default function FacultyChip({ faculty }) {
 
       {/* Name and Role */}
       <div className="flex flex-col">
-        <span className="font-bold text-[15px] lg:text-[calc(var(--su)*17)] text-[#0F172A] leading-tight">
+        <span
+          className="font-bold text-[#0F172A] leading-tight"
+          style={{ fontSize: "clamp(13px, 3.2cqw, calc(var(--su, 1px) * 15.5))" }}
+        >
           {faculty?.name || "Ronak Dugar"}
         </span>
-        <span className="text-[13px] lg:text-[calc(var(--su)*14.5)] text-[#6B7280] leading-tight mt-0.5">
+        <span
+          className="text-[#6B7280] leading-tight"
+          style={{
+            marginTop: "2px",
+            fontSize: "clamp(11px, 2.86cqw, calc(var(--su, 1px) * 13.6))",
+          }}
+        >
           {faculty?.role || "Lead Accountancy Faculty"}
         </span>
       </div>

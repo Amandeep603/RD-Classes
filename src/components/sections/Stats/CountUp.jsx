@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Counts up from 0 to target value once when 40% visible.
  * Preserves SSR final value for SEO and no-JS.
- * Respects prefers-reduced-motion.
+ * Respects document.documentElement.dataset.motion.
  */
 export default function CountUp({ value, suffix = "", className = "" }) {
   const containerRef = useRef(null);
@@ -15,12 +15,13 @@ export default function CountUp({ value, suffix = "", className = "" }) {
   const hasAnimated = useRef(false);
 
   useEffect(() => {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    // Check for reduced motion mode from document dataset
+    const isReducedMotion =
+      document.documentElement.dataset.motion === "reduce" ||
+      (window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        process.env.NEXT_PUBLIC_FORCE_MOTION !== "1");
 
-    if (prefersReducedMotion) {
+    if (isReducedMotion) {
       return;
     }
 

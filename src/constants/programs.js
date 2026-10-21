@@ -41,7 +41,7 @@ export const PROGRAMS = [
     description: "136 HD Chapter Lectures on Mobile",
     href: "/courses/online-video-portal",
     theme: "sun",
-    icon: "CirclePlay",
+    icon: "Play",
   },
   {
     id: "mock-tests",

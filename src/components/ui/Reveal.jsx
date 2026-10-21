@@ -4,13 +4,15 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * Scroll Reveal component using IntersectionObserver.
- * Only hides elements after hydration by checking/adding the 'js' class on <html>.
- * Respects prefers-reduced-motion: reduce via CSS rules.
+ * Only hides elements after hydration by checking/adding data-js on <html>.
+ * When data-motion="full", animates with 700ms cubic-bezier(.22,1,.36,1).
+ * When data-motion="reduce", fades in with 200ms opacity.
  */
 export default function Reveal({
   children,
   className = "",
   index = 0,
+  delay,
   as: Component = "div",
   ...props
 }) {
@@ -18,7 +20,7 @@ export default function Reveal({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    document.documentElement.classList.add("js");
+    document.documentElement.dataset.js = "1";
 
     const el = ref.current;
     if (!el) return;
@@ -40,11 +42,17 @@ export default function Reveal({
     return () => observer.disconnect();
   }, []);
 
+  const transitionDelay = delay !== undefined ? `${delay}ms` : `calc(var(--i, 0) * 90ms)`;
+
   return (
     <Component
       ref={ref}
+      data-reveal="true"
       data-visible={isVisible ? "true" : "false"}
-      style={{ "--i": index }}
+      style={{
+        "--i": index,
+        transitionDelay: isVisible ? transitionDelay : "0ms",
+      }}
       className={`reveal-item ${className}`}
       {...props}
     >

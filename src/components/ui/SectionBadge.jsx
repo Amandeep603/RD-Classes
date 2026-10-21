@@ -1,19 +1,24 @@
 /**
  * Shared Section Badge pill component.
- * e.g., "COURSE CATEGORIES", "FEATURED BATCHES"
+ * Supports children or text prop.
+ * Matches 13u / 800 uppercase 0.12em letter-spacing, height 36u, padding-x 26u, bg #FFF4D4, border #F5E2A5.
  */
-export default function SectionBadge({ children, className = "" }) {
+export default function SectionBadge({ children, text, className = "" }) {
+  const content = children || text;
+
   return (
     <div
-      className={`inline-flex items-center justify-center rounded-full bg-[#FFF3D1] border border-[#F3DFA0] text-[#1A1A1A] font-extrabold uppercase tracking-[0.12em] select-none shadow-xs px-5 sm:px-6 h-[36px] lg:h-[calc(var(--su)*36)] text-[12px] sm:text-[13px] lg:text-[calc(var(--su)*14)] ${className}`}
+      className={`inline-flex items-center justify-center rounded-full select-none shadow-xs font-extrabold uppercase tracking-[0.12em] text-[#1A1A1A] whitespace-nowrap ${className}`}
       style={{
-        paddingTop: "calc(var(--su) * 9)",
-        paddingBottom: "calc(var(--su) * 9)",
-        paddingLeft: "calc(var(--su) * 26)",
-        paddingRight: "calc(var(--su) * 26)",
+        height: "max(32px, calc(var(--su, 1px) * 36))",
+        paddingLeft: "max(20px, calc(var(--su, 1px) * 26))",
+        paddingRight: "max(20px, calc(var(--su, 1px) * 26))",
+        fontSize: "max(12px, calc(var(--su, 1px) * 13))",
+        backgroundColor: "#FFF4D4",
+        border: "1px solid #F5E2A5",
       }}
     >
-      {children}
+      {content}
     </div>
   );
 }

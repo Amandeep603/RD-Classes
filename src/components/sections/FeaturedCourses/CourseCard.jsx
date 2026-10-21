@@ -4,8 +4,13 @@ import { DynamicIcon } from "@/lib/icons";
 import Rating from "./Rating";
 import FacultyChip from "./FacultyChip";
 
+/**
+ * Course Card for Section B: Featured Batches.
+ * Exact visual replica of courses-full.png & courses-cards.png.
+ * 475u canvas width, CSS container for cqw scaling.
+ */
 export default function CourseCard({ course, index = 0 }) {
-  // Badge tone styles
+  // Badge tone pill styles
   const badgeClasses = {
     navy: "bg-[#0B3556] text-white",
     yellow: "bg-[#FFC21A] text-[#0F172A]",
@@ -17,43 +22,91 @@ export default function CourseCard({ course, index = 0 }) {
       data-theme={course.theme}
       style={{
         "--i": index,
+        containerType: "inline-size",
       }}
-      className="group relative flex flex-col justify-between bg-white rounded-[18px] lg:rounded-[calc(var(--su)*18)] border border-[rgba(15,23,42,0.07)] overflow-hidden shadow-[0_6px_24px_-4px_rgba(15,23,42,0.06)] hover:shadow-[0_22px_44px_-8px_rgba(15,23,42,0.14)] hover:-translate-y-[8px] transition-all duration-300 ease-out h-full"
+      className="course-card group relative flex flex-col justify-between bg-white rounded-[18px] lg:rounded-[calc(var(--su,1px)*18)] border border-[rgba(15,23,42,0.07)] overflow-hidden shadow-[0_1px_2px_rgba(15,23,42,0.04),0_18px_40px_-22px_rgba(15,23,42,0.18)] hover:shadow-[0_24px_48px_-16px_rgba(15,23,42,0.22)] hover:-translate-y-[8px] transition-all duration-300 ease-out h-full select-none"
     >
-      {/* ================= CARD BANNER ================= */}
-      <div className="relative w-full h-[150px] lg:h-[calc(var(--su)*170)] bg-[var(--banner-bg)] overflow-hidden flex flex-col justify-between pt-[14px] lg:pt-[calc(var(--su)*17)] px-[20px] lg:px-[calc(var(--su)*28)] pb-3 select-none">
-        {/* Soft Decorative Circles in Banner Bottom */}
+      {/* ================= CARD BANNER (170u high) ================= */}
+      <div
+        className="course-card-banner relative w-full overflow-hidden flex flex-col justify-between"
+        style={{
+          height: "clamp(140px, 35.8cqw, calc(var(--su, 1px) * 170))",
+          paddingTop: "clamp(14px, 3.6cqw, calc(var(--su, 1px) * 17))",
+          paddingLeft: "clamp(20px, 5.5cqw, calc(var(--su, 1px) * 26))",
+          paddingRight: "clamp(20px, 5.5cqw, calc(var(--su, 1px) * 26))",
+        }}
+      >
+        {/* Decorative Circle 1: 190u at left -40u / bottom -110u */}
         <div
-          className="absolute -bottom-8 -left-6 w-32 h-32 lg:w-[calc(var(--su)*130)] lg:h-[calc(var(--su)*130)] rounded-full bg-white/35 blur-xs pointer-events-none"
+          className="course-card-banner-circle absolute rounded-full pointer-events-none banner-circle-drift"
+          style={{
+            width: "clamp(150px, 40cqw, calc(var(--su, 1px) * 190))",
+            height: "clamp(150px, 40cqw, calc(var(--su, 1px) * 190))",
+            left: "calc(var(--su, 1px) * -40)",
+            bottom: "calc(var(--su, 1px) * -110)",
+          }}
           aria-hidden="true"
         />
+
+        {/* Decorative Circle 2: 240u at right -60u / bottom -140u */}
         <div
-          className="absolute -bottom-10 -right-6 w-36 h-36 lg:w-[calc(var(--su)*140)] lg:h-[calc(var(--su)*140)] rounded-full bg-white/30 blur-xs pointer-events-none"
+          className="course-card-banner-circle absolute rounded-full pointer-events-none banner-circle-drift"
+          style={{
+            width: "clamp(180px, 50.5cqw, calc(var(--su, 1px) * 240))",
+            height: "clamp(180px, 50.5cqw, calc(var(--su, 1px) * 240))",
+            right: "calc(var(--su, 1px) * -60)",
+            bottom: "calc(var(--su, 1px) * -140)",
+            animationDelay: "-6s",
+          }}
           aria-hidden="true"
         />
 
         {/* Top Header Row in Banner: Class Pill + Badge Pill */}
         <div className="relative z-10 flex items-center justify-between w-full">
-          {/* Class Pill (Translucent White) */}
-          <div className="inline-flex items-center justify-center rounded-full bg-white/80 backdrop-blur-xs font-bold text-[13px] lg:text-[calc(var(--su)*15)] text-[#0F2A44] px-4 py-1.5 shadow-xs">
+          {/* Class Pill: 37u high, padding-x 22u, 14u / 700, #0F2A44 */}
+          <div
+            className="course-card-class-pill inline-flex items-center justify-center rounded-full font-bold select-none"
+            style={{
+              height: "clamp(30px, 7.8cqw, calc(var(--su, 1px) * 37))",
+              paddingLeft: "clamp(14px, 4.6cqw, calc(var(--su, 1px) * 22))",
+              paddingRight: "clamp(14px, 4.6cqw, calc(var(--su, 1px) * 22))",
+              fontSize: "clamp(12px, 2.9cqw, calc(var(--su, 1px) * 14))",
+            }}
+          >
             {course.classLabel}
           </div>
 
-          {/* Badge Pill (Tone-based) */}
+          {/* Badge Pill: 37u high, padding-x 22u, 14u / 600 */}
           <div
-            className={`inline-flex items-center justify-center rounded-full font-semibold text-[13px] lg:text-[calc(var(--su)*15)] px-4 py-1.5 shadow-xs ${badgeClasses}`}
+            className={`inline-flex items-center justify-center rounded-full font-semibold select-none shadow-xs ${badgeClasses}`}
+            style={{
+              height: "clamp(30px, 7.8cqw, calc(var(--su, 1px) * 37))",
+              paddingLeft: "clamp(14px, 4.6cqw, calc(var(--su, 1px) * 22))",
+              paddingRight: "clamp(14px, 4.6cqw, calc(var(--su, 1px) * 22))",
+              fontSize: "clamp(12px, 2.9cqw, calc(var(--su, 1px) * 14))",
+            }}
           >
             {course.badge}
           </div>
         </div>
 
-        {/* Centered 80u Icon Tile */}
-        <div className="relative z-10 flex items-center justify-center w-full mb-1">
-          <div className="flex items-center justify-center w-[64px] h-[64px] lg:w-[calc(var(--su)*80)] lg:h-[calc(var(--su)*80)] rounded-[16px] lg:rounded-[calc(var(--su)*18)] bg-[var(--banner-tile-bg)] border border-[var(--banner-tile-border)] shadow-xs transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
+        {/* Centered Icon Tile: 79u square, radius 18u, top 63u from card top */}
+        <div className="relative z-10 flex items-center justify-center w-full pb-2">
+          <div
+            className="course-card-icon-tile flex items-center justify-center rounded-[18px] lg:rounded-[calc(var(--su,1px)*18)] shadow-xs transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105"
+            style={{
+              width: "clamp(62px, 16.6cqw, calc(var(--su, 1px) * 79))",
+              height: "clamp(62px, 16.6cqw, calc(var(--su, 1px) * 79))",
+            }}
+          >
             <DynamicIcon
               name={course.icon}
-              className="w-7 h-7 lg:w-[calc(var(--su)*36)] lg:h-[calc(var(--su)*36)] text-[#0F2A44]"
               strokeWidth={1.8}
+              className="text-[#0F2A44]"
+              style={{
+                width: "clamp(26px, 7.1cqw, calc(var(--su, 1px) * 34))",
+                height: "clamp(26px, 7.1cqw, calc(var(--su, 1px) * 34))",
+              }}
               aria-hidden="true"
             />
           </div>
@@ -61,46 +114,102 @@ export default function CourseCard({ course, index = 0 }) {
       </div>
 
       {/* ================= CARD BODY ================= */}
-      <div className="flex-1 flex flex-col justify-between pt-[18px] lg:pt-[calc(var(--su)*22)] px-[24px] lg:px-[calc(var(--su)*40)] pb-[20px] lg:pb-[calc(var(--su)*26)]">
+      <div
+        className="flex-1 flex flex-col justify-between"
+        style={{
+          paddingTop: "clamp(16px, 4.4cqw, calc(var(--su, 1px) * 21))",
+          paddingLeft: "clamp(22px, 7.6cqw, calc(var(--su, 1px) * 36))",
+          paddingRight: "clamp(22px, 7.6cqw, calc(var(--su, 1px) * 36))",
+          paddingBottom: "clamp(16px, 4.2cqw, calc(var(--su, 1px) * 20))",
+        }}
+      >
         <div>
           {/* Rating Row */}
           <Rating rating={course.rating} students={course.students} />
 
-          {/* Title: 27u weight 800, ONE line with ellipsis */}
+          {/* Title: 22u / 800 / -0.02em, one line with ellipsis (margin-top 14u) */}
           <h3
             title={course.title}
-            className="mt-[10px] lg:mt-[calc(var(--su)*12)] font-extrabold tracking-tight leading-tight text-[22px] lg:text-[calc(var(--su)*27)] text-[#0F172A] truncate"
+            className="font-extrabold tracking-[-0.02em] leading-tight text-[#0F172A] truncate"
+            style={{
+              marginTop: "clamp(10px, 2.9cqw, calc(var(--su, 1px) * 14))",
+              fontSize: "clamp(18px, 4.6cqw, calc(var(--su, 1px) * 22))",
+            }}
           >
             {course.title}
           </h3>
 
-          {/* Description: 17.5u, line-height 1.5, clamp to 2 lines */}
-          <p className="mt-[6px] lg:mt-[calc(var(--su)*8)] text-[14px] lg:text-[calc(var(--su)*17.5)] leading-[1.5] text-[#5B6677] line-clamp-2">
+          {/* Description: 15.5u / 1.62 / #5B6677, 2-line clamp (margin-top 8u, Anchor line 1: 396u) */}
+          <p
+            className="font-normal text-[#5B6677] line-clamp-2"
+            style={{
+              marginTop: "clamp(6px, 1.7cqw, calc(var(--su, 1px) * 8))",
+              fontSize: "clamp(13px, 3.6cqw, calc(var(--su, 1px) * 17))",
+              lineHeight: 1.62,
+            }}
+          >
             {course.description}
           </p>
 
-          {/* Divider */}
+          {/* Divider: 1px #ECEAE3 (margin 14u 0) */}
           <div
-            className="w-full h-[1px] bg-[rgba(15,23,42,0.08)] my-[14px] lg:my-[calc(var(--su)*18)]"
+            className="w-full bg-[#ECEAE3]"
+            style={{
+              height: "1px",
+              marginTop: "clamp(10px, 2.9cqw, calc(var(--su, 1px) * 14))",
+              marginBottom: "clamp(10px, 2.9cqw, calc(var(--su, 1px) * 14))",
+            }}
             aria-hidden="true"
           />
 
-          {/* Meta Row: Clock + duration, separator, Globe + language */}
-          <div className="flex items-center gap-2.5 text-[14px] lg:text-[calc(var(--su)*16)] text-[#5B6677] flex-wrap">
-            <div className="flex items-center gap-1.5 font-medium">
-              <Clock className="w-4 h-4 lg:w-[calc(var(--su)*16)] lg:h-[calc(var(--su)*16)] text-[#F97316] shrink-0" />
+          {/* Meta Row: 15.3u / 500 / #3E4A5C, Clock #F59E0B 17u, Globe #3B82A8 17u, sep 1px x 14u, gaps 14u */}
+          <div
+            className="flex items-center text-[#3E4A5C] flex-wrap"
+            style={{
+              gap: "clamp(10px, 2.9cqw, calc(var(--su, 1px) * 14))",
+              fontSize: "clamp(12px, 3.2cqw, calc(var(--su, 1px) * 15.3))",
+            }}
+          >
+            <div className="flex items-center gap-1.5 font-medium whitespace-nowrap">
+              <Clock
+                className="text-[#F59E0B] shrink-0"
+                style={{
+                  width: "clamp(14px, 3.6cqw, calc(var(--su, 1px) * 17))",
+                  height: "clamp(14px, 3.6cqw, calc(var(--su, 1px) * 17))",
+                }}
+              />
               <span>{course.duration}</span>
             </div>
-            <span className="w-[1px] h-3.5 bg-[rgba(15,23,42,0.15)] shrink-0" aria-hidden="true" />
-            <div className="flex items-center gap-1.5 font-medium">
-              <Globe className="w-4 h-4 lg:w-[calc(var(--su)*16)] lg:h-[calc(var(--su)*16)] text-[#1E9BD1] shrink-0" />
+
+            <span
+              className="bg-[#ECEAE3] shrink-0"
+              style={{
+                width: "1px",
+                height: "clamp(10px, 2.9cqw, calc(var(--su, 1px) * 14))",
+              }}
+              aria-hidden="true"
+            />
+
+            <div className="flex items-center gap-1.5 font-medium whitespace-nowrap">
+              <Globe
+                className="text-[#3B82A8] shrink-0"
+                style={{
+                  width: "clamp(14px, 3.6cqw, calc(var(--su, 1px) * 17))",
+                  height: "clamp(14px, 3.6cqw, calc(var(--su, 1px) * 17))",
+                }}
+              />
               <span>{course.language}</span>
             </div>
           </div>
 
           {/* Divider */}
           <div
-            className="w-full h-[1px] bg-[rgba(15,23,42,0.08)] my-[14px] lg:my-[calc(var(--su)*18)]"
+            className="w-full bg-[#ECEAE3]"
+            style={{
+              height: "1px",
+              marginTop: "clamp(10px, 2.9cqw, calc(var(--su, 1px) * 14))",
+              marginBottom: "clamp(10px, 2.9cqw, calc(var(--su, 1px) * 14))",
+            }}
             aria-hidden="true"
           />
 
@@ -108,26 +217,52 @@ export default function CourseCard({ course, index = 0 }) {
           <FacultyChip faculty={course.faculty} />
         </div>
 
-        {/* ================= FOOTER ROW ================= */}
-        <div className="mt-[16px] lg:mt-[calc(var(--su)*18)] pt-2 flex items-center gap-3 w-full">
-          {/* View Course Outline Button */}
+        {/* ================= FOOTER ROW (margin-top 22u) ================= */}
+        <div
+          className="flex items-center w-full"
+          style={{
+            marginTop: "clamp(16px, 4.6cqw, calc(var(--su, 1px) * 22))",
+            gap: "clamp(7px, 1.9cqw, calc(var(--su, 1px) * 9))",
+          }}
+        >
+          {/* View Course Outline Pill (height 50u, flex 1, 17u / 700) */}
           <Link
             href={course.href}
-            className="flex-1 flex items-center justify-center gap-2 rounded-full h-[46px] lg:h-[calc(var(--su)*50)] border-[1.5px] border-[var(--btn-border)] bg-white text-[var(--btn-text)] hover:bg-[var(--btn-hover-bg)] hover:text-[var(--btn-hover-text)] font-bold text-[15px] lg:text-[calc(var(--su)*18)] shadow-xs transition-all duration-200 group/btn"
+            className="course-card-view-btn flex-1 flex items-center justify-center gap-2 rounded-full font-bold shadow-xs transition-all duration-200 group/btn"
+            style={{
+              height: "clamp(44px, 10.5cqw, calc(var(--su, 1px) * 50))",
+              fontSize: "clamp(14px, 3.6cqw, calc(var(--su, 1px) * 17))",
+            }}
           >
             <span>View Course</span>
-            <ArrowRight className="w-4 h-4 lg:w-[calc(var(--su)*18)] lg:h-[calc(var(--su)*18)] transition-transform duration-200 group-hover/btn:translate-x-1" />
+            <ArrowRight
+              className="transition-transform duration-200 group-hover/btn:translate-x-1"
+              style={{
+                width: "clamp(15px, 3.6cqw, calc(var(--su, 1px) * 17))",
+                height: "clamp(15px, 3.6cqw, calc(var(--su, 1px) * 17))",
+              }}
+            />
           </Link>
 
-          {/* 58u Circular WhatsApp Button */}
+          {/* WhatsApp Circle Button (59u, solid theme accent with white MessageCircle icon 26u) */}
           <a
             href={course.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Chat on WhatsApp about ${course.title}`}
-            className="flex items-center justify-center rounded-full w-[46px] h-[46px] lg:w-[calc(var(--su)*58)] lg:h-[calc(var(--su)*58)] shrink-0 bg-[var(--whatsapp-bg)] hover:bg-[var(--whatsapp-hover-bg)] text-white shadow-sm transition-transform duration-200 hover:scale-108"
+            className="course-card-whatsapp-btn flex items-center justify-center rounded-full shrink-0 shadow-sm transition-transform duration-200 hover:scale-108"
+            style={{
+              width: "clamp(48px, 12.4cqw, calc(var(--su, 1px) * 59))",
+              height: "clamp(48px, 12.4cqw, calc(var(--su, 1px) * 59))",
+            }}
           >
-            <MessageCircle className="w-5 h-5 lg:w-[calc(var(--su)*26)] lg:h-[calc(var(--su)*26)] fill-current" />
+            <MessageCircle
+              className="text-white fill-current"
+              style={{
+                width: "clamp(22px, 5.5cqw, calc(var(--su, 1px) * 26))",
+                height: "clamp(22px, 5.5cqw, calc(var(--su, 1px) * 26))",
+              }}
+            />
           </a>
         </div>
       </div>

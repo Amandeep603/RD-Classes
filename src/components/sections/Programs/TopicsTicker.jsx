@@ -2,27 +2,42 @@ import Link from "next/link";
 import { TOPICS } from "@/constants/topics";
 
 /**
- * Topics Ticker component for Section A.
- * Desktop (>=1280px): Static justify-between layout matching design.
- * Below 1280px: Seamless infinite marquee (40s linear, pauses on hover/focus, edge fade mask).
- * Reduced motion: Static horizontally scrollable row.
+ * Topics Ticker for Section A.
+ * Desktop (>=1280px): Exactly 12u / 500 uppercase 0.06em, #6B7280.
+ * Separators are 1px x 20u #CBD0D8 as separate flex items.
+ * Equal spacing via justify-between across the full container.
+ * Below 1280px: Seamless marquee with pause on hover/focus.
  */
 export default function TopicsTicker() {
   return (
-    <div className="w-full mt-[32px] lg:mt-[calc(var(--su)*40)] pt-[20px] lg:pt-[calc(var(--su)*28)] border-t border-[rgba(15,23,42,0.1)]">
+    <div
+      className="w-full border-t border-[rgba(15,23,42,0.10)]"
+      style={{
+        marginTop: "clamp(28px, 4.5vw, calc(var(--su, 1px) * 41))",
+        paddingTop: "clamp(18px, 3vw, calc(var(--su, 1px) * 27))",
+      }}
+    >
       {/* ================= DESKTOP STATIC ROW (>= 1280px) ================= */}
-      <div className="hidden xl:flex items-center justify-between w-full">
+      <div className="hidden xl:flex items-center justify-between w-full select-none">
         {TOPICS.map((topic, index) => (
-          <div key={topic.id} className="relative flex items-center justify-center px-1 flex-1">
+          <div key={topic.id} className="contents">
             <Link
               href={`/courses?topic=${topic.slug}`}
-              className="font-bold uppercase text-[#6B7280] hover:text-[#0F172A] transition-colors whitespace-nowrap text-center text-[12px] lg:text-[calc(var(--su)*14)] tracking-[0.08em]"
+              className="font-medium uppercase text-[#6B7280] hover:text-[#0F172A] transition-colors whitespace-nowrap tracking-[0.06em]"
+              style={{
+                fontSize: "calc(var(--su, 1px) * 12)",
+              }}
             >
               {topic.name}
             </Link>
+
             {index < TOPICS.length - 1 && (
               <span
-                className="absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-[18px] lg:h-[calc(var(--su)*22)] bg-[#C9CED6]"
+                className="bg-[#CBD0D8] shrink-0"
+                style={{
+                  width: "1px",
+                  height: "calc(var(--su, 1px) * 20)",
+                }}
                 aria-hidden="true"
               />
             )}
@@ -31,35 +46,35 @@ export default function TopicsTicker() {
       </div>
 
       {/* ================= MARQUEE (< 1280px) ================= */}
-      <div className="xl:hidden relative w-full overflow-hidden select-none py-1 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-        <div className="flex w-max animate-topics-marquee hover:[animation-play-state:paused] active:[animation-play-state:paused] focus-within:[animation-play-state:paused]">
-          {/* First loop */}
-          <div className="flex items-center">
+      <div className="xl:hidden relative w-full overflow-hidden select-none py-1 [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]">
+        <div className="flex w-max animate-terms-marquee hover:[animation-play-state:paused] active:[animation-play-state:paused] focus-within:[animation-play-state:paused]">
+          {/* Loop 1 */}
+          <div className="flex items-center gap-6 pr-6">
             {TOPICS.map((topic) => (
-              <div key={`m1-${topic.id}`} className="flex items-center gap-4 px-4 shrink-0">
+              <div key={`m1-${topic.id}`} className="flex items-center gap-6 shrink-0">
                 <Link
                   href={`/courses?topic=${topic.slug}`}
-                  className="font-bold uppercase text-[12px] text-[#6B7280] hover:text-[#0F172A] transition-colors whitespace-nowrap tracking-[0.08em]"
+                  className="font-medium uppercase text-[12px] text-[#6B7280] hover:text-[#0F172A] transition-colors whitespace-nowrap tracking-[0.06em]"
                 >
                   {topic.name}
                 </Link>
-                <span className="w-[1px] h-[16px] bg-[#C9CED6] shrink-0" aria-hidden="true" />
+                <span className="w-[1px] h-[16px] bg-[#CBD0D8] shrink-0" aria-hidden="true" />
               </div>
             ))}
           </div>
 
-          {/* Duplicate loop for seamless infinite marquee */}
-          <div className="flex items-center" aria-hidden="true">
+          {/* Loop 2 (Duplicate for seamless infinite marquee) */}
+          <div className="flex items-center gap-6 pr-6" aria-hidden="true">
             {TOPICS.map((topic) => (
-              <div key={`m2-${topic.id}`} className="flex items-center gap-4 px-4 shrink-0">
+              <div key={`m2-${topic.id}`} className="flex items-center gap-6 shrink-0">
                 <Link
                   href={`/courses?topic=${topic.slug}`}
                   tabIndex={-1}
-                  className="font-bold uppercase text-[12px] text-[#6B7280] hover:text-[#0F172A] transition-colors whitespace-nowrap tracking-[0.08em]"
+                  className="font-medium uppercase text-[12px] text-[#6B7280] hover:text-[#0F172A] transition-colors whitespace-nowrap tracking-[0.06em]"
                 >
                   {topic.name}
                 </Link>
-                <span className="w-[1px] h-[16px] bg-[#C9CED6] shrink-0" aria-hidden="true" />
+                <span className="w-[1px] h-[16px] bg-[#CBD0D8] shrink-0" aria-hidden="true" />
               </div>
             ))}
           </div>

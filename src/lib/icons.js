@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Star,
   Check,
+  Play,
 } from "lucide-react";
 
 export const ICON_MAP = {
@@ -21,6 +22,7 @@ export const ICON_MAP = {
   BookOpen,
   Zap,
   CirclePlay,
+  Play,
   FileCheck,
   Award,
   Clock,

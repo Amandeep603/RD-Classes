@@ -1,214 +1,249 @@
 /* =========================================================
    CARD THEMES (CSS Custom Properties via [data-theme])
+   Exact values matching 1600px canvas reference designs
    ========================================================= */
 
+/* Theme: Sky */
 [data-theme="sky"] {
-  --card-bg: #DDF0FB;
-  --card-border: #BFE3F5;
-  --card-shadow: 0 4px 20px -2px rgba(30, 155, 209, 0.08);
-  --icon-bg: #1E9BD1;
+  --card-bg: linear-gradient(160deg, #E2F3FD, #D5ECFA);
+  --card-border: #BFE1F4;
+  --card-shadow: 0 12px 30px -14px rgba(30, 155, 209, 0.30);
+  --icon-bg: #1B9AD2;
   --icon-color: #FFFFFF;
-  --accent-color: #1E9BD1;
-  --number-color: #1E9BD1;
-  --eyebrow-color: #2A2A2A;
-  --title-color: #0B0B0B;
-  --desc-color: #6B6B6B;
-  --footer-text-color: #0B0B0B;
-  --arrow-bg: #BFE3F5;
-  --arrow-color: #0A2F4E;
-  --arrow-hover-bg: #1E9BD1;
+  --number-color: #2AA3DB;
+  --eyebrow-color: #1F2A3C;
+  --title-color: #0B1B2E;
+  --desc-color: #6B7787;
+  --footer-text-color: #0B1B2E;
+  --arrow-bg: #B9E0F4;
+  --arrow-color: #0B1B2E;
+  --arrow-hover-bg: #1B9AD2;
   --arrow-hover-color: #FFFFFF;
 
   /* Course Card Banners */
-  --banner-bg: #D3ECFB;
-  --banner-tile-bg: #EAF6FE;
-  --banner-tile-border: #BCE2FA;
+  --banner-bg: linear-gradient(135deg, #D6EEFC, #C9E7FA);
+  --banner-circle: rgba(255, 255, 255, 0.40);
+  --class-pill-bg: #BDE3F7;
+  --icon-tile-bg: #BFE3F8;
   --btn-border: #1E9BD1;
   --btn-text: #0F172A;
   --btn-hover-bg: #1E9BD1;
   --btn-hover-text: #FFFFFF;
-  --whatsapp-bg: #1E9BD1;
-  --whatsapp-hover-bg: #1686b8;
+  --whatsapp-bg: #0E9FD9;
+  --whatsapp-hover-bg: #0B85B6;
 }
 
+/* Theme: White */
 [data-theme="white"] {
   --card-bg: #FFFFFF;
-  --card-border: #EEEAE0;
-  --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
-  --icon-bg: #1EA7D0;
+  --card-border: #ECE9E1;
+  --card-shadow: 0 12px 30px -16px rgba(15, 23, 42, 0.14);
+  --icon-bg: #1EA6D3;
   --icon-color: #FFFFFF;
-  --accent-color: #1EA7D0;
-  --number-color: #1EA7D0;
-  --eyebrow-color: #2A2A2A;
-  --title-color: #0B0B0B;
-  --desc-color: #6B6B6B;
-  --footer-text-color: #0B0B0B;
-  --arrow-bg: #D6EEFA;
-  --arrow-color: #0A2F4E;
-  --arrow-hover-bg: #1EA7D0;
+  --number-color: #2AA3DB;
+  --eyebrow-color: #1F2A3C;
+  --title-color: #0B1B2E;
+  --desc-color: #6B7787;
+  --footer-text-color: #0B1B2E;
+  --arrow-bg: #CFEAF7;
+  --arrow-color: #0B1B2E;
+  --arrow-hover-bg: #1EA6D3;
   --arrow-hover-color: #FFFFFF;
 
-  --banner-bg: #F0F9FF;
-  --banner-tile-bg: #FFFFFF;
-  --banner-tile-border: #E0F2FE;
-  --btn-border: #1EA7D0;
+  /* Course fallback if white */
+  --banner-bg: linear-gradient(135deg, #F0F9FF, #E0F2FE);
+  --banner-circle: rgba(255, 255, 255, 0.50);
+  --class-pill-bg: #E0F2FE;
+  --icon-tile-bg: #BAE6FD;
+  --btn-border: #1EA6D3;
   --btn-text: #0F172A;
-  --btn-hover-bg: #1EA7D0;
+  --btn-hover-bg: #1EA6D3;
   --btn-hover-text: #FFFFFF;
-  --whatsapp-bg: #1EA7D0;
-  --whatsapp-hover-bg: #1686b8;
+  --whatsapp-bg: #0E9FD9;
+  --whatsapp-hover-bg: #0B85B6;
 }
 
+/* Theme: Navy */
 [data-theme="navy"] {
-  --card-bg: #0A2F4E;
-  --card-border: rgba(255, 255, 255, 0.12);
-  --card-shadow: 0 14px 34px -4px rgba(10, 47, 78, 0.35);
-  --icon-bg: #1F4A63;
+  --card-bg: linear-gradient(160deg, #0B3555, #072A45);
+  --card-border: #0F4468;
+  --card-shadow: 0 20px 40px -16px rgba(7, 42, 69, 0.55);
+  --icon-bg: rgba(255, 255, 255, 0.10);
+  --icon-border: 1px solid rgba(255, 255, 255, 0.12);
   --icon-color: #FFFFFF;
-  --accent-color: #2BA7E0;
-  --number-color: #2BA7E0;
-  --eyebrow-color: #FFFFFF;
+  --number-color: #2AA3DB;
+  --eyebrow-color: #E6EEF6;
   --title-color: #FFFFFF;
-  --desc-color: #C9D8E2;
+  --desc-color: #C3D2E0;
   --footer-text-color: #FFFFFF;
   --arrow-bg: #1E9BD1;
   --arrow-color: #FFFFFF;
-  --arrow-hover-bg: #2BA7E0;
+  --arrow-hover-bg: #2AA3DB;
   --arrow-hover-color: #FFFFFF;
 
-  --banner-bg: #0A2F4E;
-  --banner-tile-bg: #164264;
-  --banner-tile-border: rgba(255, 255, 255, 0.18);
+  /* Course Card Banners */
+  --banner-bg: linear-gradient(135deg, #0B3555, #072A45);
+  --banner-circle: rgba(255, 255, 255, 0.15);
+  --class-pill-bg: #164264;
+  --icon-tile-bg: #1C5078;
   --btn-border: #1E9BD1;
-  --btn-text: #0F172A;
+  --btn-text: #FFFFFF;
   --btn-hover-bg: #1E9BD1;
   --btn-hover-text: #FFFFFF;
-  --whatsapp-bg: #1E9BD1;
-  --whatsapp-hover-bg: #1686b8;
+  --whatsapp-bg: #0E9FD9;
+  --whatsapp-hover-bg: #0B85B6;
 }
 
+/* Theme: Sun */
 [data-theme="sun"] {
-  --card-bg: linear-gradient(180deg, #FFF3C7 0%, #FFF8E1 100%);
-  --card-border: #F6E3A6;
-  --card-shadow: 0 4px 20px -2px rgba(255, 194, 26, 0.08);
-  --icon-bg: #FFC21A;
-  --icon-color: #0F172A;
-  --accent-color: #F2A900;
-  --number-color: #F2A900;
-  --eyebrow-color: #2A2A2A;
-  --title-color: #0B0B0B;
-  --desc-color: #6B6B6B;
-  --footer-text-color: #0B0B0B;
+  --card-bg: linear-gradient(160deg, #FFF1BF, #FFF8E0);
+  --card-border: #F8E3A0;
+  --card-shadow: 0 12px 30px -14px rgba(253, 190, 24, 0.25);
+  --icon-bg: #FDBE18;
+  --icon-color: #FFFFFF;
+  --number-color: #F5B400;
+  --eyebrow-color: #1F2A3C;
+  --title-color: #0B1B2E;
+  --desc-color: #6B7787;
+  --footer-text-color: #0B1B2E;
   --arrow-bg: #FFC21A;
-  --arrow-color: #0B0B0B;
+  --arrow-color: #0B1B2E;
   --arrow-hover-bg: #E5AC0D;
-  --arrow-hover-color: #0B0B0B;
+  --arrow-hover-color: #0B1B2E;
 
-  --banner-bg: #FFF0C2;
-  --banner-tile-bg: #FFF8DF;
-  --banner-tile-border: #FFE494;
+  /* Course Card Banners */
+  --banner-bg: linear-gradient(135deg, #FFF3C9, #FFEBA8);
+  --banner-circle: rgba(255, 255, 255, 0.45);
+  --class-pill-bg: #FFE69A;
+  --icon-tile-bg: #FFE9A8;
   --btn-border: #FFC21A;
   --btn-text: #0F172A;
   --btn-hover-bg: #FFC21A;
   --btn-hover-text: #0F172A;
   --whatsapp-bg: #FFC21A;
-  --whatsapp-hover-bg: #e5ac0d;
+  --whatsapp-hover-bg: #E5AC0D;
 }
 
+/* Theme: Peach */
 [data-theme="peach"] {
-  --card-bg: linear-gradient(180deg, #FFE6D2 0%, #FFF0E6 100%);
-  --card-border: #F8D3BC;
-  --card-shadow: 0 4px 20px -2px rgba(245, 130, 32, 0.08);
-  --icon-bg: #F58220;
+  --card-bg: linear-gradient(160deg, #FFE3CF, #FFF1E6);
+  --card-border: #F8D3B8;
+  --card-shadow: 0 12px 30px -14px rgba(245, 130, 31, 0.25);
+  --icon-bg: #F5821F;
   --icon-color: #FFFFFF;
-  --accent-color: #F58220;
-  --number-color: #F58220;
-  --eyebrow-color: #2A2A2A;
-  --title-color: #0B0B0B;
-  --desc-color: #6B6B6B;
-  --footer-text-color: #0B0B0B;
-  --arrow-bg: #F58220;
-  --arrow-color: #FFFFFF;
+  --number-color: #F58A1F;
+  --eyebrow-color: #1F2A3C;
+  --title-color: #0B1B2E;
+  --desc-color: #6B7787;
+  --footer-text-color: #0B1B2E;
+  --arrow-bg: #F5821F;
+  --arrow-color: #0B1B2E;
   --arrow-hover-bg: #DE6D0F;
   --arrow-hover-color: #FFFFFF;
 
-  --banner-bg: #FFE1D0;
-  --banner-tile-bg: #FFF0E6;
-  --banner-tile-border: #FCC7AA;
+  /* Course Card Banners */
+  --banner-bg: linear-gradient(135deg, #FFDCCB, #FFD0BA);
+  --banner-circle: rgba(255, 255, 255, 0.40);
+  --class-pill-bg: #FFD2BD;
+  --icon-tile-bg: #FFD9C6;
   --btn-border: #F97316;
   --btn-text: #0F172A;
   --btn-hover-bg: #F97316;
   --btn-hover-text: #FFFFFF;
   --whatsapp-bg: #F97316;
-  --whatsapp-hover-bg: #de5f07;
+  --whatsapp-hover-bg: #DD5F07;
 }
 
 /* =========================================================
-   ANIMATIONS & TRANSITIONS
+   DIRECT CSS RULES FOR PROGRAM CARDS
+   Guarantees non-transparent fills, borders, and colors
    ========================================================= */
 
-@keyframes filterFadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.96) translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+.program-card {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  box-shadow: var(--card-shadow) !important;
+  color: var(--title-color) !important;
 }
 
-.animate-filter-card {
-  animation: filterFadeIn 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+.program-card-icon {
+  background: var(--icon-bg) !important;
+  color: var(--icon-color) !important;
+  border: var(--icon-border, none) !important;
 }
 
-@keyframes glowDrift {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(15px, -12px) scale(1.08);
-  }
+.program-card-number {
+  color: var(--number-color) !important;
 }
 
-.animate-glow-drift {
-  animation: glowDrift 20s ease-in-out infinite;
+.program-card-accent-line {
+  background: var(--number-color) !important;
 }
 
-@keyframes statIconPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(255, 190, 90, 0);
-  }
-  50% {
-    box-shadow: 0 0 24px 2px rgba(255, 190, 90, 0.28);
-  }
+.program-card-label {
+  color: var(--eyebrow-color) !important;
 }
 
-.stat-icon-tile {
-  animation: statIconPulse 4s ease-in-out infinite;
+.program-card-title {
+  color: var(--title-color) !important;
 }
 
-@keyframes dividerDraw {
-  0% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
+.program-card-desc {
+  color: var(--desc-color) !important;
 }
 
-.animate-divider-draw {
-  transform-origin: top;
-  animation: dividerDraw 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+.program-card-footer-text {
+  color: var(--footer-text-color) !important;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-filter-card,
-  .animate-glow-drift,
-  .stat-icon-tile,
-  .animate-divider-draw {
-    animation: none !important;
-  }
+.program-card-arrow-btn {
+  background: var(--arrow-bg) !important;
+  color: var(--arrow-color) !important;
+}
+
+.program-card:hover .program-card-arrow-btn {
+  background: var(--arrow-hover-bg) !important;
+  color: var(--arrow-hover-color) !important;
+}
+
+/* =========================================================
+   DIRECT CSS RULES FOR COURSE CARDS
+   ========================================================= */
+
+.course-card-banner {
+  background: var(--banner-bg) !important;
+}
+
+.course-card-banner-circle {
+  background: var(--banner-circle) !important;
+}
+
+.course-card-class-pill {
+  background: var(--class-pill-bg) !important;
+  color: #0F2A44 !important;
+}
+
+.course-card-icon-tile {
+  background: var(--icon-tile-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+}
+
+.course-card-view-btn {
+  border: 1.5px solid var(--btn-border) !important;
+  background: #FFFFFF !important;
+  color: var(--btn-text) !important;
+}
+
+.course-card:hover .course-card-view-btn {
+  background: var(--btn-hover-bg) !important;
+  color: var(--btn-hover-text) !important;
+}
+
+.course-card-whatsapp-btn {
+  background: var(--whatsapp-bg) !important;
+  color: #FFFFFF !important;
+}
+
+.course-card-whatsapp-btn:hover {
+  background: var(--whatsapp-hover-bg) !important;
 }

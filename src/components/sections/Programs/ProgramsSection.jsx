@@ -7,29 +7,46 @@ import TopicsTicker from "./TopicsTicker";
 /**
  * Section A: Explore Popular Programs
  * id="programs"
- * Background: cream #FDFAF3.
- * Top corners rounded clamp(24px, 2.5vw, 40px) rising over dark hero.
+ * Seamless cream background continuing to Section B.
+ * Desktop: Padding top 80u, bottom 56u. Container padding-inline 62u.
  */
 export default function ProgramsSection() {
   return (
     <section
       id="programs"
       aria-labelledby="programs-heading"
+      className="relative w-full overflow-hidden scroll-mt-[72px] lg:scroll-mt-[96px]"
       style={{
-        "--su": "min(100vw / 1600, 1.1px)",
+        paddingTop: "clamp(56px, 6vw, calc(var(--su, 1px) * 80))",
+        paddingBottom: "clamp(48px, 4.5vw, calc(var(--su, 1px) * 56))",
       }}
-      className="relative z-20 w-full overflow-hidden bg-[#FDFAF3] rounded-t-[clamp(24px,2.5vw,40px)] scroll-mt-[72px] lg:scroll-mt-[96px] pt-[64px] lg:pt-[calc(var(--su)*96)] pb-[56px] lg:pb-[calc(var(--su)*88)] shadow-[0_-12px_36px_rgba(0,0,0,0.18)]"
     >
-      <div className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su)*1600)] mx-auto px-5 lg:px-[calc(var(--su)*62)] flex flex-col items-center">
+      <div
+        className="w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto flex flex-col items-center"
+        style={{
+          paddingLeft: "clamp(20px, 4vw, calc(var(--su, 1px) * 62))",
+          paddingRight: "clamp(20px, 4vw, calc(var(--su, 1px) * 62))",
+        }}
+      >
         {/* Header Block with Reveal */}
         <Reveal index={0} className="w-full">
           <ProgramsHeader />
         </Reveal>
 
         {/* ================= CARDS LAYOUT ================= */}
-        <div className="w-full mt-[32px] lg:mt-[calc(var(--su)*56)]">
+        <div
+          className="w-full"
+          style={{
+            marginTop: "clamp(28px, 3.5vw, calc(var(--su, 1px) * 40))",
+          }}
+        >
           {/* 1. Desktop Row (>= 1280px): Exactly 5 columns */}
-          <div className="hidden xl:grid grid-cols-5 gap-[calc(var(--su)*26)] items-stretch w-full">
+          <div
+            className="hidden xl:grid grid-cols-5 items-stretch w-full"
+            style={{
+              gap: "calc(var(--su, 1px) * 26)",
+            }}
+          >
             {PROGRAMS.map((program, index) => (
               <Reveal key={program.id} index={index + 1} className="h-full">
                 <ProgramCard program={program} index={index} />
@@ -38,12 +55,12 @@ export default function ProgramsSection() {
           </div>
 
           {/* 2. Tablet Wrapping Grid (768px - 1279px): 3+2 on lg, 2+2+1 centered on md */}
-          <div className="hidden md:flex xl:hidden flex-wrap justify-center gap-5 lg:gap-[calc(var(--su)*26)] items-stretch w-full">
+          <div className="hidden md:flex xl:hidden flex-wrap justify-center gap-5 lg:gap-[calc(var(--su,1px)*26)] items-stretch w-full">
             {PROGRAMS.map((program, index) => (
               <Reveal
                 key={program.id}
                 index={index + 1}
-                className="w-[calc((100%-20px)/2)] lg:w-[calc((100%-calc(var(--su)*52))/3)] max-w-[340px]"
+                className="w-[calc((100%-20px)/2)] lg:w-[calc((100%-calc(var(--su,1px)*52))/3)] max-w-[340px]"
               >
                 <ProgramCard program={program} index={index} />
               </Reveal>

@@ -3,25 +3,32 @@ import SectionHeading from "@/components/ui/SectionHeading";
 
 /**
  * Header block for Section A: Explore Popular Programs.
- * Spacing: badge -> H2: 24u. H2 -> paragraph: 26u.
+ * Spacing: badge -> H2: 24u. H2 -> paragraph: 20u. Paragraph -> cards: 40u.
  */
 export default function ProgramsHeader() {
   return (
     <header className="w-full flex flex-col items-center text-center">
-      {/* Badge Pill: COURSE CATEGORIES */}
-      <SectionBadge>COURSE CATEGORIES</SectionBadge>
+      {/* Badge Pill: COURSE CATEGORIES (Anchor width 171u) */}
+      <SectionBadge text="COURSE CATEGORIES" />
 
-      {/* H2 Heading: Explore Popular Programs (highlighted Programs) */}
-      <div className="mt-[16px] lg:mt-[calc(var(--su)*24)]">
+      {/* H2 Heading: Explore Popular Programs (62u / 1.1 / 800, Anchor width 754u) */}
+      <div className="mt-[16px] lg:mt-[calc(var(--su,1px)*24)]">
         <SectionHeading
           id="programs-heading"
-          prefix="Explore Popular"
+          text="Explore Popular"
           highlight="Programs"
+          fontSize={62}
         />
       </div>
 
-      {/* Section Paragraph: centered, ~22u (floor 16px), color #5A6472, line-height 1.5, max-width ~900u */}
-      <p className="mt-[14px] lg:mt-[calc(var(--su)*26)] text-[16px] sm:text-[18px] lg:text-[calc(var(--su)*22)] font-normal leading-[1.5] text-[#5A6472] max-w-[900px] lg:max-w-[calc(var(--su)*900)] [text-wrap:balance]">
+      {/* Section Paragraph: 20.5u / 1.5 / 400 / #5A6472 (Anchor width 862u) */}
+      <p
+        className="mt-[14px] lg:mt-[calc(var(--su,1px)*20)] text-[#5A6472] font-normal leading-[1.5] w-full text-center"
+        style={{
+          fontSize: "clamp(15px, 2.2vw, calc(var(--su, 1px) * 20.5))",
+          maxWidth: "calc(var(--su, 1px) * 862)",
+        }}
+      >
         Choose the right learning format for your CBSE Accountancy goals in Class 11 &amp; 12.
       </p>
     </header>

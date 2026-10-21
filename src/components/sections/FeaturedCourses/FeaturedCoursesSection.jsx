@@ -1,4 +1,3 @@
-import Container from "@/components/layout/Container";
 import SectionBadge from "@/components/ui/SectionBadge";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
@@ -9,7 +8,11 @@ import { COURSES } from "@/constants/courses";
 
 /**
  * Section B: Explore Popular Accountancy Courses
- * Features category filter tabs, responsive 3/2/1 card grid, and JSON-LD structured data.
+ * id="courses"
+ * Seamless cream background.
+ * Desktop: Padding top 72u, bottom 88u. Container padding-inline 70u.
+ * Badge: "FEATURED BATCHES"
+ * H2: "Explore Popular Accountancy Courses" (54u, highlighted Courses)
  */
 export default function FeaturedCoursesSection() {
   const jsonLd = {
@@ -34,9 +37,10 @@ export default function FeaturedCoursesSection() {
     <section
       id="courses"
       aria-labelledby="featured-courses-heading"
-      className="relative w-full bg-[#FDFAF3] text-[#0F172A] pt-[64px] sm:pt-[80px] lg:pt-[calc(var(--su)*72)] pb-[56px] sm:pb-[72px] lg:pb-[calc(var(--su)*88)] px-[20px] sm:px-[32px] lg:px-[calc(var(--su)*80)] scroll-mt-20 overflow-hidden"
+      className="relative w-full overflow-hidden scroll-mt-20 text-[#0F172A]"
       style={{
-        "--su": "min(100vw / 1600, 1.1px)",
+        paddingTop: "clamp(56px, 6vw, calc(var(--su, 1px) * 72))",
+        paddingBottom: "clamp(56px, 7vw, calc(var(--su, 1px) * 88))",
       }}
     >
       {/* JSON-LD Course Catalog Schema */}
@@ -45,39 +49,60 @@ export default function FeaturedCoursesSection() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Container className="relative z-10 flex flex-col items-center">
-        {/* Header Block: Badge + Heading */}
+      <div
+        className="w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto flex flex-col items-center"
+        style={{
+          paddingLeft: "clamp(20px, 4.5vw, calc(var(--su, 1px) * 70))",
+          paddingRight: "clamp(20px, 4.5vw, calc(var(--su, 1px) * 70))",
+        }}
+      >
+        {/* Header Block: Badge "FEATURED BATCHES" + Heading "Explore Popular Accountancy Courses" */}
         <Reveal className="flex flex-col items-center text-center w-full">
           <SectionBadge text="FEATURED BATCHES" />
 
-          <div className="mt-[16px] lg:mt-[calc(var(--su)*24)]">
+          {/* Gap badge -> H2: 16u */}
+          <div
+            className="w-full"
+            style={{
+              marginTop: "clamp(12px, 2vw, calc(var(--su, 1px) * 16))",
+            }}
+          >
             <SectionHeading
               id="featured-courses-heading"
-              tag="h2"
-              plainText="Explore Popular Accountancy"
-              highlightText="Courses"
-              className="text-center"
+              text="Explore Popular Accountancy"
+              highlight="Courses"
+              fontSize={56.5}
             />
           </div>
         </Reveal>
 
         {/* Filter Tabs + Course Grid with Client Context */}
         <CourseFilterProvider initialFilter="all" initialCount={COURSES.length}>
-          {/* Filter Tabs */}
-          <div className="w-full mt-[24px] lg:mt-[calc(var(--su)*40)]">
+          {/* Filter Tabs: Gap H2 -> tabs: 34u */}
+          <div
+            className="w-full"
+            style={{
+              marginTop: "clamp(20px, 3vw, calc(var(--su, 1px) * 34))",
+            }}
+          >
             <Reveal delay={120} className="w-full">
               <CourseFilters filters={COURSE_FILTERS} />
             </Reveal>
           </div>
 
-          {/* Cards Grid */}
-          <div className="w-full mt-[28px] lg:mt-[calc(var(--su)*52)]">
+          {/* Cards Grid: Gap tabs -> grid: 32u */}
+          <div
+            className="w-full"
+            style={{
+              marginTop: "clamp(20px, 3vw, calc(var(--su, 1px) * 32))",
+            }}
+          >
             <Reveal delay={200} className="w-full">
               <CourseGrid courses={COURSES} />
             </Reveal>
           </div>
         </CourseFilterProvider>
-      </Container>
+      </div>
     </section>
   );
 }
