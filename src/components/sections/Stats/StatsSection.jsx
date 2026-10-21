@@ -16,7 +16,7 @@ import { STATS } from "@/constants/stats";
 export default function StatsSection() {
   return (
     <InViewSection
-      id="results"
+      id="achievements"
       aria-label="Achievements and statistics"
       className="relative w-full overflow-hidden text-white scroll-mt-20 [isolation:isolate] lg:box-border"
       style={{

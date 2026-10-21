@@ -357,7 +357,7 @@ html[data-motion="reduce"] .course-card-whatsapp-btn {
   /* Syllabus Book Theme */
   --book-card-bg: var(--surface-e-orange-bg);
   --book-card-border: var(--surface-e-orange-border);
-  --book-pill-bg: #F97316;
+  --book-pill-bg: #C2410C;
   --book-pill-text: #FFFFFF;
   --book-topic-icon: #F97316;
   --book-blob-bg: var(--surface-e-orange-blob);
@@ -689,6 +689,53 @@ section:not([data-inview="true"]) .arrow-circle-pulse::after {
     --chip-3-left: 16.3%;
   }
 }
+
+/* =========================================================
+   SECTIONS G - L ANIMATIONS UNDER html[data-motion="full"]
+   ========================================================= */
+
+@keyframes leafSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes ctaPillFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(calc(var(--su, 1px) * -4));
+  }
+}
+
+@keyframes ctaRingPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  40%, 100% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  html[data-motion="full"] .desktop-leaf-sway {
+    animation: leafSway 6s ease-in-out infinite;
+  }
+  html[data-motion="full"] .lg\:animate-cta-pill-float {
+    animation: ctaPillFloat 6s ease-in-out infinite;
+  }
+}
+
+html[data-motion="full"] .animate-cta-ring {
+  animation: ctaRingPulse 5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
 
 
 

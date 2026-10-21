@@ -81,14 +81,12 @@ export default function CourseFilters({ filters }) {
           {filters.map((filter) => {
             const isActive = activeFilter === filter.key;
             return (
-              // eslint-disable-next-line jsx-a11y/role-supports-aria-props
               <button
                 key={filter.key}
                 ref={(el) => (tabRefs.current[filter.key] = el)}
                 type="button"
                 role="tab"
                 aria-selected={isActive}
-                aria-pressed={isActive}
                 onClick={() => handleTabClick(filter.key)}
                 className={`relative z-10 shrink-0 snap-center cursor-pointer rounded-full flex items-center justify-center select-none outline-none focus-visible:ring-2 focus-visible:ring-[#FFC21A] focus-visible:ring-offset-2 whitespace-nowrap active:scale-[0.97] transition-[background-color,color,box-shadow,transform] duration-250 ${
                   isActive

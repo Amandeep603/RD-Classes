@@ -118,4 +118,34 @@
   --surface-f-chip-blue: #BFDBF9;
   --surface-f-chip-orange: #FFCDA8;
   --surface-f-chip-yellow: #FFE289;
+
+  /* =========================================================
+     SECTION H: TESTIMONIALS TINTED SURFACES (Deepened)
+     ========================================================= */
+  --surface-h-blue-bg: #D8ECFB;
+  --surface-h-blue-border: #B8DBF3;
+  --surface-h-blue-badge: #A8D8F7;
+  --surface-h-navy-bg: linear-gradient(180deg, #0A3150 0%, #082B47 100%);
+  --surface-h-yellow-bg: #FFEEBD;
+  --surface-h-yellow-border: #F0D590;
+  --surface-h-yellow-badge: #FFD978;
+
+  /* =========================================================
+     SECTION J: FAQ TINTED SURFACES (Deepened)
+     ========================================================= */
+  --surface-j-blue-bg: #D8ECFB;
+  --surface-j-blue-border: #B8DBF3;
+  --surface-j-blue-badge: #A8D8F7;
+  --surface-j-yellow-bg: linear-gradient(90deg, #FFFFFF, #FFEEBD);
+  --surface-j-yellow-border: #F0D590;
+  --surface-j-yellow-badge: #FFD978;
+  --surface-j-orange-bg: #FFE2CB;
+  --surface-j-orange-border: #F4C29D;
+  --surface-j-orange-badge: #FFB87A;
+
+  /* =========================================================
+     SECTION K: CTA BANNER TINTED SURFACES (Deepened)
+     ========================================================= */
+  --surface-k-card-bg: linear-gradient(135deg, #FFFDF8 0%, #F7F0DD 100%);
+  --surface-k-circle: linear-gradient(135deg, #FFD66A 0%, #FFCA45 100%);
 }

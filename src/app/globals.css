@@ -437,3 +437,19 @@ html[data-motion="reduce"] [data-reveal][data-visible="true"] {
   animation-play-state: paused !important;
 }
 
+/* Accessibility: WCAG AA contrast for topic links */
+a[href*="/courses?topic="] {
+  color: #4B5563 !important;
+}
+
+/* Mobile performance: suspend non-composited shadow animations below 1024px */
+@media (max-width: 1023px) {
+  .course-card-whatsapp-btn,
+  .stat-icon-tile,
+  .accountancy-word {
+    animation: none !important;
+  }
+}
+
+
+
