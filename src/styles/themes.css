@@ -1,0 +1,214 @@
+/* =========================================================
+   CARD THEMES (CSS Custom Properties via [data-theme])
+   ========================================================= */
+
+[data-theme="sky"] {
+  --card-bg: #DDF0FB;
+  --card-border: #BFE3F5;
+  --card-shadow: 0 4px 20px -2px rgba(30, 155, 209, 0.08);
+  --icon-bg: #1E9BD1;
+  --icon-color: #FFFFFF;
+  --accent-color: #1E9BD1;
+  --number-color: #1E9BD1;
+  --eyebrow-color: #2A2A2A;
+  --title-color: #0B0B0B;
+  --desc-color: #6B6B6B;
+  --footer-text-color: #0B0B0B;
+  --arrow-bg: #BFE3F5;
+  --arrow-color: #0A2F4E;
+  --arrow-hover-bg: #1E9BD1;
+  --arrow-hover-color: #FFFFFF;
+
+  /* Course Card Banners */
+  --banner-bg: #D3ECFB;
+  --banner-tile-bg: #EAF6FE;
+  --banner-tile-border: #BCE2FA;
+  --btn-border: #1E9BD1;
+  --btn-text: #0F172A;
+  --btn-hover-bg: #1E9BD1;
+  --btn-hover-text: #FFFFFF;
+  --whatsapp-bg: #1E9BD1;
+  --whatsapp-hover-bg: #1686b8;
+}
+
+[data-theme="white"] {
+  --card-bg: #FFFFFF;
+  --card-border: #EEEAE0;
+  --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+  --icon-bg: #1EA7D0;
+  --icon-color: #FFFFFF;
+  --accent-color: #1EA7D0;
+  --number-color: #1EA7D0;
+  --eyebrow-color: #2A2A2A;
+  --title-color: #0B0B0B;
+  --desc-color: #6B6B6B;
+  --footer-text-color: #0B0B0B;
+  --arrow-bg: #D6EEFA;
+  --arrow-color: #0A2F4E;
+  --arrow-hover-bg: #1EA7D0;
+  --arrow-hover-color: #FFFFFF;
+
+  --banner-bg: #F0F9FF;
+  --banner-tile-bg: #FFFFFF;
+  --banner-tile-border: #E0F2FE;
+  --btn-border: #1EA7D0;
+  --btn-text: #0F172A;
+  --btn-hover-bg: #1EA7D0;
+  --btn-hover-text: #FFFFFF;
+  --whatsapp-bg: #1EA7D0;
+  --whatsapp-hover-bg: #1686b8;
+}
+
+[data-theme="navy"] {
+  --card-bg: #0A2F4E;
+  --card-border: rgba(255, 255, 255, 0.12);
+  --card-shadow: 0 14px 34px -4px rgba(10, 47, 78, 0.35);
+  --icon-bg: #1F4A63;
+  --icon-color: #FFFFFF;
+  --accent-color: #2BA7E0;
+  --number-color: #2BA7E0;
+  --eyebrow-color: #FFFFFF;
+  --title-color: #FFFFFF;
+  --desc-color: #C9D8E2;
+  --footer-text-color: #FFFFFF;
+  --arrow-bg: #1E9BD1;
+  --arrow-color: #FFFFFF;
+  --arrow-hover-bg: #2BA7E0;
+  --arrow-hover-color: #FFFFFF;
+
+  --banner-bg: #0A2F4E;
+  --banner-tile-bg: #164264;
+  --banner-tile-border: rgba(255, 255, 255, 0.18);
+  --btn-border: #1E9BD1;
+  --btn-text: #0F172A;
+  --btn-hover-bg: #1E9BD1;
+  --btn-hover-text: #FFFFFF;
+  --whatsapp-bg: #1E9BD1;
+  --whatsapp-hover-bg: #1686b8;
+}
+
+[data-theme="sun"] {
+  --card-bg: linear-gradient(180deg, #FFF3C7 0%, #FFF8E1 100%);
+  --card-border: #F6E3A6;
+  --card-shadow: 0 4px 20px -2px rgba(255, 194, 26, 0.08);
+  --icon-bg: #FFC21A;
+  --icon-color: #0F172A;
+  --accent-color: #F2A900;
+  --number-color: #F2A900;
+  --eyebrow-color: #2A2A2A;
+  --title-color: #0B0B0B;
+  --desc-color: #6B6B6B;
+  --footer-text-color: #0B0B0B;
+  --arrow-bg: #FFC21A;
+  --arrow-color: #0B0B0B;
+  --arrow-hover-bg: #E5AC0D;
+  --arrow-hover-color: #0B0B0B;
+
+  --banner-bg: #FFF0C2;
+  --banner-tile-bg: #FFF8DF;
+  --banner-tile-border: #FFE494;
+  --btn-border: #FFC21A;
+  --btn-text: #0F172A;
+  --btn-hover-bg: #FFC21A;
+  --btn-hover-text: #0F172A;
+  --whatsapp-bg: #FFC21A;
+  --whatsapp-hover-bg: #e5ac0d;
+}
+
+[data-theme="peach"] {
+  --card-bg: linear-gradient(180deg, #FFE6D2 0%, #FFF0E6 100%);
+  --card-border: #F8D3BC;
+  --card-shadow: 0 4px 20px -2px rgba(245, 130, 32, 0.08);
+  --icon-bg: #F58220;
+  --icon-color: #FFFFFF;
+  --accent-color: #F58220;
+  --number-color: #F58220;
+  --eyebrow-color: #2A2A2A;
+  --title-color: #0B0B0B;
+  --desc-color: #6B6B6B;
+  --footer-text-color: #0B0B0B;
+  --arrow-bg: #F58220;
+  --arrow-color: #FFFFFF;
+  --arrow-hover-bg: #DE6D0F;
+  --arrow-hover-color: #FFFFFF;
+
+  --banner-bg: #FFE1D0;
+  --banner-tile-bg: #FFF0E6;
+  --banner-tile-border: #FCC7AA;
+  --btn-border: #F97316;
+  --btn-text: #0F172A;
+  --btn-hover-bg: #F97316;
+  --btn-hover-text: #FFFFFF;
+  --whatsapp-bg: #F97316;
+  --whatsapp-hover-bg: #de5f07;
+}
+
+/* =========================================================
+   ANIMATIONS & TRANSITIONS
+   ========================================================= */
+
+@keyframes filterFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-filter-card {
+  animation: filterFadeIn 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes glowDrift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(15px, -12px) scale(1.08);
+  }
+}
+
+.animate-glow-drift {
+  animation: glowDrift 20s ease-in-out infinite;
+}
+
+@keyframes statIconPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 190, 90, 0);
+  }
+  50% {
+    box-shadow: 0 0 24px 2px rgba(255, 190, 90, 0.28);
+  }
+}
+
+.stat-icon-tile {
+  animation: statIconPulse 4s ease-in-out infinite;
+}
+
+@keyframes dividerDraw {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.animate-divider-draw {
+  transform-origin: top;
+  animation: dividerDraw 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-filter-card,
+  .animate-glow-drift,
+  .stat-icon-tile,
+  .animate-divider-draw {
+    animation: none !important;
+  }
+}

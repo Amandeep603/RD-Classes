@@ -1,9 +1,10 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { programs } from "@/data/programs";
 import { terms } from "@/data/terms";
 
-export default async function CoursesPage({ searchParams }) {
+async function CoursesContent({ searchParams }) {
   const params = await searchParams;
   const selectedType = params?.type || "all";
   const selectedTopic = params?.topic || null;
@@ -117,5 +118,13 @@ export default async function CoursesPage({ searchParams }) {
           ))}
       </div>
     </div>
+  );
+}
+
+export default function CoursesPage({ searchParams }) {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#0A0A0A] text-white pt-[112px] p-8">Loading courses...</div>}>
+      <CoursesContent searchParams={searchParams} />
+    </Suspense>
   );
 }

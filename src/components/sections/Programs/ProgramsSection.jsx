@@ -1,40 +1,72 @@
+import { PROGRAMS } from "@/constants/programs";
+import Reveal from "@/components/ui/Reveal";
 import ProgramsHeader from "./ProgramsHeader";
-import ProgramsCardsGrid from "./ProgramsCardsGrid";
-import TermsRow from "./TermsRow";
+import ProgramCard from "./ProgramCard";
+import TopicsTicker from "./TopicsTicker";
 
+/**
+ * Section A: Explore Popular Programs
+ * id="programs"
+ * Background: cream #FDFAF3.
+ * Top corners rounded clamp(24px, 2.5vw, 40px) rising over dark hero.
+ */
 export default function ProgramsSection() {
   return (
     <section
-      id="programs-section"
-      aria-label="Course Categories and Popular Programs"
+      id="programs"
+      aria-labelledby="programs-heading"
       style={{
-        backgroundColor: "#FDFAF3",
-        "--u": "min(min(100vw / 1600, 100svh / 900), 1.1px)",
+        "--su": "min(100vw / 1600, 1.1px)",
       }}
-      className="relative z-20 w-full overflow-hidden text-[#0B0B0B] scroll-mt-20 pt-[46px] lg:pt-[calc(var(--u)*46)] pb-[60px] lg:pb-[calc(var(--u)*84)] border-t border-black/5"
+      className="relative z-20 w-full overflow-hidden bg-[#FDFAF3] rounded-t-[clamp(24px,2.5vw,40px)] scroll-mt-[72px] lg:scroll-mt-[96px] pt-[64px] lg:pt-[calc(var(--su)*96)] pb-[56px] lg:pb-[calc(var(--su)*88)] shadow-[0_-12px_36px_rgba(0,0,0,0.18)]"
     >
-      {/* Smooth 24px transition gradient from dark hero at the very top edge */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[24px] bg-gradient-to-b from-[#0A0A0A]/20 to-transparent pointer-events-none -z-0"
-        aria-hidden="true"
-      />
+      <div className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su)*1600)] mx-auto px-5 lg:px-[calc(var(--su)*62)] flex flex-col items-center">
+        {/* Header Block with Reveal */}
+        <Reveal index={0} className="w-full">
+          <ProgramsHeader />
+        </Reveal>
 
-      {/* Main Container - max-width 1600px centered with 62u side padding on desktop */}
-      <div
-        className="relative z-10 w-full max-w-[1600px] mx-auto flex flex-col items-center"
-        style={{
-          paddingLeft: "max(16px, calc(var(--u) * 62))",
-          paddingRight: "max(16px, calc(var(--u) * 62))",
-        }}
-      >
-        {/* Header Block: Pill + H1 with Animated Highlighter + Subtitle */}
-        <ProgramsHeader />
+        {/* ================= CARDS LAYOUT ================= */}
+        <div className="w-full mt-[32px] lg:mt-[calc(var(--su)*56)]">
+          {/* 1. Desktop Row (>= 1280px): Exactly 5 columns */}
+          <div className="hidden xl:grid grid-cols-5 gap-[calc(var(--su)*26)] items-stretch w-full">
+            {PROGRAMS.map((program, index) => (
+              <Reveal key={program.id} index={index + 1} className="h-full">
+                <ProgramCard program={program} index={index} />
+              </Reveal>
+            ))}
+          </div>
 
-        {/* 5 Cards Row (5 columns desktop, 3+2 tablet, swipe carousel mobile) */}
-        <ProgramsCardsGrid />
+          {/* 2. Tablet Wrapping Grid (768px - 1279px): 3+2 on lg, 2+2+1 centered on md */}
+          <div className="hidden md:flex xl:hidden flex-wrap justify-center gap-5 lg:gap-[calc(var(--su)*26)] items-stretch w-full">
+            {PROGRAMS.map((program, index) => (
+              <Reveal
+                key={program.id}
+                index={index + 1}
+                className="w-[calc((100%-20px)/2)] lg:w-[calc((100%-calc(var(--su)*52))/3)] max-w-[340px]"
+              >
+                <ProgramCard program={program} index={index} />
+              </Reveal>
+            ))}
+          </div>
 
-        {/* Accounting Terms Row with Divider */}
-        <TermsRow />
+          {/* 3. Mobile Swipe Scroller (< 768px): CSS Scroll-Snap */}
+          <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-[14px] px-5 -mx-5 pb-3 scrollbar-none [scroll-padding-left:20px]">
+            {PROGRAMS.map((program, index) => (
+              <div
+                key={program.id}
+                className="shrink-0 snap-start w-[min(82vw,320px)]"
+              >
+                <ProgramCard program={program} index={index} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Topics Ticker */}
+        <Reveal index={6} className="w-full">
+          <TopicsTicker />
+        </Reveal>
       </div>
     </section>
   );

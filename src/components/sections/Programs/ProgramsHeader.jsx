@@ -1,45 +1,29 @@
+import SectionBadge from "@/components/ui/SectionBadge";
+import SectionHeading from "@/components/ui/SectionHeading";
+
+/**
+ * Header block for Section A: Explore Popular Programs.
+ * Spacing: badge -> H2: 24u. H2 -> paragraph: 26u.
+ */
 export default function ProgramsHeader() {
   return (
-    <div className="w-full flex flex-col items-center text-center">
-      {/* Pill Label: COURSE CATEGORIES (y~46..82) */}
-      <div
-        className="inline-flex items-center justify-center rounded-full bg-[#FFF4D1] border border-[#F2E3B0] text-[#1B1B1B] font-bold uppercase tracking-[0.12em] px-5 sm:px-6 shadow-xs select-none"
-        style={{
-          height: "calc(var(--u) * 36)",
-          fontSize: "clamp(12px, calc(var(--u) * 15), 15px)",
-        }}
-      >
-        COURSE CATEGORIES
+    <header className="w-full flex flex-col items-center text-center">
+      {/* Badge Pill: COURSE CATEGORIES */}
+      <SectionBadge>COURSE CATEGORIES</SectionBadge>
+
+      {/* H2 Heading: Explore Popular Programs (highlighted Programs) */}
+      <div className="mt-[16px] lg:mt-[calc(var(--su)*24)]">
+        <SectionHeading
+          id="programs-heading"
+          prefix="Explore Popular"
+          highlight="Programs"
+        />
       </div>
 
-      {/* H1 Headline: Explore Popular Programs (y~118..176) */}
-      <h1
-        className="font-extrabold tracking-[-0.02em] leading-[1.0] text-[#0B0B0B]"
-        style={{
-          fontSize: "clamp(32px, calc(var(--u) * 58), 58px)",
-          marginTop: "calc(var(--u) * 36)",
-        }}
-      >
-        Explore Popular{" "}
-        <span className="relative inline-block">
-          <span
-            aria-hidden="true"
-            className="absolute -left-1 -right-1 bottom-[4%] h-[55%] bg-gradient-to-r from-[#FFD54A] to-[#FF9F1C] -z-0 highlighter-bar"
-          />
-          <span className="relative z-10 text-[#0B0B0B]">Programs</span>
-        </span>
-      </h1>
-
-      {/* Subtitle (y~208..231) */}
-      <p
-        className="font-normal leading-[1.4] text-[#55565B] max-w-[850px] whitespace-normal lg:whitespace-nowrap"
-        style={{
-          fontSize: "clamp(16px, calc(var(--u) * 23), 23px)",
-          marginTop: "calc(var(--u) * 32)",
-        }}
-      >
+      {/* Section Paragraph: centered, ~22u (floor 16px), color #5A6472, line-height 1.5, max-width ~900u */}
+      <p className="mt-[14px] lg:mt-[calc(var(--su)*26)] text-[16px] sm:text-[18px] lg:text-[calc(var(--su)*22)] font-normal leading-[1.5] text-[#5A6472] max-w-[900px] lg:max-w-[calc(var(--su)*900)] [text-wrap:balance]">
         Choose the right learning format for your CBSE Accountancy goals in Class 11 &amp; 12.
       </p>
-    </div>
+    </header>
   );
 }

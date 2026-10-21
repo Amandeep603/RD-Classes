@@ -1,169 +1,87 @@
 import Link from "next/link";
-import {
-  GraduationCap,
-  BookOpen,
-  Zap,
-  Play,
-  FileCheck2,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { DynamicIcon } from "@/lib/icons";
 
-const ICON_MAP = {
-  GraduationCap,
-  BookOpen,
-  Zap,
-  Play,
-  FileCheck2,
-};
-
-export default function ProgramCard({ program, index = 0, isMobile = false }) {
-  const { theme } = program;
-  const IconComponent = ICON_MAP[program.icon] || GraduationCap;
-
+/**
+ * Program Card for Section A.
+ * Uses [data-theme] CSS custom properties from src/styles/themes.css.
+ * Entire card is one accessible link.
+ */
+export default function ProgramCard({ program, index = 0 }) {
   return (
-    <Link
-      href={program.link}
-      aria-label={`${program.title} - ${program.eyebrow} - Explore Course`}
+    <article
+      data-theme={program.theme}
       style={{
-        background: theme.cardBg,
-        borderColor: theme.cardBorder,
-        boxShadow: theme.elevated
-          ? "0 14px 34px -4px rgba(11, 47, 69, 0.35), 0 4px 12px rgba(11, 47, 69, 0.15)"
-          : "0 6px 20px -2px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02)",
-        animationDelay: `${index * 80}ms`,
-        borderRadius: isMobile ? "20px" : "calc(var(--u) * 20)",
-        padding: isMobile ? "24px" : "calc(var(--u) * 28)",
-        minHeight: isMobile ? "340px" : "calc(var(--u) * 342)",
+        "--i": index,
       }}
-      className={`group relative flex flex-col justify-between border select-none transition-all duration-300 hover:-translate-y-[6px] hover:shadow-[0_20px_40px_-6px_rgba(0,0,0,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB800] focus-visible:ring-offset-2 ${
-        isMobile
-          ? "w-[78vw] max-w-[320px] shrink-0 snap-center"
-          : "w-full h-full"
-      } animate-card-fade-up`}
+      className="relative flex flex-col justify-between select-none border rounded-[20px] lg:rounded-[calc(var(--su)*20)] p-[24px] lg:px-[calc(var(--su)*30)] lg:pt-[calc(var(--su)*24)] lg:pb-[calc(var(--su)*28)] min-h-[340px] lg:min-h-[calc(var(--su)*342)] bg-[var(--card-bg)] border-[var(--card-border)] shadow-[var(--card-shadow)] transition-all duration-300 ease-out hover:-translate-y-[8px] hover:shadow-[0_22px_44px_-8px_rgba(15,23,42,0.18)] focus-within:ring-2 focus-within:ring-[#FFC21A] focus-within:ring-offset-2 group"
     >
-      {/* Top Part */}
       <div>
-        {/* Top Row: Icon Circle (Left) & Number (Right) */}
+        {/* Top Row: 64u circle icon (left) & 20u number (right) */}
         <div className="flex items-start justify-between w-full">
-          {/* Icon Circle 64px */}
-          <div
-            className="flex items-center justify-center rounded-full shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105"
-            style={{
-              backgroundColor: theme.iconBg,
-              width: isMobile ? "54px" : "calc(var(--u) * 64)",
-              height: isMobile ? "54px" : "calc(var(--u) * 64)",
-            }}
-          >
-            <IconComponent
-              style={{
-                color: theme.iconColor,
-                width: isMobile ? "26px" : "calc(var(--u) * 28)",
-                height: isMobile ? "26px" : "calc(var(--u) * 28)",
-              }}
+          {/* Icon Circle 64u */}
+          <div className="flex items-center justify-center rounded-full w-[54px] h-[54px] lg:w-[calc(var(--su)*64)] lg:h-[calc(var(--su)*64)] shrink-0 bg-[var(--icon-bg)] text-[var(--icon-color)] shadow-sm transition-transform duration-300 group-hover:scale-108 group-hover:-rotate-6">
+            <DynamicIcon
+              name={program.icon}
+              className="w-6 h-6 lg:w-[calc(var(--su)*28)] lg:h-[calc(var(--su)*28)]"
               strokeWidth={2}
-              fill={program.icon === "Play" ? theme.iconColor : "none"}
+              fill={program.icon === "CirclePlay" ? "currentColor" : "none"}
               aria-hidden="true"
             />
           </div>
 
-          {/* Number (20px, font-bold) */}
-          <span
-            className="font-bold tracking-tight"
-            style={{
-              color: theme.numberColor,
-              fontSize: isMobile ? "18px" : "clamp(16px, calc(var(--u) * 20), 20px)",
-            }}
-          >
+          {/* Number 20u */}
+          <span className="font-bold text-[18px] lg:text-[calc(var(--su)*20)] tracking-tight text-[var(--number-color)]">
             {program.number}
           </span>
         </div>
 
-        {/* Accent Line: 20x2px below the icon */}
+        {/* Accent Line: 16x3u below icon (margin-top 18u) */}
         <div
-          className="rounded-full shrink-0"
-          style={{
-            backgroundColor: theme.accentColor,
-            width: isMobile ? "20px" : "calc(var(--u) * 20)",
-            height: "2px",
-            marginTop: isMobile ? "14px" : "calc(var(--u) * 16)",
-          }}
+          className="w-[16px] lg:w-[calc(var(--su)*16)] h-[3px] rounded-full mt-[14px] lg:mt-[calc(var(--su)*18)] bg-[var(--accent-color)] shrink-0"
           aria-hidden="true"
         />
 
-        {/* Eyebrow: uppercase, 14px, tracking 0.15em, font-weight 700 */}
-        <div
-          className="font-bold uppercase tracking-[0.15em]"
-          style={{
-            color: theme.eyebrowColor,
-            fontSize: isMobile ? "12px" : "clamp(12px, calc(var(--u) * 14), 14px)",
-            marginTop: isMobile ? "12px" : "calc(var(--u) * 14)",
-          }}
-        >
-          {program.eyebrow}
+        {/* Category Label: 14u, uppercase, letter-spacing 0.14em, weight 700 (margin-top 16u) */}
+        <div className="mt-[14px] lg:mt-[calc(var(--su)*16)] font-bold uppercase tracking-[0.14em] text-[12px] lg:text-[calc(var(--su)*14)] text-[var(--eyebrow-color)]">
+          {program.label}
         </div>
 
-        {/* Title: 23.5px, weight 700, tight tracking, single line */}
-        <h3
-          className="font-extrabold tracking-tight leading-tight whitespace-nowrap"
-          style={{
-            color: theme.titleColor,
-            fontSize: isMobile ? "20px" : "clamp(18px, calc(var(--u) * 23.5), 24px)",
-            marginTop: isMobile ? "6px" : "calc(var(--u) * 6)",
-          }}
-        >
+        {/* Title: 28u, weight 800, single line, tight letter-spacing (margin-top 8u) */}
+        <h3 className="mt-[6px] lg:mt-[calc(var(--su)*8)] font-extrabold tracking-tight leading-tight whitespace-nowrap text-[22px] lg:text-[calc(var(--su)*28)] text-[var(--title-color)]">
           {program.title}
         </h3>
 
-        {/* Description: 18px, line-height 1.5 */}
-        <p
-          className="leading-[1.5] whitespace-pre-line"
-          style={{
-            color: theme.descColor,
-            fontSize: isMobile ? "14px" : "clamp(14px, calc(var(--u) * 18), 18px)",
-            marginTop: isMobile ? "8px" : "calc(var(--u) * 8)",
-          }}
-        >
+        {/* Description: 17u, line-height 1.6, two lines (margin-top 10u) */}
+        <p className="mt-[8px] lg:mt-[calc(var(--su)*10)] leading-[1.6] line-clamp-2 text-[14px] lg:text-[calc(var(--su)*17)] text-[var(--desc-color)]">
           {program.description}
         </p>
       </div>
 
-      {/* Footer Row: "Explore Course" on left + 46px Arrow Button on right */}
-      <div
-        className="flex items-center justify-between w-full"
-        style={{
-          marginTop: isMobile ? "20px" : "calc(var(--u) * 24)",
-        }}
-      >
-        <span
-          className="font-semibold tracking-tight transition-colors duration-200"
-          style={{
-            color: theme.footerTextColor,
-            fontSize: isMobile ? "15px" : "clamp(14px, calc(var(--u) * 17), 17px)",
-          }}
-        >
+      {/* Footer Row: "Explore Course" on left + 46u Arrow Button on right */}
+      <div className="mt-[20px] lg:mt-[calc(var(--su)*24)] pt-[10px] flex items-center justify-between w-full">
+        <span className="font-bold text-[15px] lg:text-[calc(var(--su)*16)] tracking-tight text-[var(--footer-text-color)]">
           Explore Course
         </span>
 
-        {/* Circular Arrow Button (46px circle) */}
-        <div
-          className="flex items-center justify-center rounded-full shrink-0 transition-all duration-300 group-hover:translate-x-1"
-          style={{
-            backgroundColor: theme.arrowBg,
-            color: theme.arrowColor,
-            width: isMobile ? "40px" : "calc(var(--u) * 46)",
-            height: isMobile ? "40px" : "calc(var(--u) * 46)",
-          }}
-        >
+        {/* Circular Arrow Button (46u circle) */}
+        <div className="flex items-center justify-center rounded-full w-[40px] h-[40px] lg:w-[calc(var(--su)*46)] lg:h-[calc(var(--su)*46)] shrink-0 bg-[var(--arrow-bg)] text-[var(--arrow-color)] group-hover:bg-[var(--arrow-hover-bg)] group-hover:text-[var(--arrow-hover-color)] transition-all duration-300 group-hover:scale-106">
           <ArrowRight
-            style={{
-              width: isMobile ? "18px" : "calc(var(--u) * 20)",
-              height: isMobile ? "18px" : "calc(var(--u) * 20)",
-            }}
+            className="w-4 h-4 lg:w-[calc(var(--su)*20)] lg:h-[calc(var(--su)*20)] transition-transform duration-300 group-hover:translate-x-[calc(var(--su)*3)]"
             strokeWidth={2.2}
             aria-hidden="true"
           />
         </div>
       </div>
-    </Link>
+
+      {/* Stretched Link covering the entire card */}
+      <Link
+        href={program.href}
+        className="absolute inset-0 z-10 rounded-[inherit] focus:outline-none"
+        aria-label={`${program.title} - Explore Course`}
+      >
+        <span className="sr-only">Explore {program.title}</span>
+      </Link>
+    </article>
   );
 }
