@@ -49,7 +49,7 @@ export const SITE_CONFIG = {
     },
     exploreCourses: {
       label: "Explore Courses",
-      href: "/courses",
+      href: "#programs",
     },
     getInTouch: {
       label: "Get in Touch",

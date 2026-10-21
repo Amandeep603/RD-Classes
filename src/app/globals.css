@@ -36,6 +36,7 @@ html {
   background-color: #0A0A0A;
   color: #FFFFFF;
   color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -223,7 +224,56 @@ body {
   }
 }
 
+@keyframes programFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .programs-init h2,
+  .programs-init p,
+  .programs-init [data-card-item] {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .programs-revealed h2,
+  .programs-revealed p {
+    animation: programFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .programs-revealed [data-card-item]:nth-child(1) {
+    animation: programFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.09s both;
+  }
+  .programs-revealed [data-card-item]:nth-child(2) {
+    animation: programFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+  }
+  .programs-revealed [data-card-item]:nth-child(3) {
+    animation: programFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.27s both;
+  }
+  .programs-revealed [data-card-item]:nth-child(4) {
+    animation: programFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both;
+  }
+  .programs-revealed [data-card-item]:nth-child(5) {
+    animation: programFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .animate-hero-fade,
   .animate-letter,
   .animate-arch-card {
@@ -242,4 +292,12 @@ body {
   .animate-glow-drift-rev {
     animation: none !important;
   }
+
+  .programs-init h2,
+  .programs-init p,
+  .programs-init [data-card-item] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
+
