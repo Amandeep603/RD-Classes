@@ -20,61 +20,60 @@ export default function BoardToppersSection() {
     <InViewSection
       id="results"
       aria-label="Celebrating Our Board Toppers"
-      className="relative w-full overflow-hidden text-white scroll-mt-20 [isolation:isolate]"
+      className="u-scope relative w-full overflow-hidden text-white scroll-mt-20 [isolation:isolate]"
       style={{
         backgroundColor: "#0A1424",
         paddingTop: "clamp(48px, 5.5vw, calc(var(--su, 1px) * 64))",
         paddingBottom: "clamp(52px, 6vw, calc(var(--su, 1px) * 72))",
-        "--su": "min(100vw / 1600, 1px)",
       }}
     >
-      {/* ================= HARD-EDGED DECORATIVE LAYERS (No Blur) ================= */}
+      {/* ================= HARD-EDGED DECORATIVE LAYERS (Measured from toppers.png, No Blur) ================= */}
 
-      {/* 1. Large Dark Circle Top-Right (x1130-1500, y0-130) */}
+      {/* 1. Subtle Dark Circle Top-Right (x1130-1500, y0-130, ~4% lighter than bg) */}
       <div
-        className="absolute rounded-full pointer-events-none"
+        className="hidden lg:block absolute rounded-full pointer-events-none"
         style={{
           width: "calc(var(--su, 1px) * 370)",
           height: "calc(var(--su, 1px) * 370)",
-          right: "calc(var(--su, 1px) * 100)",
-          top: "calc(var(--su, 1px) * -180)",
-          backgroundColor: "#12233A",
-          opacity: 0.45,
+          left: "calc(var(--su, 1px) * 1130)",
+          top: "calc(var(--su, 1px) * -120)",
+          backgroundColor: "#0D1B2E",
+          opacity: 0.55,
         }}
         aria-hidden="true"
       />
 
-      {/* 2. Amber Arc at Far Left (x0-170, y185-310) */}
+      {/* 2. Amber Arc at Far Left (visible area about x0-170 / y185-310) */}
       <div
-        className="absolute rounded-full pointer-events-none"
+        className="hidden lg:block absolute rounded-full pointer-events-none"
         style={{
           width: "calc(var(--su, 1px) * 340)",
           height: "calc(var(--su, 1px) * 340)",
           left: "calc(var(--su, 1px) * -170)",
           top: "calc(var(--su, 1px) * 185)",
-          backgroundColor: "#5A3212",
-          opacity: 0.4,
+          backgroundColor: "#3A200B",
+          opacity: 0.45,
         }}
         aria-hidden="true"
       />
 
-      {/* 3. Orange Arc at Far Right (x1480-1600, y330-420) */}
+      {/* 3. Orange Arc at Far Right (visible area about x1480-1600 / y330-420) */}
       <div
-        className="absolute rounded-full pointer-events-none"
+        className="hidden lg:block absolute rounded-full pointer-events-none"
         style={{
           width: "calc(var(--su, 1px) * 240)",
           height: "calc(var(--su, 1px) * 240)",
-          right: "calc(var(--su, 1px) * -120)",
+          left: "calc(var(--su, 1px) * 1480)",
           top: "calc(var(--su, 1px) * 330)",
-          backgroundColor: "#52280E",
-          opacity: 0.4,
+          backgroundColor: "#3A1A08",
+          opacity: 0.45,
         }}
         aria-hidden="true"
       />
 
       {/* ================= CONTAINER ================= */}
       <div
-        className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 lg:px-0"
+        className="relative z-10 w-full max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 lg:px-0"
         style={{
           paddingLeft: "clamp(16px, 4vw, calc(var(--su, 1px) * 101))",
           paddingRight: "clamp(16px, 4vw, calc(var(--su, 1px) * 101))",
@@ -84,7 +83,7 @@ export default function BoardToppersSection() {
           {/* Header Row: Left-Aligned on Desktop with Top-Right Nav Controls */}
           <div className="relative w-full flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 lg:mb-[calc(var(--su,1px)*44)]">
             <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-              {/* Badge */}
+              {/* Badge (Trophy icon, orange border) */}
               <div
                 className="inline-flex items-center gap-2 rounded-full border border-[#F97316] bg-[rgba(249,115,22,0.08)] mb-3"
                 style={{
@@ -114,15 +113,18 @@ export default function BoardToppersSection() {
                 align="left"
               />
 
-              {/* Paragraph (gap 16u, 2 lines desktop with break after 'year', ANCHOR 502u) */}
+              {/* Paragraph (gap 16u, explicit break: Line 1 ANCHOR 502u at 18-19u) */}
               <p
                 className="mt-3 lg:mt-[calc(var(--su,1px)*16)] text-[#A8B3C5] font-normal leading-[1.38] text-balance max-w-full lg:max-w-[calc(var(--su,1px)*640)]"
-                style={{ fontSize: "clamp(15px, 2vw, calc(var(--su, 1px) * 19))" }}
+                style={{
+                  fontSize: "clamp(15px, 2vw, calc(var(--su, 1px) * 18))",
+                  letterSpacing: "-0.01em",
+                }}
               >
                 <span className="lg:inline-block">
-                  Consistent 95+ and 100/100 scores produced year after
+                  Consistent 95+ and 100/100 scores produced year after year
                 </span>
-                <span className="lg:block">year from Sector 9, Faridabad.</span>
+                <span className="lg:block">from Sector 9, Faridabad.</span>
               </p>
             </div>
 
@@ -188,7 +190,7 @@ export default function BoardToppersSection() {
             </button>
           </div>
 
-          {/* CTA Button: View All Results & Toppers */}
+          {/* CTA Button: View All Results & Toppers (310u x 55u) */}
           <Link
             href="/results"
             className="group inline-flex items-center justify-center gap-2 rounded-full font-bold text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"

@@ -1,79 +1,17 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React from "react";
 import Image from "next/image";
 
 export default function GalleryStrip({ items, stripRef, onScrollStateChange }) {
-  const [isInView, setIsInView] = useState(false);
-  const rafIdRef = useRef(null);
-
-  // Compute 3D cylinder rotation --ry for each card
-  const updateCardRotations = useCallback(() => {
+  // Report scroll bounds for arrow disabled state
+  const handleScroll = () => {
     const strip = stripRef.current;
-    if (!strip) return;
-
-    const stripRect = strip.getBoundingClientRect();
-    const centerX = stripRect.left + stripRect.width / 2;
-    const maxDeg = window.innerWidth < 768 ? 7 : 14;
-
-    const cards = strip.children;
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i];
-      const cardRect = card.getBoundingClientRect();
-      const cardCenter = cardRect.left + cardRect.width / 2;
-
-      // Distance normalized from -1 to 1 across viewport
-      const dist = (cardCenter - centerX) / (stripRect.width / 2);
-      const clampedDist = Math.max(-1.2, Math.min(1.2, dist));
-
-      // Signed so that outer edges are taller (closer)
-      // Positive dist (right) -> positive rotation (right edge closer)
-      // Negative dist (left) -> negative rotation (left edge closer)
-      const ry = clampedDist * maxDeg;
-      card.style.setProperty("--ry", ry.toFixed(2));
-    }
-
-    // Report scroll bounds for arrow disabled state
-    if (onScrollStateChange) {
-      const atStart = strip.scrollLeft <= 10;
-      const atEnd =
-        strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 10;
-      onScrollStateChange({ atStart, atEnd });
-    }
-  }, [stripRef, onScrollStateChange]);
-
-  // Throttled scroll listener running only when strip is in view
-  useEffect(() => {
-    const strip = stripRef.current;
-    if (!strip || typeof IntersectionObserver === "undefined") return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(strip);
-
-    const onScrollOrResize = () => {
-      if (!isInView) return;
-      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-      rafIdRef.current = requestAnimationFrame(updateCardRotations);
-    };
-
-    strip.addEventListener("scroll", onScrollOrResize, { passive: true });
-    window.addEventListener("resize", onScrollOrResize, { passive: true });
-
-    // Initial calculation
-    updateCardRotations();
-
-    return () => {
-      observer.disconnect();
-      strip.removeEventListener("scroll", onScrollOrResize);
-      window.removeEventListener("resize", onScrollOrResize);
-      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-    };
-  }, [isInView, stripRef, updateCardRotations]);
+    if (!strip || !onScrollStateChange) return;
+    const atStart = strip.scrollLeft <= 10;
+    const atEnd = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 10;
+    onScrollStateChange({ atStart, atEnd });
+  };
 
   // Keyboard navigation
   const handleKeyDown = (e) => {
@@ -95,27 +33,29 @@ export default function GalleryStrip({ items, stripRef, onScrollStateChange }) {
       tabIndex={0}
       role="region"
       aria-label="Classroom and celebration gallery photos"
+      onScroll={handleScroll}
       onKeyDown={handleKeyDown}
-      className="w-full flex items-center overflow-x-auto snap-x snap-proximity scroll-smooth no-scrollbar outline-none focus-visible:ring-2 focus-visible:ring-[#0F6A8F] [perspective:1200px]"
+      className="w-full flex items-center overflow-x-auto snap-x snap-proximity scroll-smooth no-scrollbar custom-scroller outline-none focus-visible:ring-2 focus-visible:ring-[#0F6A8F] [perspective:1200px]"
       style={{
         gap: "clamp(8px, 1.2vw, calc(var(--su, 1px) * 12))",
         paddingTop: "24px",
         paddingBottom: "44px",
         marginTop: "-24px",
         marginBottom: "-44px",
-        paddingInline: "clamp(16px, 2.5vw, calc(var(--su, 1px) * 30))",
-        scrollPaddingInline: "clamp(16px, 2.5vw, calc(var(--su, 1px) * 30))",
+        paddingInline: "clamp(16px, 2.5vw, calc(var(--su, 1px) * 20))",
       }}
     >
-      {items.map((item, idx) => (
+      {items.map((item) => (
         <div
           key={item.id}
-          className="snap-center shrink-0 rounded-[18px] overflow-hidden relative shadow-md transition-transform duration-300 hover:scale-[1.04] group [transform-origin:center] [will-change:transform]"
+          className="snap-center shrink-0 rounded-[18px] overflow-hidden relative shadow-md transition-all duration-300 hover:scale-[1.04] group [transform-origin:center] [will-change:transform]"
           style={{
             width: "clamp(140px, 42vw, calc(var(--su, 1px) * 188))",
             height: "clamp(240px, 70vw, calc(var(--su, 1px) * 320))",
-            transform: "perspective(1200px) rotateY(calc(var(--ry, 0) * 1deg))",
             border: "1px solid rgba(15, 23, 42, 0.08)",
+            "--card-ry": `${item.ry}deg`,
+            "--card-skew": `${item.skew}deg`,
+            transform: "perspective(1200px) rotateY(var(--card-ry, 0deg)) skewY(var(--card-skew, 0deg))",
           }}
         >
           <Image
@@ -129,7 +69,7 @@ export default function GalleryStrip({ items, stripRef, onScrollStateChange }) {
 
           {/* Subtle gradient vignette */}
           <div
-            className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 opacity-60 group-hover:opacity-40 transition-opacity pointer-events-none"
+            className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 opacity-50 group-hover:opacity-30 transition-opacity pointer-events-none"
             aria-hidden="true"
           />
 

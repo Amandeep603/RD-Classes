@@ -8,6 +8,7 @@ import {
   SIDE_CARD_PATH_UNIT,
   FEATURED_CARD_PATH_100,
   FEATURED_CARD_PATH_UNIT,
+  V_PANEL_PATH_100,
 } from "@/constants/topperShapes";
 
 /**
@@ -44,11 +45,12 @@ function ScoreCounter({ score, isFeatured }) {
 
 /**
  * TopperCard component.
- * Base size: 318u x 428u. Internal elements scale with container queries (cqw).
+ * Base size: 318u x 428u for featured, 266u x 380u for side.
  */
 export default function TopperCard({ topper, isFeatured, onClick }) {
   const isBlue = topper.tone === "blue";
-  const clipId = `topper-clip-${topper.id}`;
+  const clipId = `topper-card-clip-${topper.id}`;
+  const photoClipId = `topper-photo-clip-${topper.id}`;
 
   const path100 = isFeatured ? FEATURED_CARD_PATH_100 : SIDE_CARD_PATH_100;
   const pathUnit = isFeatured ? FEATURED_CARD_PATH_UNIT : SIDE_CARD_PATH_UNIT;
@@ -60,16 +62,17 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
     <div
       onClick={onClick}
       role="group"
+      data-featured={isFeatured ? "true" : "false"}
       aria-label={`${topper.name}, score ${topper.score} out of 100`}
       className="relative select-none cursor-pointer [container-type:inline-size] w-full h-full"
     >
-      {/* Featured static radial glow behind card (NO blur) */}
+      {/* Featured static orange radial glow behind card (measured from reference, NO blur) */}
       {isFeatured && (
         <div
-          className="absolute -inset-[15%] rounded-full pointer-events-none -z-10"
+          className="absolute -inset-[18%] rounded-full pointer-events-none -z-10"
           style={{
             background:
-              "radial-gradient(circle, rgba(249, 115, 22, 0.45) 0%, rgba(249, 115, 22, 0.15) 50%, transparent 75%)",
+              "radial-gradient(circle, rgba(255, 138, 31, 0.45) 0%, rgba(242, 106, 10, 0.18) 45%, transparent 72%)",
           }}
           aria-hidden="true"
         />
@@ -81,31 +84,34 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
           <clipPath id={clipId} clipPathUnits="objectBoundingBox">
             <path d={pathUnit} />
           </clipPath>
+          <clipPath id={photoClipId} clipPathUnits="objectBoundingBox">
+            <path d="M 0 0 L 1 0 L 1 0.60 L 0.50 0.68 L 0 0.60 Z" />
+          </clipPath>
           <linearGradient id={`grad-card-${topper.id}`} x1="0%" y1="0%" x2="0%" y2="100%">
             {isBlue ? (
               <>
-                <stop offset="0%" stopColor="#0F2A55" />
-                <stop offset="60%" stopColor="#0C1D38" />
-                <stop offset="100%" stopColor="#0A1426" />
+                <stop offset="0%" stopColor="#0F1F32" />
+                <stop offset="50%" stopColor="#0B1522" />
+                <stop offset="100%" stopColor="#08101C" />
               </>
             ) : isFeatured ? (
               <>
-                <stop offset="0%" stopColor="#C65A10" />
+                <stop offset="0%" stopColor="#5E3311" />
                 <stop offset="45%" stopColor="#4A230D" />
                 <stop offset="100%" stopColor="#0A1426" />
               </>
             ) : (
               <>
-                <stop offset="0%" stopColor="#A04E12" />
-                <stop offset="50%" stopColor="#3A1F10" />
-                <stop offset="100%" stopColor="#0A1426" />
+                <stop offset="0%" stopColor="#321E14" />
+                <stop offset="50%" stopColor="#271811" />
+                <stop offset="100%" stopColor="#18100C" />
               </>
             )}
           </linearGradient>
         </defs>
       </svg>
 
-      {/* Clipped Body Container */}
+      {/* Clipped Outer Shield Body Container */}
       <div
         className="relative w-full h-full overflow-hidden"
         style={{
@@ -113,7 +119,7 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
           WebkitClipPath: `url(#${clipId})`,
         }}
       >
-        {/* Card Background SVG with crisp stroke */}
+        {/* Card Background SVG with crisp stroke and top corner ears */}
         <svg
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
@@ -129,22 +135,28 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
           />
         </svg>
 
-        {/* Golden Laurel Wreath for featured card */}
+        {/* Golden Laurel Wreath for featured card (shoulder level up to above crown) */}
         {isFeatured && (
           <div
-            className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[85%] h-[54%] z-10 pointer-events-none"
+            className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[90%] h-[60%] z-10 pointer-events-none"
             aria-hidden="true"
           >
             <LaurelWreath />
           </div>
         )}
 
-        {/* Student Portrait */}
+        {/* Student Portrait (Clipped above the V line, feathered with mask-image) */}
         <div
-          className="absolute top-[13%] left-1/2 -translate-x-1/2 w-[70%] h-[52%] overflow-hidden z-15"
+          className="absolute inset-x-[3%] top-[8%] h-[62%] z-15 overflow-hidden"
           style={{
-            maskImage: "linear-gradient(to bottom, black 72%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 72%, transparent 100%)",
+            clipPath: `url(#${photoClipId})`,
+            WebkitClipPath: `url(#${photoClipId})`,
+            maskImage:
+              "linear-gradient(to bottom, transparent 0%, #000 10%), linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent 0%, #000 10%), linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%)",
+            maskComposite: "intersect",
+            WebkitMaskComposite: "source-in",
           }}
         >
           <Image
@@ -153,19 +165,25 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
             fill
             sizes="(max-width: 768px) 240px, 320px"
             className="object-cover object-top"
+            priority={isFeatured}
           />
         </div>
 
-        {/* Lower Dark Panel dividing boundary along the V */}
-        <div
-          className="absolute bottom-0 inset-x-0 h-[40%] bg-[#0A1426] z-18"
-          style={{
-            clipPath: "polygon(0% 20%, 50% 32%, 100% 20%, 100% 100%, 0% 100%)",
-          }}
+        {/* Shallow V-Shaped Dark Bottom Panel (sides at 60%, center at 68%) */}
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="absolute inset-0 w-full h-full z-18 pointer-events-none"
           aria-hidden="true"
-        />
+        >
+          <path
+            d={V_PANEL_PATH_100}
+            fill="#0A1426"
+            stroke="none"
+          />
+        </svg>
 
-        {/* Score Circle (30% W, centered at 65% H) */}
+        {/* Score Circle (Exactly 30% of card width, centered at ~65% of H) */}
         <div
           data-score-circle="true"
           className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex flex-col items-center justify-center z-25 text-white font-extrabold shadow-md"
@@ -176,12 +194,12 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
             background: isFeatured
               ? "linear-gradient(135deg, #FF9A2E 0%, #F26A0A 100%)"
               : isBlue
-              ? "#0E2A52"
-              : "#3A1D0B",
+              ? "#0B1B36"
+              : "#261408",
             border: isFeatured
               ? "none"
-              : `3px solid ${isBlue ? "#2F6FD0" : "#E8841A"}`,
-            boxShadow: isFeatured ? "0 4px 16px rgba(249,115,22,0.5)" : "none",
+              : `3px solid ${isBlue ? "#2D5DA8" : "#E8731A"}`,
+            boxShadow: isFeatured ? "0 4px 18px rgba(242,106,10,0.55)" : "none",
           }}
         >
           <span style={{ fontSize: "9.3cqw", lineHeight: 1 }}>
@@ -192,8 +210,8 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
               fontSize: "3.9cqw",
               lineHeight: 1,
               marginTop: "0.8cqw",
-              color: "rgba(255,255,255,0.75)",
-              fontWeight: 500,
+              color: "rgba(255,255,255,0.8)",
+              fontWeight: 600,
             }}
           >
             /100
@@ -202,9 +220,9 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
 
         {/* Name (center at 80% of H) */}
         <div
-          className="absolute inset-x-2 text-center text-white font-bold truncate z-25"
+          className="absolute inset-x-2 text-center text-white font-bold truncate z-25 -translate-y-1/2"
           style={{
-            top: "78%",
+            top: "80%",
             fontSize: "7.4cqw",
             lineHeight: 1.2,
           }}
@@ -214,10 +232,10 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
 
         {/* School (center at 87.5% of H) */}
         <div
-          className="absolute inset-x-2 text-center text-[#9AA7BA] font-medium truncate z-25"
+          className="absolute inset-x-2 text-center text-[#9AA7BA] font-medium truncate z-25 -translate-y-1/2"
           style={{
-            top: "86.5%",
-            fontSize: "5.3cqw",
+            top: "87.5%",
+            fontSize: "5.2cqw",
             lineHeight: 1.2,
           }}
         >
@@ -225,19 +243,23 @@ export default function TopperCard({ topper, isFeatured, onClick }) {
         </div>
       </div>
 
-      {/* Year Pill (top 5.5% of H, 40% W x 7.5% H) */}
+      {/* Year Pill:
+          Side cards = INSIDE the card top (top 5.5%, 40% W x 7.5% H, bordered)
+          Featured card = filled orange pill straddling the top edge by ~25% of its height
+      */}
       <div
-        className="absolute left-1/2 -translate-x-1/2 -top-[3.75%] rounded-full flex items-center justify-center font-bold whitespace-nowrap z-30 shadow-xs"
+        className="absolute left-1/2 -translate-x-1/2 rounded-full flex items-center justify-center font-bold whitespace-nowrap z-30 shadow-xs"
         style={{
+          top: isFeatured ? "-2.2%" : "5.5%",
           width: isFeatured ? "38cqw" : "40cqw",
           height: isFeatured ? "8.4cqw" : "7.5cqw",
           background: isFeatured
             ? "linear-gradient(90deg, #FF9A2E, #F26A0A)"
             : isBlue
-            ? "rgba(45, 93, 168, 0.25)"
-            : "rgba(232, 115, 26, 0.25)",
+            ? "rgba(45, 93, 168, 0.28)"
+            : "rgba(232, 115, 26, 0.28)",
           border: isFeatured ? "none" : `1px solid ${isBlue ? "#2D5DA8" : "#E8731A"}`,
-          color: isFeatured ? "#1A0E05" : "#FFFFFF",
+          color: isFeatured ? "#FFFFFF" : "#FFFFFF",
           fontSize: "5.2cqw",
         }}
       >

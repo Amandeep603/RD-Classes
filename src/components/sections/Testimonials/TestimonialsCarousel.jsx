@@ -40,8 +40,8 @@ export default function TestimonialsCarousel({ testimonials }) {
   const handleNext = () => scrollToIndex(activeIndex + 1);
 
   return (
-    <div className="relative w-full flex flex-col min-[1100px]:flex-row items-stretch gap-6 min-[1100px]:gap-[calc(var(--su,1px)*28)]">
-      {/* Left Column (Desktop >=1100px): Big Quote Glyph + 4-line H2 + Controls */}
+    <div className="relative w-full flex flex-col min-[1100px]:flex-row items-stretch gap-6 min-[1100px]:gap-[calc(var(--su,1px)*30)]">
+      {/* Left Column (Desktop >=1100px): Big Quote Glyph + 4-line H3 + Controls */}
       <div className="hidden min-[1100px]:flex flex-col justify-between shrink-0 w-[calc(var(--su,1px)*266)]">
         <div>
           {/* Big Quote Glyph (62u tall, #9ED3F0) */}
@@ -59,14 +59,14 @@ export default function TestimonialsCarousel({ testimonials }) {
             </svg>
           </div>
 
-          {/* Heading 4 lines: 48u / 800 / 0.98 / #0B1B3B */}
+          {/* Heading 4 lines: 48u / 800 / 0.98 / #0B1B3B, 'parents are' ~252u */}
           <h3
             className="font-extrabold text-[#0B1B3B] leading-[0.98] tracking-tight"
             style={{ fontSize: "calc(var(--su, 1px) * 48)" }}
           >
             <span className="block">What our</span>
             <span className="block">students &amp;</span>
-            <span className="block">parents are</span>
+            <span className="block whitespace-nowrap">parents are</span>
             <span
               className="inline-block bg-gradient-to-r from-[#F59E0B] to-[#F97316] bg-clip-text text-transparent pb-1"
             >
@@ -106,7 +106,7 @@ export default function TestimonialsCarousel({ testimonials }) {
                 type="button"
                 onClick={() => scrollToIndex(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className="transition-all duration-300 rounded-full"
+                className="transition-all duration-300 rounded-full cursor-pointer"
                 style={{
                   width: "calc(var(--su, 1px) * 40)",
                   height: "calc(var(--su, 1px) * 6)",
@@ -142,24 +142,27 @@ export default function TestimonialsCarousel({ testimonials }) {
           role="region"
           aria-label="Testimonial reviews track"
           tabIndex={0}
-          className="flex items-stretch overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
+          className={`flex items-stretch overflow-x-auto ${
+            n > 3 ? "snap-x snap-mandatory" : "min-[1100px]:overflow-visible"
+          } scroll-smooth no-scrollbar custom-scroller`}
           style={{
             gap: "clamp(12px, 1.8vw, calc(var(--su, 1px) * 17))",
             paddingTop: "20px",
             paddingBottom: "44px",
             marginTop: "-20px",
             marginBottom: "-44px",
-            paddingInline: "20px",
-            scrollPaddingInline: "20px",
+            paddingInline: "0px",
           }}
         >
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="snap-start shrink-0 flex flex-col"
+              className="shrink-0 flex flex-col snap-start min-[1100px]:snap-none"
               style={{
-                width: "clamp(280px, 86vw, calc(var(--su, 1px) * 392))",
+                width: "var(--card-w, clamp(280px, 86vw, calc((100% - 2 * calc(var(--su, 1px) * 17)) / 3)))",
+                minWidth: "min(100%, 280px)",
                 height: "clamp(340px, 40vw, calc(var(--su, 1px) * 404))",
+                flex: "0 0 auto",
               }}
             >
               <TestimonialCard item={item} />

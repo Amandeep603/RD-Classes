@@ -9,6 +9,7 @@ import {
   Trophy,
   Languages,
   Plus,
+  Minus,
 } from "lucide-react";
 
 const ICON_MAP = {
@@ -71,7 +72,7 @@ export default function FaqItem({
         border: `1px solid ${rowBorder}`,
       }}
     >
-      {/* Header Button */}
+      {/* Header Button (collapsed height 60u) */}
       <button
         ref={headerRef}
         id={buttonId}
@@ -85,8 +86,8 @@ export default function FaqItem({
           minHeight: "clamp(54px, 6vw, calc(var(--su, 1px) * 60))",
           paddingLeft: "clamp(12px, 2vw, calc(var(--su, 1px) * 30))",
           paddingRight: "clamp(12px, 2vw, calc(var(--su, 1px) * 28))",
-          paddingTop: isOpen ? "clamp(14px, 2vw, calc(var(--su, 1px) * 22))" : "0",
-          paddingBottom: isOpen ? "clamp(10px, 1.5vw, calc(var(--su, 1px) * 12))" : "0",
+          paddingTop: isOpen ? "clamp(14px, 2vw, calc(var(--su, 1px) * 20))" : "0",
+          paddingBottom: isOpen ? "clamp(8px, 1.2vw, calc(var(--su, 1px) * 10))" : "0",
         }}
       >
         <div className="flex items-center flex-1 min-w-0 gap-3 sm:gap-4 lg:gap-0">
@@ -101,30 +102,21 @@ export default function FaqItem({
             {item.number}
           </div>
 
-          {/* Desktop Divider 1 */}
-          <div
-            className="hidden lg:block w-[1px] h-[calc(var(--su,1px)*28)] bg-black/10 mx-[calc(var(--su,1px)*16)]"
-            aria-hidden="true"
-          />
-
           {/* Icon Circle (46u on desktop) */}
           <div
-            className="shrink-0 rounded-full flex items-center justify-center shadow-2xs transition-transform duration-300"
+            className="shrink-0 rounded-full flex items-center justify-center lg:mr-[calc(var(--su,1px)*24)] shadow-2xs"
             style={{
-              width: "clamp(34px, 4.2vw, calc(var(--su, 1px) * 46))",
-              height: "clamp(34px, 4.2vw, calc(var(--su, 1px) * 46))",
+              width: "clamp(38px, 4.5vw, calc(var(--su, 1px) * 46))",
+              height: "clamp(38px, 4.5vw, calc(var(--su, 1px) * 46))",
               backgroundColor: iconCircleBg,
-              color: iconColor,
             }}
-          >
-            <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" />
-          </div>
-
-          {/* Desktop Divider 2 */}
-          <div
-            className="hidden lg:block w-[1px] h-[calc(var(--su,1px)*28)] bg-black/10 mx-[calc(var(--su,1px)*16)]"
             aria-hidden="true"
-          />
+          >
+            <IconComponent
+              className="w-5 h-5 sm:w-5.5 sm:h-5.5"
+              style={{ color: iconColor }}
+            />
+          </div>
 
           {/* Question Text */}
           <div
@@ -137,22 +129,26 @@ export default function FaqItem({
           </div>
         </div>
 
-        {/* Toggle Button (42u on desktop, rotates 45deg on open) */}
+        {/* Toggle Button (42u on desktop, shows MINUS when open, PLUS when closed, rotates smoothly) */}
         <div
           className="shrink-0 rounded-full flex items-center justify-center transition-transform duration-300 ml-2"
           style={{
             width: "clamp(34px, 4vw, calc(var(--su, 1px) * 42))",
             height: "clamp(34px, 4vw, calc(var(--su, 1px) * 42))",
             backgroundColor: toggleBg,
-            transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
+            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
           }}
           aria-hidden="true"
         >
-          <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-[#0B1B3B] stroke-[2.5]" />
+          {isOpen ? (
+            <Minus className="w-4 h-4 sm:w-5 sm:h-5 text-[#0B1B3B] stroke-[2.5]" />
+          ) : (
+            <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-[#0B1B3B] stroke-[2.5]" />
+          )}
         </div>
       </button>
 
-      {/* Answer Region via pure CSS grid transition (0fr -> 1fr) */}
+      {/* Answer Region via pure CSS grid transition (0fr -> 1fr, open height ~163u) */}
       <div
         id={regionId}
         role="region"
@@ -166,7 +162,7 @@ export default function FaqItem({
             className="pb-5 lg:pb-[calc(var(--su,1px)*22)]"
             style={{
               paddingLeft:
-                "clamp(14px, 2vw, calc(var(--su, 1px) * (30 + 75 + 16 + 46 + 16)))",
+                "clamp(14px, 2vw, calc(var(--su, 1px) * (30 + 75 + 24 + 46)))",
               paddingRight: "clamp(14px, 2vw, calc(var(--su, 1px) * 60))",
             }}
           >

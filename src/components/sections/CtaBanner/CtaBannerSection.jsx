@@ -26,85 +26,51 @@ export default function CtaBannerSection() {
     <InViewSection
       id="demo"
       aria-label="Book a free demo class"
-      className="relative w-full overflow-hidden text-[#0F172A] scroll-mt-20 [isolation:isolate]"
+      className="u-scope relative w-full overflow-hidden text-[#0F172A] scroll-mt-20 [isolation:isolate]"
       style={{
         paddingTop: "clamp(32px, 4vw, calc(var(--su, 1px) * 40))",
         paddingBottom: "clamp(56px, 7vw, calc(var(--su, 1px) * 88))",
-        "--su": "min(100vw / 1600, 1px)",
       }}
     >
-      <div
-        className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 lg:px-0"
-        style={{
-          paddingLeft: "clamp(16px, 4vw, calc(var(--su, 1px) * 62))",
-          paddingRight: "clamp(16px, 4vw, calc(var(--su, 1px) * 62))",
-        }}
-      >
-        <Reveal>
+      <div className="relative z-10 w-full max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 lg:px-0 flex justify-center">
+        <Reveal className="w-full flex justify-center">
           {/* Main Card (1475u x 620u, radius 36u) */}
           <div
-            className="relative w-full rounded-[28px] lg:rounded-[calc(var(--su,1px)*36)] overflow-hidden"
+            data-cta-card="true"
+            className="relative w-full max-w-[calc(var(--su,1px)*1475)] rounded-[28px] lg:rounded-[calc(var(--su,1px)*36)] overflow-hidden"
             style={{
-              background:
-                "var(--surface-k-card-bg, linear-gradient(135deg, #FFFDF8 0%, #F7F0DD 100%))",
-              border: "1px solid rgba(15, 23, 42, 0.05)",
-              boxShadow: "0 40px 80px -40px rgba(120, 90, 20, 0.25)",
+              minHeight: "calc(var(--su, 1px) * 620)",
+              background: "#FFFDF8",
+              border: "1px solid rgba(15, 23, 42, 0.06)",
+              boxShadow: "0 30px 60px -30px rgba(120, 90, 20, 0.15)",
               padding:
-                "clamp(28px, 3.5vw, calc(var(--su, 1px) * 47)) clamp(20px, 6vw, calc(var(--su, 1px) * 97))",
+                "clamp(28px, 3.5vw, calc(var(--su, 1px) * 48)) clamp(20px, 4vw, calc(var(--su, 1px) * 64))",
             }}
           >
-            {/* ================= RIGHT DECORATIVE ELEMENTS ================= */}
-
-            {/* Large Pale-Yellow Circle (520u diameter at top-right, hard-edged) */}
+            {/* ================= RIGHT VISUAL (cropped from cta.png, 497u wide, fade mask) ================= */}
             <div
-              className="absolute -top-[15%] -right-[10%] lg:-top-[calc(var(--su,1px)*60)] lg:-right-[calc(var(--su,1px)*60)] rounded-full pointer-events-none -z-10"
+              className="hidden lg:block absolute right-0 top-0 bottom-0 pointer-events-none z-10 overflow-hidden"
               style={{
-                width: "clamp(260px, 38vw, calc(var(--su, 1px) * 520))",
-                height: "clamp(260px, 38vw, calc(var(--su, 1px) * 520))",
-                background:
-                  "var(--surface-k-circle, linear-gradient(135deg, #FFD66A 0%, #FFCA45 100%))",
-                opacity: 0.85,
-              }}
-              aria-hidden="true"
-            >
-              {/* Faint RD logo watermark inside circle */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-18 pointer-events-none p-12">
-                <Image
-                  src="/images/logo-rd.png"
-                  alt=""
-                  width={280}
-                  height={280}
-                  className="object-contain"
-                />
-              </div>
-            </div>
-
-            {/* Bottom-Right Books & Desk Photo (Blended with linear gradient) */}
-            <div
-              className="hidden lg:block absolute bottom-0 right-0 w-[34%] h-[68%] pointer-events-none z-10 overflow-hidden"
-              style={{
-                maskImage:
-                  "linear-gradient(to right, transparent 0%, #000 28%), linear-gradient(to top, #000 75%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(to right, transparent 0%, #000 28%), linear-gradient(to top, #000 75%, transparent 100%)",
-                maskComposite: "intersect",
-                WebkitMaskComposite: "source-in",
+                width: "calc(var(--su, 1px) * 497)",
+                maskImage: "linear-gradient(to right, transparent 0%, #000 22%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, #000 22%)",
               }}
               aria-hidden="true"
             >
               <Image
-                src="/images/cta/books-desk.webp"
+                src="/images/cta/cta-visual.webp"
                 alt=""
                 fill
-                sizes="520px"
-                className="object-cover object-bottom"
+                sizes="497px"
+                className="object-cover object-left"
+                priority
               />
             </div>
 
-            {/* ================= LEFT CONTENT COLUMN (~800u max width) ================= */}
+            {/* ================= LEFT CONTENT COLUMN (max 800u so text never runs over visual) ================= */}
             <div className="relative z-20 max-w-full lg:max-w-[calc(var(--su,1px)*800)] flex flex-col items-center lg:items-start text-center lg:text-left">
-              {/* Row 1: Logo Tile + 2 Badges */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 lg:gap-[calc(var(--su,1px)*24)] mb-6 lg:mb-[calc(var(--su,1px)*36)]">
+              {/* Row 1: Logo Tile (129u x 90u) + 2 Pills */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 lg:gap-[calc(var(--su,1px)*20)] mb-6 lg:mb-[calc(var(--su,1px)*32)]">
                 {/* Logo Tile (White, 129u x 90u, radius 18u) */}
                 <div
                   className="rounded-[18px] bg-white flex items-center justify-center shrink-0 shadow-md p-1.5"
@@ -119,13 +85,14 @@ export default function CtaBannerSection() {
                     alt="RD Classes Logo"
                     width={110}
                     height={75}
+                    style={{ width: "auto", height: "auto", maxHeight: "100%" }}
                     className="object-contain"
                   />
                 </div>
 
                 {/* Pill 1: Limited Batch Seats */}
                 <div
-                  className="rounded-full flex items-center justify-center gap-2 font-extrabold uppercase px-4 whitespace-nowrap shadow-2xs lg:animate-cta-pill-float"
+                  className="rounded-full flex items-center justify-center gap-2 font-extrabold uppercase px-4 whitespace-nowrap shadow-2xs"
                   style={{
                     height: "clamp(38px, 4.2vw, calc(var(--su, 1px) * 50))",
                     backgroundColor: "#FFEFC2",
@@ -139,13 +106,12 @@ export default function CtaBannerSection() {
 
                 {/* Pill 2: ₹5,100 Cash for 100/100 */}
                 <div
-                  className="rounded-full flex items-center justify-center gap-2 font-bold px-4 whitespace-nowrap shadow-2xs lg:animate-cta-pill-float"
+                  className="rounded-full flex items-center justify-center gap-2 font-bold px-4 whitespace-nowrap shadow-2xs"
                   style={{
                     height: "clamp(38px, 4.2vw, calc(var(--su, 1px) * 50))",
                     backgroundColor: "#F3F3F5",
                     color: "#1F2937",
                     fontSize: "clamp(12px, 1.3vw, calc(var(--su, 1px) * 14.5))",
-                    animationDelay: "-3s",
                   }}
                 >
                   <Trophy className="w-4 h-4 text-[#F5B400] shrink-0" />
@@ -153,11 +119,12 @@ export default function CtaBannerSection() {
                 </div>
               </div>
 
-              {/* H2 Heading: 72u / 800 / 0.98 / -0.02em, ANCHOR line 1 761u */}
+              {/* H2 Heading: 72u / 800 / line-height 0.98, ANCHOR line 1 761u */}
               <h2
-                className="font-extrabold tracking-[-0.02em] leading-[0.98] text-[#0B1630] text-balance mb-4 lg:mb-[calc(var(--su,1px)*22)]"
+                className="font-extrabold tracking-[-0.02em] text-[#0B1630] text-balance mb-4 lg:mb-[calc(var(--su,1px)*20)]"
                 style={{
-                  fontSize: "clamp(30px, 9.5vw, calc(var(--su, 1px) * 77))",
+                  fontSize: "clamp(30px, 9vw, calc(var(--su, 1px) * 72))",
+                  lineHeight: 0.98,
                 }}
               >
                 <span className="lg:inline-block">Take a demo for free;</span>
@@ -165,15 +132,15 @@ export default function CtaBannerSection() {
                   <span
                     className="inline-block bg-gradient-to-r from-[#FFC21A] to-[#F97316] bg-clip-text text-transparent pb-[0.12em]"
                   >
-                    you won&apos;t regret it
+                    you won’t regret it
                   </span>
                   <span className="text-[#5B5B5B]">.</span>
                 </span>
               </h2>
 
-              {/* Paragraph (gap 22u, ANCHOR line 2 794u) */}
+              {/* Paragraph (gap 22u, 2 lines desktop, ANCHOR line 2 794u at 20u) */}
               <p
-                className="text-[#4B5563] font-normal leading-[1.55] text-balance max-w-full lg:max-w-[calc(var(--su,1px)*780)] mb-6 lg:mb-[calc(var(--su,1px)*34)]"
+                className="text-[#4B5563] font-normal leading-[1.55] text-balance max-w-full lg:max-w-[calc(var(--su,1px)*800)] mb-6 lg:mb-[calc(var(--su,1px)*34)]"
                 style={{
                   fontSize: "clamp(15px, 1.8vw, calc(var(--su, 1px) * 20))",
                 }}
@@ -186,11 +153,9 @@ export default function CtaBannerSection() {
                 </span>
               </p>
 
-              {/* Buttons Row (gap 26u) */}
-              <div
-                className="w-full flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 lg:gap-[calc(var(--su,1px)*26)] mb-8 lg:mb-[calc(var(--su,1px)*40)]"
-              >
-                {/* Primary: WhatsApp Button */}
+              {/* Buttons Row (Primary 437u x 61u, Secondary 295u x 61u) */}
+              <div className="w-full flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 lg:gap-[calc(var(--su,1px)*22)] mb-8 lg:mb-[calc(var(--su,1px)*36)]">
+                {/* Primary: WhatsApp Button (437u x 61u) */}
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -201,113 +166,58 @@ export default function CtaBannerSection() {
                     height: "clamp(52px, 5.5vw, calc(var(--su, 1px) * 61))",
                     background: "linear-gradient(90deg, #FFCB2E 0%, #FFB800 100%)",
                     fontSize: "clamp(16px, 1.8vw, calc(var(--su, 1px) * 19))",
-                    boxShadow: "0 14px 28px -12px rgba(255, 184, 0, 0.6)",
+                    boxShadow: "0 14px 28px -12px rgba(255, 184, 0, 0.55)",
                   }}
                 >
-                  {/* Subtle ring pulse animation */}
-                  <span
-                    className="absolute -inset-1 rounded-full border-2 border-[#FFCB2E]/60 pointer-events-none animate-cta-ring"
-                    aria-hidden="true"
-                  />
                   <WhatsAppIcon className="w-5 h-5 text-[#111111]" />
                   <span>Book Free Demo on WhatsApp</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
 
-                {/* Secondary: Phone Call Button */}
+                {/* Secondary: Phone Call Button (295u x 61u) */}
                 <a
                   href={`tel:${SITE_CONFIG.contact.phone}`}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full font-bold text-[#111827] bg-transparent transition-colors duration-200 hover:bg-black/5 active:scale-[0.98] cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full font-bold text-[#111827] bg-transparent transition-colors duration-200 hover:bg-black/5 active:scale-[0.98] cursor-pointer border border-[#111827]"
                   style={{
                     width: "clamp(240px, 100%, calc(var(--su, 1px) * 295))",
                     height: "clamp(52px, 5.5vw, calc(var(--su, 1px) * 61))",
-                    border: "1.5px solid #111827",
-                    fontSize: "clamp(16px, 1.8vw, calc(var(--su, 1px) * 19))",
+                    fontSize: "clamp(15px, 1.7vw, calc(var(--su, 1px) * 18))",
                   }}
                 >
-                  <Phone className="w-4 h-4 text-[#111827]" />
-                  <span>Call +91 83685 45620</span>
+                  <Phone className="w-4 h-4" />
+                  <span>Call {SITE_CONFIG.contact.phone}</span>
                 </a>
               </div>
 
-              {/* Info Row: 3 items with dividers */}
-              <div className="w-full flex flex-col md:flex-row items-center justify-center lg:justify-start gap-4 lg:gap-[calc(var(--su,1px)*16)] pt-2">
-                {/* Item 1: Location */}
-                <div className="flex items-center gap-3">
-                  <div
-                    className="rounded-full flex items-center justify-center shrink-0"
-                    style={{
-                      width: "clamp(42px, 4.5vw, calc(var(--su, 1px) * 56))",
-                      height: "clamp(42px, 4.5vw, calc(var(--su, 1px) * 56))",
-                      backgroundColor: "#D7ECFB",
-                    }}
-                  >
-                    <MapPin className="w-5 h-5 text-[#2B8FD6]" />
+              {/* Info Row: 3 Items with Dividers */}
+              <div className="w-full flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-6 lg:gap-[calc(var(--su,1px)*32)] pt-2 border-t border-black/8 text-[#4B5563] text-sm lg:text-[calc(var(--su,1px)*14.5)] font-medium">
+                {/* Item 1 */}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#E0F2FE] flex items-center justify-center shrink-0">
+                    <MapPin className="w-4 h-4 text-[#0284C7]" />
                   </div>
-                  <span
-                    className="text-[#4B5563] text-left leading-tight font-medium"
-                    style={{ fontSize: "clamp(13px, 1.4vw, calc(var(--su, 1px) * 16.5))" }}
-                  >
-                    SCF 59–60, 2nd Floor,<br />Sector 9 Market, Faridabad
-                  </span>
+                  <span>SCF 59-60, 2nd Floor, Sector 9 Market, Faridabad</span>
                 </div>
 
-                {/* Divider 1 */}
-                <div className="hidden md:block w-[1px] h-[calc(var(--su,1px)*40)] bg-[#E5E7EB] mx-2" aria-hidden="true" />
+                <div className="hidden sm:block w-[1px] h-6 bg-black/10" aria-hidden="true" />
 
-                {/* Item 2: Payment */}
-                <div className="flex items-center gap-3">
-                  <div
-                    className="rounded-full flex items-center justify-center shrink-0"
-                    style={{
-                      width: "clamp(42px, 4.5vw, calc(var(--su, 1px) * 56))",
-                      height: "clamp(42px, 4.5vw, calc(var(--su, 1px) * 56))",
-                      backgroundColor: "#FFF0CB",
-                    }}
-                  >
-                    <IndianRupee className="w-5 h-5 text-[#F59E0B]" />
+                {/* Item 2 */}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#FEF3C7] flex items-center justify-center shrink-0">
+                    <IndianRupee className="w-4 h-4 text-[#D97706]" />
                   </div>
-                  <span
-                    className="text-[#4B5563] text-left leading-tight font-medium"
-                    style={{ fontSize: "clamp(13px, 1.4vw, calc(var(--su, 1px) * 16.5))" }}
-                  >
-                    No advance<br />payment needed
-                  </span>
+                  <span>No advance payment needed</span>
                 </div>
 
-                {/* Divider 2 */}
-                <div className="hidden md:block w-[1px] h-[calc(var(--su,1px)*40)] bg-[#E5E7EB] mx-2" aria-hidden="true" />
+                <div className="hidden sm:block w-[1px] h-6 bg-black/10" aria-hidden="true" />
 
-                {/* Item 3: Live Experience */}
-                <div className="flex items-center gap-3">
-                  <div
-                    className="rounded-full flex items-center justify-center shrink-0"
-                    style={{
-                      width: "clamp(42px, 4.5vw, calc(var(--su, 1px) * 56))",
-                      height: "clamp(42px, 4.5vw, calc(var(--su, 1px) * 56))",
-                      backgroundColor: "#FFE3D1",
-                    }}
-                  >
-                    <Users className="w-5 h-5 text-[#F97316]" />
+                {/* Item 3 */}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#FFEDD5] flex items-center justify-center shrink-0">
+                    <Users className="w-4 h-4 text-[#EA580C]" />
                   </div>
-                  <span
-                    className="text-[#4B5563] text-left leading-tight font-medium"
-                    style={{ fontSize: "clamp(13px, 1.4vw, calc(var(--su, 1px) * 16.5))" }}
-                  >
-                    Ongoing live class<br />experience
-                  </span>
+                  <span>Ongoing live class experience</span>
                 </div>
-              </div>
-
-              {/* Mobile Decorative Book Image Strip (<1024px) */}
-              <div className="block lg:hidden w-full mt-8 rounded-2xl overflow-hidden relative h-48">
-                <Image
-                  src="/images/cta/books-desk.webp"
-                  alt=""
-                  fill
-                  className="object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
           </div>

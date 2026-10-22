@@ -451,5 +451,29 @@ a[href*="/courses?topic="] {
   }
 }
 
+/* Shared scale scope for sections G-L and Footer */
+.u-scope {
+  --su: min(100vw / 1600, 1px);
+}
+
+@media (max-width: 1023px) {
+  .u-scope {
+    --su: initial;
+  }
+}
+
+/* Hide native scrollbars on custom scrollers while keeping them scrollable */
+.no-scrollbar,
+.custom-scroller,
+[data-scroller] {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.no-scrollbar::-webkit-scrollbar,
+.custom-scroller::-webkit-scrollbar,
+[data-scroller]::-webkit-scrollbar {
+  display: none !important;
+}
+
 
 

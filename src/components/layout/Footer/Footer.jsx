@@ -38,21 +38,18 @@ export default async function Footer() {
     <footer
       id="contact"
       aria-label="Site Footer and Contact Information"
-      className="relative w-full bg-[#121212] text-white [isolation:isolate] overflow-hidden"
-      style={{
-        "--su": "min(100vw / 1600, 1px)",
-      }}
+      className="u-scope relative w-full bg-[#121212] text-white [isolation:isolate] overflow-hidden"
     >
-      {/* Wave Transition Band from Light Page Flow */}
+      {/* 165u Wave Transition Band */}
       <FooterWave />
 
-      {/* Main Footer Body */}
+      {/* Main Footer Container (max-width 1600u capped, padding-inline 79u) */}
       <div
-        className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 lg:px-0"
+        className="relative z-10 w-full max-w-[calc(var(--su,1px)*1600)] mx-auto"
         style={{
-          paddingTop: "clamp(36px, 4.5vw, calc(var(--su, 1px) * 56))",
           paddingLeft: "clamp(16px, 4.5vw, calc(var(--su, 1px) * 79))",
           paddingRight: "clamp(16px, 4.5vw, calc(var(--su, 1px) * 79))",
+          paddingTop: "clamp(32px, 4vw, calc(var(--su, 1px) * 44))",
         }}
       >
         {/* Large Faint Graduation Cap Watermark (Bottom-Right, Decorative) */}
@@ -71,11 +68,16 @@ export default async function Footer() {
           </svg>
         </div>
 
-        {/* 4-Column Grid (Desktop >=1100px) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-          {/* Column 1: Brand (332u, lg:col-span-4) */}
-          <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left pr-0 lg:pr-8">
-            {/* Logo */}
+        {/* 4-Column Grid:
+            Desktop (>=1100px): grid-template-columns: 409fr 349fr 329fr 354fr
+            Mobile (<1100px): single column stack, Courses & Quick Links side-by-side from 520px
+        */}
+        <div
+          className="grid grid-cols-1 min-[520px]:grid-cols-2 min-[1100px]:grid-cols-[409fr_349fr_329fr_354fr] gap-8 min-[1100px]:gap-0 items-start"
+        >
+          {/* Column 1: Brand [79..488) -> 409fr (padding-right: 77u) */}
+          <div className="col-span-1 min-[520px]:col-span-2 min-[1100px]:col-span-1 flex flex-col items-center min-[1100px]:items-start text-center min-[1100px]:text-left pr-0 min-[1100px]:pr-[calc(var(--su,1px)*77)]">
+            {/* Logo (187u wide) */}
             <Link href="/" className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-[#FFC21A]">
               <Image
                 src="/images/logo-rd-light.png"
@@ -87,17 +89,17 @@ export default async function Footer() {
               />
             </Link>
 
-            {/* Description (margin-top 20u, 3 lines desktop) */}
+            {/* Description (17u / 1.45) */}
             <p
-              className="mt-4 lg:mt-[calc(var(--su,1px)*20)] text-white/75 font-normal leading-[1.45] text-balance"
+              className="mt-4 min-[1100px]:mt-[calc(var(--su,1px)*18)] text-white/75 font-normal leading-[1.45] text-balance"
               style={{ fontSize: "clamp(14px, 1.6vw, calc(var(--su, 1px) * 17))" }}
             >
               Faridabad&apos;s premier Accountancy coaching institute for CBSE Class 11 &amp; 12, founded and personally taught by Ronak Dugar in Sector 9.
             </p>
 
-            {/* Reward Pill (margin-top 18u, 332u x 46u) */}
+            {/* Reward Pill (332u x 46u) */}
             <div
-              className="mt-4 lg:mt-[calc(var(--su,1px)*18)] rounded-[10px] flex items-center justify-center gap-2 px-3 border border-[#E8B000] bg-[rgba(255,194,26,0.06)]"
+              className="mt-4 min-[1100px]:mt-[calc(var(--su,1px)*18)] rounded-[10px] flex items-center justify-center gap-2 px-3 border border-[#E8B000] bg-[rgba(255,194,26,0.06)]"
               style={{
                 width: "clamp(260px, 100%, calc(var(--su, 1px) * 332))",
                 height: "clamp(40px, 4.2vw, calc(var(--su, 1px) * 46))",
@@ -112,9 +114,9 @@ export default async function Footer() {
               </span>
             </div>
 
-            {/* Social Icons Row (margin-top 20u) */}
+            {/* Social Icons Row (47u circles, y477-523) */}
             <div
-              className="mt-5 lg:mt-[calc(var(--su,1px)*20)] flex items-center gap-3 lg:gap-[calc(var(--su,1px)*14)]"
+              className="mt-5 min-[1100px]:mt-[calc(var(--su,1px)*20)] flex items-center gap-3 min-[1100px]:gap-[calc(var(--su,1px)*14)]"
             >
               {FOOTER_SOCIALS.map((social) => {
                 const Icon = SOCIAL_ICON_MAP[social.platform];
@@ -125,34 +127,33 @@ export default async function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.ariaLabel}
-                    className="group rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#FFC21A] hover:-translate-y-1 active:scale-95 border border-[#3A3A3C]"
+                    className="group rounded-full flex items-center justify-center border border-[#3A3A3C] transition-all duration-300 [@media(hover:hover)]:hover:bg-[#FFC21A] [@media(hover:hover)]:hover:-translate-y-1 active:scale-95"
                     style={{
                       width: "clamp(40px, 4.5vw, calc(var(--su, 1px) * 47))",
                       height: "clamp(40px, 4.5vw, calc(var(--su, 1px) * 47))",
                     }}
                   >
-                    <Icon className="w-5 h-5 text-white group-hover:text-[#121212] transition-colors" />
+                    <Icon className="w-5 h-5 text-white [@media(hover:hover)]:group-hover:text-[#121212] transition-colors" />
                   </a>
                 );
               })}
             </div>
           </div>
 
-          {/* Desktop Divider 1 */}
+          {/* Column 2: Courses [488..837) -> 349fr (1px left border, padding-left 50u) */}
           <div
-            className="hidden lg:block lg:col-span-1 w-[1px] h-[calc(var(--su,1px)*260)] bg-white/8 mx-auto"
-            aria-hidden="true"
-          />
-
-          {/* Column 2: Courses (lg:col-span-2) */}
-          <div className="lg:col-span-2 flex flex-col items-center lg:items-start text-center lg:text-left">
+            className="flex flex-col items-center min-[1100px]:items-start text-center min-[1100px]:text-left min-[1100px]:border-l min-[1100px]:border-white/8 min-[1100px]:min-h-[calc(var(--su,1px)*260)]"
+            style={{
+              paddingLeft: "clamp(0px, 3vw, calc(var(--su, 1px) * 50))",
+            }}
+          >
             <h4
               className="font-bold text-white relative pb-2.5"
               style={{ fontSize: "clamp(18px, 2vw, calc(var(--su, 1px) * 22))" }}
             >
               Courses
               <span
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 rounded-full bg-[#F5B400]"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 min-[1100px]:left-0 min-[1100px]:translate-x-0 rounded-full bg-[#F5B400]"
                 style={{
                   width: "calc(var(--su, 1px) * 34)",
                   height: "calc(var(--su, 1px) * 3)",
@@ -161,16 +162,21 @@ export default async function Footer() {
             </h4>
 
             <ul
-              className="mt-5 lg:mt-[calc(var(--su,1px)*24)] space-y-2.5 lg:space-y-[calc(var(--su,1px)*10)]"
-              style={{ fontSize: "clamp(14px, 1.5vw, calc(var(--su, 1px) * 16.5))" }}
+              className="mt-5 min-[1100px]:mt-[calc(var(--su,1px)*20)] space-y-2 min-[1100px]:space-y-0"
+              style={{
+                fontSize: "clamp(14px, 1.5vw, calc(var(--su, 1px) * 16.5))",
+              }}
             >
               {FOOTER_COURSES.map((course, idx) => (
-                <li key={idx}>
+                <li
+                  key={idx}
+                  className="min-[1100px]:h-[calc(var(--su,1px)*33)] flex items-center"
+                >
                   <Link
                     href={course.href}
-                    className="group inline-flex items-center text-[#D1D5DB] hover:text-[#FFC21A] transition-colors py-1 min-h-[44px]"
+                    className="group inline-flex items-center text-[#D1D5DB] [@media(hover:hover)]:hover:text-[#FFC21A] transition-colors whitespace-nowrap"
                   >
-                    <span className="transition-transform duration-200 group-hover:translate-x-1">
+                    <span className="transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-1">
                       {course.label}
                     </span>
                   </Link>
@@ -179,21 +185,20 @@ export default async function Footer() {
             </ul>
           </div>
 
-          {/* Desktop Divider 2 */}
+          {/* Column 3: Quick Links [837..1166) -> 329fr (1px left border, padding-left 45u) */}
           <div
-            className="hidden lg:block lg:col-span-1 w-[1px] h-[calc(var(--su,1px)*260)] bg-white/8 mx-auto"
-            aria-hidden="true"
-          />
-
-          {/* Column 3: Quick Links (lg:col-span-2) */}
-          <div className="lg:col-span-2 flex flex-col items-center lg:items-start text-center lg:text-left">
+            className="flex flex-col items-center min-[1100px]:items-start text-center min-[1100px]:text-left min-[1100px]:border-l min-[1100px]:border-white/8 min-[1100px]:min-h-[calc(var(--su,1px)*260)]"
+            style={{
+              paddingLeft: "clamp(0px, 3vw, calc(var(--su, 1px) * 45))",
+            }}
+          >
             <h4
               className="font-bold text-white relative pb-2.5"
               style={{ fontSize: "clamp(18px, 2vw, calc(var(--su, 1px) * 22))" }}
             >
               Quick Links
               <span
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 rounded-full bg-[#F5B400]"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 min-[1100px]:left-0 min-[1100px]:translate-x-0 rounded-full bg-[#F5B400]"
                 style={{
                   width: "calc(var(--su, 1px) * 34)",
                   height: "calc(var(--su, 1px) * 3)",
@@ -202,24 +207,29 @@ export default async function Footer() {
             </h4>
 
             <ul
-              className="mt-5 lg:mt-[calc(var(--su,1px)*24)] space-y-2.5 lg:space-y-[calc(var(--su,1px)*10)]"
-              style={{ fontSize: "clamp(14px, 1.5vw, calc(var(--su, 1px) * 16.5))" }}
+              className="mt-5 min-[1100px]:mt-[calc(var(--su,1px)*20)] space-y-2 min-[1100px]:space-y-0"
+              style={{
+                fontSize: "clamp(14px, 1.5vw, calc(var(--su, 1px) * 16.5))",
+              }}
             >
               {FOOTER_QUICK_LINKS.map((link, idx) => (
-                <li key={idx}>
+                <li
+                  key={idx}
+                  className="min-[1100px]:h-[calc(var(--su,1px)*33)] flex items-center"
+                >
                   <Link
                     href={link.href}
-                    className={`group inline-flex items-center gap-1.5 transition-colors py-1 min-h-[44px] ${
+                    className={`group inline-flex items-center gap-1.5 transition-colors whitespace-nowrap ${
                       link.highlight
-                        ? "text-[#FFC21A] font-bold hover:underline"
-                        : "text-[#D1D5DB] hover:text-[#FFC21A]"
+                        ? "text-[#FFC21A] font-bold [@media(hover:hover)]:hover:underline"
+                        : "text-[#D1D5DB] [@media(hover:hover)]:hover:text-[#FFC21A]"
                     }`}
                   >
-                    <span className="transition-transform duration-200 group-hover:translate-x-1">
+                    <span className="transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-1">
                       {link.label}
                     </span>
                     {link.highlight && (
-                      <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-1" />
                     )}
                   </Link>
                 </li>
@@ -227,21 +237,20 @@ export default async function Footer() {
             </ul>
           </div>
 
-          {/* Desktop Divider 3 */}
+          {/* Column 4: Contact [1166..1520) -> 354fr (1px left border, padding-left 47u) */}
           <div
-            className="hidden lg:block lg:col-span-1 w-[1px] h-[calc(var(--su,1px)*260)] bg-white/8 mx-auto"
-            aria-hidden="true"
-          />
-
-          {/* Column 4: Contact (lg:col-span-3) */}
-          <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left">
+            className="col-span-1 min-[520px]:col-span-2 min-[1100px]:col-span-1 flex flex-col items-center min-[1100px]:items-start text-center min-[1100px]:text-left min-[1100px]:border-l min-[1100px]:border-white/8 min-[1100px]:min-h-[calc(var(--su,1px)*260)]"
+            style={{
+              paddingLeft: "clamp(0px, 3vw, calc(var(--su, 1px) * 47))",
+            }}
+          >
             <h4
               className="font-bold text-white relative pb-2.5"
               style={{ fontSize: "clamp(18px, 2vw, calc(var(--su, 1px) * 22))" }}
             >
-              Contact Us
+              Contact
               <span
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 rounded-full bg-[#F5B400]"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 min-[1100px]:left-0 min-[1100px]:translate-x-0 rounded-full bg-[#F5B400]"
                 style={{
                   width: "calc(var(--su, 1px) * 34)",
                   height: "calc(var(--su, 1px) * 3)",
@@ -250,13 +259,13 @@ export default async function Footer() {
             </h4>
 
             <div
-              className="mt-5 lg:mt-[calc(var(--su,1px)*24)] space-y-3.5 lg:space-y-[calc(var(--su,1px)*14)]"
+              className="mt-5 min-[1100px]:mt-[calc(var(--su,1px)*20)] space-y-3.5 min-[1100px]:space-y-[calc(var(--su,1px)*14)]"
               style={{ fontSize: "clamp(14px, 1.5vw, calc(var(--su, 1px) * 16.5))" }}
             >
               {/* Address */}
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#F5B400] shrink-0 mt-0.5" />
-                <span className="text-[#D1D5DB] leading-snug">
+                <span className="text-[#D1D5DB] leading-snug whitespace-nowrap">
                   SCF 59-60, 2nd Floor, Sector 9,
                   <br />
                   Faridabad, Haryana 121006
@@ -268,7 +277,7 @@ export default async function Footer() {
                 <Phone className="w-5 h-5 text-[#F5B400] shrink-0" />
                 <a
                   href={`tel:${FOOTER_CONTACT.phoneTel}`}
-                  className="text-[#D1D5DB] hover:text-[#FFC21A] transition-colors min-h-[44px] flex items-center"
+                  className="text-[#D1D5DB] [@media(hover:hover)]:hover:text-[#FFC21A] transition-colors whitespace-nowrap flex items-center"
                 >
                   {FOOTER_CONTACT.phoneDisplay}
                 </a>
@@ -279,7 +288,7 @@ export default async function Footer() {
                 <Mail className="w-5 h-5 text-[#F5B400] shrink-0" />
                 <a
                   href={`mailto:${FOOTER_CONTACT.email}`}
-                  className="text-[#D1D5DB] hover:text-[#FFC21A] transition-colors min-h-[44px] flex items-center"
+                  className="text-[#D1D5DB] [@media(hover:hover)]:hover:text-[#FFC21A] transition-colors whitespace-nowrap flex items-center"
                 >
                   {FOOTER_CONTACT.email}
                 </a>
@@ -291,7 +300,7 @@ export default async function Footer() {
                   href={FOOTER_CONTACT.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full font-bold border border-[#E8B000] text-[#FFC21A] transition-all duration-300 hover:bg-[#FFC21A] hover:text-[#121212] active:scale-95"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full font-bold border border-[#E8B000] text-[#FFC21A] transition-all duration-300 [@media(hover:hover)]:hover:bg-[#FFC21A] [@media(hover:hover)]:hover:text-[#121212] active:scale-95 whitespace-nowrap"
                   style={{
                     width: "clamp(220px, 100%, calc(var(--su, 1px) * 242))",
                     height: "clamp(42px, 4.5vw, calc(var(--su, 1px) * 45))",
@@ -307,11 +316,11 @@ export default async function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar: Divider + Copyright + Meta + Back to Top */}
+        {/* Bottom Bar: Divider at y557 + Copyright + Meta + Back to Top */}
         <div
-          className="mt-12 lg:mt-[calc(var(--su,1px)*48)] border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-white/60"
+          className="mt-12 min-[1100px]:mt-[calc(var(--su,1px)*36)] border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-white/60"
           style={{
-            paddingTop: "calc(var(--su, 1px) * 22)",
+            paddingTop: "calc(var(--su, 1px) * 20)",
             paddingBottom: "calc(var(--su, 1px) * 26)",
             fontSize: "clamp(12px, 1.3vw, calc(var(--su, 1px) * 14.5))",
           }}
@@ -329,7 +338,7 @@ export default async function Footer() {
             <span className="w-1.5 h-1.5 rounded-full bg-white/30" aria-hidden="true" />
             <a
               href="#top"
-              className="group inline-flex items-center gap-1.5 text-white/80 hover:text-[#FFC21A] font-semibold transition-colors min-h-[44px]"
+              className="group inline-flex items-center gap-1.5 text-white/80 [@media(hover:hover)]:hover:text-[#FFC21A] font-semibold transition-colors min-h-[44px]"
             >
               <span>Back to Top</span>
               <ArrowUp className="w-4 h-4 transition-transform group-hover:-translate-y-1" />

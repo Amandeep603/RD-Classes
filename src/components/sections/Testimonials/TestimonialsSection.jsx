@@ -44,24 +44,23 @@ export default function TestimonialsSection() {
     <InViewSection
       id="reviews"
       aria-label="Parent and student testimonials"
-      className="relative w-full overflow-hidden text-[#0F172A] scroll-mt-20 [isolation:isolate]"
+      className="u-scope relative w-full overflow-hidden text-[#0F172A] scroll-mt-20 [isolation:isolate]"
       style={{
         paddingTop: "clamp(48px, 5.5vw, calc(var(--su, 1px) * 64))",
         paddingBottom: "clamp(48px, 5.5vw, calc(var(--su, 1px) * 64))",
-        "--su": "min(100vw / 1600, 1px)",
       }}
     >
       <div
-        className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 lg:px-0"
+        className="relative z-10 w-full max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 lg:px-0"
         style={{
           paddingLeft: "clamp(16px, 3.8vw, calc(var(--su, 1px) * 62))",
-          paddingRight: "clamp(16px, 3.8vw, calc(var(--su, 1px) * 62))",
+          paddingRight: "clamp(16px, 3.8vw, calc(var(--su, 1px) * 42))",
         }}
       >
         <Reveal>
           {/* Header Area (Centered) */}
           <div className="flex flex-col items-center text-center mb-8 lg:mb-[calc(var(--su,1px)*48)]">
-            {/* Badge */}
+            {/* Badge (331u x 42u, MessageSquareQuote icon) */}
             <SectionBadge
               text="PARENT & STUDENT FEEDBACK"
               icon={MessageSquareQuote}
@@ -84,14 +83,15 @@ export default function TestimonialsSection() {
               align="center"
             />
 
-            {/* Subtext (gap 18u, 2 lines desktop, ANCHOR line 1 827u) */}
+            {/* Subtext (gap 18u, max-width 840u, 2 lines desktop, ANCHOR line 1 827u at 20u) */}
             <p
               className="mt-3 lg:mt-[calc(var(--su,1px)*18)] text-[#5F6A7A] font-normal leading-[1.4] text-balance max-w-full lg:max-w-[calc(var(--su,1px)*840)]"
               style={{ fontSize: "clamp(15px, 2vw, calc(var(--su, 1px) * 20))" }}
             >
               <span className="lg:block">
-                Real testimonials and WhatsApp result messages from Class 11 and 12 Accountancy students.
+                Real testimonials and WhatsApp result messages from Class 11 and 12 Accountancy
               </span>
+              <span className="lg:block">students.</span>
             </p>
 
             {/* Rating Row (gap 24u) */}
@@ -100,40 +100,37 @@ export default function TestimonialsSection() {
               style={{ gap: "clamp(8px, 1.2vw, calc(var(--su, 1px) * 14))" }}
             >
               <span
-                className="font-extrabold text-[#0B1F3A]"
-                style={{ fontSize: "clamp(18px, 2.2vw, calc(var(--su, 1px) * 24))" }}
+                className="font-extrabold text-[#0B1B3B]"
+                style={{ fontSize: "clamp(18px, 2.2vw, calc(var(--su, 1px) * 22))" }}
               >
                 <RatingCounter target={4.8} />/5
               </span>
 
               {/* 5 Stars */}
-              <div className="flex items-center gap-1" aria-hidden="true">
+              <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className="w-5 h-5 fill-[#FFB800] text-[#FFB800] shrink-0"
+                    className="w-5 h-5 fill-[#F59E0B] text-[#F59E0B]"
                     style={{
-                      width: "calc(var(--su, 1px) * 26)",
-                      height: "calc(var(--su, 1px) * 26)",
+                      width: "calc(var(--su, 1px) * 20)",
+                      height: "calc(var(--su, 1px) * 20)",
                     }}
                   />
                 ))}
               </div>
 
-              {/* Divider 2u x 24u */}
-              <div
-                className="hidden sm:block rounded-full bg-[#D1D5DB]"
-                style={{
-                  width: "calc(var(--su, 1px) * 2)",
-                  height: "calc(var(--su, 1px) * 24)",
-                  marginInline: "calc(var(--su, 1px) * 4)",
-                }}
+              {/* Divider */}
+              <span
+                className="hidden sm:inline-block w-[1px] h-4 bg-[#D1D5DB]"
+                style={{ height: "calc(var(--su, 1px) * 18)" }}
                 aria-hidden="true"
               />
 
+              {/* Review count */}
               <span
-                className="font-medium text-[#5F6A7A]"
-                style={{ fontSize: "clamp(14px, 1.8vw, calc(var(--su, 1px) * 19))" }}
+                className="text-[#64748B] font-medium"
+                style={{ fontSize: "clamp(13px, 1.5vw, calc(var(--su, 1px) * 16))" }}
               >
                 Based on 500+ reviews
               </span>
@@ -141,7 +138,7 @@ export default function TestimonialsSection() {
           </div>
         </Reveal>
 
-        {/* 2-Column Desktop / Stacked Mobile Carousel */}
+        {/* Carousel Component */}
         <TestimonialsCarousel testimonials={TESTIMONIALS} />
       </div>
     </InViewSection>

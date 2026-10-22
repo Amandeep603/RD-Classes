@@ -39,10 +39,10 @@ export default function SectionBadge({
       {icon && (
         <DynamicIcon
           name={icon}
-          className="mr-2 fill-current shrink-0"
+          className="mr-2 shrink-0 stroke-[2.2]"
           style={{
-            width: "max(15px, calc(var(--su, 1px) * 18))",
-            height: "max(15px, calc(var(--su, 1px) * 18))",
+            width: "max(14px, calc(var(--su, 1px) * 16))",
+            height: "max(14px, calc(var(--su, 1px) * 16))",
           }}
           aria-hidden="true"
         />

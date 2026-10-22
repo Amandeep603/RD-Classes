@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, ArrowRight, Camera } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import InViewSection from "@/components/ui/InViewSection";
 import SectionBadge from "@/components/ui/SectionBadge";
@@ -32,25 +32,25 @@ export default function GallerySection() {
     <InViewSection
       id="gallery"
       aria-label="Classroom and celebrations gallery"
-      className="relative w-full overflow-hidden text-[#0F172A] scroll-mt-20 [isolation:isolate]"
+      className="u-scope relative w-full overflow-hidden text-[#0F172A] scroll-mt-20 [isolation:isolate]"
       style={{
         paddingTop: "clamp(48px, 5.5vw, calc(var(--su, 1px) * 64))",
         paddingBottom: "clamp(52px, 6vw, calc(var(--su, 1px) * 72))",
-        "--su": "min(100vw / 1600, 1px)",
       }}
     >
-      <div className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 lg:px-0">
+      <div className="relative z-10 w-full max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 lg:px-0">
         <Reveal>
-          {/* Header Row: Centered title with desktop right-aligned arrow buttons */}
-          <div className="relative w-full flex items-center justify-between mb-8 lg:mb-[calc(var(--su,1px)*40)]">
-            {/* Spacer for symmetrical centering on desktop */}
-            <div className="hidden lg:block w-[calc(var(--su,1px)*120)] shrink-0" aria-hidden="true" />
+          {/* Header Row: Centered title with desktop right-aligned arrow buttons inside 1600u */}
+          <div className="relative w-full flex items-center justify-between mb-8 lg:mb-[calc(var(--su,1px)*35)]">
+            {/* Symmetrical Left Spacer on Desktop */}
+            <div className="hidden lg:block w-[calc(var(--su,1px)*162)] shrink-0" aria-hidden="true" />
 
             {/* Centered Heading Content */}
             <div className="flex flex-col items-center text-center flex-1 min-w-0">
+              {/* Badge without icon */}
               <SectionBadge
                 text="LIFE AT RD CLASSES"
-                icon={Camera}
+                icon={null}
                 className="mb-4"
                 style={{
                   width: "clamp(160px, 18vw, calc(var(--su, 1px) * 184))",
@@ -67,7 +67,7 @@ export default function GallerySection() {
                 align="center"
               />
 
-              {/* Subtext (gap 18u, 2 lines desktop, ANCHOR line 1 761u) */}
+              {/* Subtext (gap 18u, 2 lines desktop) */}
               <p
                 className="mt-3 lg:mt-[calc(var(--su,1px)*18)] text-[#6B7686] font-normal leading-[1.4] text-balance max-w-full lg:max-w-[calc(var(--su,1px)*820)]"
                 style={{ fontSize: "clamp(15px, 2vw, calc(var(--su, 1px) * 19))" }}
@@ -79,8 +79,8 @@ export default function GallerySection() {
               </p>
             </div>
 
-            {/* Desktop Navigation Arrows (at x1438 and x1502 at y190) */}
-            <div className="hidden lg:flex items-center gap-3 shrink-0 self-end mb-2">
+            {/* Desktop Navigation Arrows (inside 1600u container aligned to right edge, x1438-1484 and x1502-1555) */}
+            <div className="hidden lg:flex items-center gap-[calc(var(--su,1px)*18)] shrink-0 self-end mb-2 w-[calc(var(--su,1px)*162)] justify-end pr-[calc(var(--su,1px)*45)]">
               <button
                 type="button"
                 onClick={handlePrev}
@@ -117,60 +117,60 @@ export default function GallerySection() {
             </div>
           </div>
         </Reveal>
-      </div>
 
-      {/* Full-bleed 3D Concave Cylinder Strip */}
-      <div className="w-full">
-        <GalleryStrip
-          items={GALLERY_ITEMS}
-          stripRef={stripRef}
-          onScrollStateChange={setScrollState}
-        />
-      </div>
-
-      {/* Bottom Area: Mobile Navigation + CTA Button */}
-      <div className="relative z-10 w-full max-w-[1600px] lg:max-w-[calc(var(--su,1px)*1600)] mx-auto px-4 mt-6 lg:mt-[calc(var(--su,1px)*30)] flex flex-col items-center justify-center gap-4">
-        {/* Mobile Navigation Arrows */}
-        <div className="flex lg:hidden items-center justify-center gap-4">
-          <button
-            type="button"
-            onClick={handlePrev}
-            aria-label="Previous gallery snapshots"
-            disabled={scrollState.atStart}
-            className={`w-11 h-11 rounded-full flex items-center justify-center bg-[#D6ECFA] active:scale-95 ${
-              scrollState.atStart ? "opacity-40" : ""
-            }`}
-          >
-            <ChevronLeft className="w-5 h-5 text-[#0F172A] stroke-[2.5]" />
-          </button>
-          <button
-            type="button"
-            onClick={handleNext}
-            aria-label="Next gallery snapshots"
-            disabled={scrollState.atEnd}
-            className={`w-12 h-12 rounded-full flex items-center justify-center bg-[#0F6A8F] text-white shadow-md active:scale-95 ${
-              scrollState.atEnd ? "opacity-40" : ""
-            }`}
-          >
-            <ChevronRight className="w-5 h-5 stroke-[2.5]" />
-          </button>
+        {/* Gallery Strip (card 188u x 320u, gap 12u, radius 18u) */}
+        <div className="w-full">
+          <GalleryStrip
+            items={GALLERY_ITEMS}
+            stripRef={stripRef}
+            onScrollStateChange={setScrollState}
+          />
         </div>
 
-        {/* CTA: View Full Classroom Gallery */}
-        <Link
-          href="/gallery"
-          className="group inline-flex items-center justify-center gap-2 rounded-full font-bold text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-          style={{
-            width: "clamp(250px, 75vw, calc(var(--su, 1px) * 294))",
-            height: "clamp(44px, 5vw, calc(var(--su, 1px) * 49))",
-            backgroundColor: "#0F6A8F",
-            fontSize: "clamp(14px, 1.8vw, calc(var(--su, 1px) * 15))",
-            boxShadow: "0 12px 24px -12px rgba(15, 106, 143, 0.5)",
-          }}
-        >
-          <span>View Full Classroom Gallery</span>
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-        </Link>
+        {/* CTA Area & Mobile Arrows */}
+        <div className="mt-8 lg:mt-[calc(var(--su,1px)*30)] flex flex-col items-center justify-center gap-6">
+          {/* Mobile Arrows: centered below the strip on mobile */}
+          <div className="flex lg:hidden items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={handlePrev}
+              aria-label="Previous gallery snapshots"
+              disabled={scrollState.atStart}
+              className={`w-11 h-11 rounded-full flex items-center justify-center bg-[#D6ECFA] active:scale-95 ${
+                scrollState.atStart ? "opacity-40" : ""
+              }`}
+            >
+              <ChevronLeft className="w-5 h-5 text-[#0F172A] stroke-[2.5]" />
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              aria-label="Next gallery snapshots"
+              disabled={scrollState.atEnd}
+              className={`w-12 h-12 rounded-full flex items-center justify-center bg-[#0F6A8F] text-white shadow-md active:scale-95 ${
+                scrollState.atEnd ? "opacity-40" : ""
+              }`}
+            >
+              <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+            </button>
+          </div>
+
+          {/* View Full Classroom Gallery Button (294u x 49u) */}
+          <Link
+            href="/gallery"
+            className="group inline-flex items-center justify-center gap-2 rounded-full font-bold text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            style={{
+              width: "clamp(240px, 80vw, calc(var(--su, 1px) * 294))",
+              height: "clamp(44px, 5vw, calc(var(--su, 1px) * 49))",
+              backgroundColor: "#0F6A8F",
+              fontSize: "clamp(13px, 1.6vw, calc(var(--su, 1px) * 15))",
+              boxShadow: "0 10px 24px -8px rgba(15, 106, 143, 0.45)",
+            }}
+          >
+            <span>View Full Classroom Gallery</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
     </InViewSection>
   );

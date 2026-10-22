@@ -83,10 +83,19 @@ export const ICON_MAP = {
 };
 
 export function DynamicIcon({ name, ...props }) {
-  const IconComponent = ICON_MAP[name] || GraduationCap;
+  if (!name) return null;
+  if (typeof name === "function" || typeof name === "object") {
+    const Component = name;
+    return <Component {...props} />;
+  }
+  const IconComponent = ICON_MAP[name];
+  if (!IconComponent) return null;
   return <IconComponent {...props} />;
 }
 
 export function getIcon(key) {
-  return ICON_MAP[key] || GraduationCap;
+  if (!key) return null;
+  if (typeof key === "function" || typeof key === "object") return key;
+  return ICON_MAP[key] || null;
 }
+
